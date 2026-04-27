@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.OverTimePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    BackgroundColor="#EEF4FB"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*">
+            <Grid Padding="18,24,18,14"
+                  RowDefinitions="Auto,Auto">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#2BC9FF" Offset="0" />
+                        <GradientStop Color="#2A8BF5" Offset="0.55" />
+                        <GradientStop Color="#5D5CF6" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Text="YOUR PERFORMANCE"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       CharacterSpacing="1.1" />
+
+                <Grid Grid.Row="1"
+                      Margin="0,18,0,0"
+                      ColumnDefinitions="*,*,*,*"
+                      RowDefinitions="Auto,4">
+                    <Label Grid.Column="0"
+                           Text="BRAIN"
+                           TextColor="#F2FFFFFF"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBrainTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Grid.Column="1"
+                           Text="OVER TIME"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnOverTimeTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Grid.Column="2"
+                           Text="GAMES"
+                           TextColor="#F2FFFFFF"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGamesTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Grid.Column="3"
+                           Text="RANKINGS"
+                           TextColor="#F2FFFFFF"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLeaderboardsTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <BoxView Grid.Row="1"
+                             Grid.Column="1"
+                             HeightRequest="3"
+                             Margin="10,0"
+                             BackgroundColor="White"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="End" />
+                </Grid>
+            </Grid>
+
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Padding="18,16,18,96"
+                                     Spacing="20">
+                    <VerticalStackLayout Spacing="4">
+                        <Label x:Name="OverTimeTitleLabel"
+                               Text="LAST WEEK OF PROGRESS"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#18324D"
+                               CharacterSpacing="0.8" />
+                        <Label x:Name="OverTimeSubtitleLabel"
+                               Text="Check your progress in each category"
+                               FontSize="15"
+                               TextColor="#6B8094" />
+                    </VerticalStackLayout>
+
+                    <local:MiniAreaCard x:Name="PeakCard"
+                                        Title="PEAK BRAIN SCORE"
+                                        TitleColor="#1DB6EA"
+                                        Score="163"
+                                        AreaColor="#7BD8F0" />
+
+                    <local:MiniAreaCard x:Name="MemoryCard"
+                                        Title="MEMORY"
+                                        TitleColor="#F0A728"
+                                        Score="167"
+                                        AreaColor="#FFD487" />
+
+                    <local:MiniAreaCard x:Name="ProblemCard"
+                                        Title="PROBLEM SOLVING"
+                                        TitleColor="#60D075"
+                                        Score="161"
+                                        AreaColor="#9AE5A7" />
+
+                    <local:MiniAreaCard x:Name="LanguageCard"
+                                        Title="LANGUAGE"
+                                        TitleColor="#6A79E8"
+                                        Score="167"
+                                        AreaColor="#B2B9FF" />
+
+                    <local:MiniAreaCard x:Name="AgilityCard"
+                                        Title="MENTAL AGILITY"
+                                        TitleColor="#30A0FF"
+                                        Score="163"
+                                        AreaColor="#92CBFF" />
+
+                    <local:MiniAreaCard x:Name="FocusCard"
+                                        Title="FOCUS"
+                                        TitleColor="#FF5A76"
+                                        Score="166"
+                                        AreaColor="#FFB1BF" />
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Grid x:Name="FilterOverlay"
+              IsVisible="False"
+              Opacity="0"
+              BackgroundColor="#8F000000">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <VerticalStackLayout HorizontalOptions="End"
+                                 VerticalOptions="End"
+                                 Margin="0,0,18,84"
+                                 Spacing="12">
+                <local:FilterChip TextValue="Lifetime"
+                                  IconText="∞"
+                                  Clicked="OnFilterClicked" />
+                <local:FilterChip TextValue="6 months"
+                                  Clicked="OnFilterClicked" />
+                <local:FilterChip TextValue="3 months"
+                                  Clicked="OnFilterClicked" />
+                <local:FilterChip TextValue="4 weeks"
+                                  Clicked="OnFilterClicked" />
+                <local:FilterChip TextValue="1 week"
+                                  Clicked="OnFilterClicked" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Grid x:Name="FabLayer"
+              InputTransparent="False"
+              VerticalOptions="Fill"
+              HorizontalOptions="Fill">
+            <Button x:Name="CalendarFab"
+                    Text=""
+                    ImageSource="icon_calendar.svg"
+                    WidthRequest="62"
+                    HeightRequest="62"
+                    CornerRadius="31"
+                    BackgroundColor="#11A7D8"
+                    Padding="15"
+                    Clicked="OnCalendarClicked"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,18,18">
+                <Button.Shadow>
+                    <Shadow Brush="#000000"
+                            Opacity="0.22"
+                            Radius="18"
+                            Offset="0,6" />
+                </Button.Shadow>
+            </Button>
+
+            <Button x:Name="CloseFab"
+                    Text="×"
+                    FontSize="28"
+                    TextColor="White"
+                    WidthRequest="62"
+                    HeightRequest="62"
+                    CornerRadius="31"
+                    BackgroundColor="#11A7D8"
+                    IsVisible="False"
+                    Opacity="0"
+                    Clicked="OnCloseOverlay"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,18,18">
+                <Button.Shadow>
+                    <Shadow Brush="#000000"
+                            Opacity="0.22"
+                            Radius="18"
+                            Offset="0,6" />
+                </Button.Shadow>
+            </Button>
+        </Grid>
+
+        <DatePicker x:Name="CalendarPicker"
+                    IsVisible="False"
+                    Opacity="0"
+                    DateSelected="OnCalendarDateSelected" />
+    </Grid>
+</ContentPage>

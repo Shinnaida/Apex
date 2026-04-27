@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.TodayPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="18,18,18,30" Spacing="18">
+
+                <Border Padding="16,14"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.Shadow>
+                        <Shadow Brush="#150A2342"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#CFF3FF" Offset="0" />
+                            <GradientStop Color="#E5F2FF" Offset="0.58" />
+                            <GradientStop Color="#F3EEFF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          Padding="2,2,2,0">
+                    <Border WidthRequest="62"
+                            HeightRequest="62"
+                            BackgroundColor="White"
+                            Stroke="#D9ECFF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 31"
+                            VerticalOptions="Center">
+                        <Grid>
+                            <Image x:Name="TodayAvatarImage"
+                                   Aspect="AspectFill"
+                                   IsVisible="False" />
+                            <Label x:Name="TodayAvatarEmojiLabel"
+                                   Text="&#x1FAE3;"
+                                   FontSize="32"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalOptions="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="#1D2B44" />
+                        </Grid>
+                    </Border>
+
+                    <Grid Grid.Column="1"
+                          ColumnDefinitions="*,*"
+                          ColumnSpacing="18"
+                          Margin="16,0,0,0">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Apex Brain Score"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#2C90FF" />
+                            <HorizontalStackLayout Spacing="4">
+                                <Label x:Name="BrainScoreLabel"
+                                       Text="171"
+                                       FontSize="28"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D2733" />
+                                <Label Text="/1000"
+                                       FontSize="16"
+                                       TextColor="#7E8B98"
+                                       VerticalTextAlignment="End" />
+                            </HorizontalStackLayout>
+                            <Border x:Name="BrainRankChip"
+                                    Padding="10,5"
+                                    BackgroundColor="#FFF1D6"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12"
+                                    HorizontalOptions="Start">
+                                <Grid ColumnDefinitions="Auto,*"
+                                      ColumnSpacing="7">
+                                    <Image x:Name="BrainRankIcon"
+                                           Source="rank_basecamp.svg"
+                                           WidthRequest="16"
+                                           HeightRequest="16"
+                                           Aspect="AspectFit"
+                                           VerticalOptions="Center" />
+                                    <Label x:Name="BrainRankLabel"
+                                           Grid.Column="1"
+                                           Text="Basecamp"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="#D98900" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             x:Name="StreakPanel"
+                                             Spacing="3">
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnStreakTapped" />
+                            </VerticalStackLayout.GestureRecognizers>
+                            <Label Text="Workout Streak"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#8C63FF" />
+                            <HorizontalStackLayout Spacing="8">
+                                <Label x:Name="StreakLabel"
+                                       Text="1"
+                                       FontSize="28"
+                                       FontAttributes="Bold"
+                                       TextColor="#1D2733" />
+                                <Border x:Name="StreakBadge"
+                                        WidthRequest="28"
+                                        HeightRequest="28"
+                                        BackgroundColor="#4DB8FF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 14"
+                                        VerticalOptions="Center">
+                                    <Label x:Name="StreakBadgeGlyph"
+                                           Text="&#x2713;"
+                                           FontSize="15"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="White" />
+                                </Border>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Grid>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="HeroAssessmentCard"
+                        Padding="22"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAssessmentTapped" />
+                    </Border.GestureRecognizers>
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#7B93FF" Offset="0" />
+                            <GradientStop Color="#46C1FF" Offset="0.52" />
+                            <GradientStop Color="#1C89E7" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="64"
+                                HeightRequest="64"
+                                BackgroundColor="#18FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 32"
+                                VerticalOptions="Center">
+                            <Label Text="&#x2713;"
+                                   FontSize="30"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="White" />
+                        </Border>
+
+                        <Label Grid.Column="1"
+                               x:Name="HeroWorkoutTitleLabel"
+                               Text="Assessment"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               VerticalTextAlignment="Center"
+                               LineBreakMode="TailTruncation"
+                               MaxLines="1"
+                               TextColor="White" />
+
+                        <Button Grid.Column="2"
+                                Text="Summary"
+                                Clicked="OnAssessmentSummaryClicked"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                BackgroundColor="White"
+                                TextColor="#3FA1F0"
+                                CornerRadius="22"
+                                HeightRequest="44"
+                                WidthRequest="108"
+                                VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <Border Padding="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#76E4FA" Offset="0" />
+                            <GradientStop Color="#2EA7F5" Offset="0.5" />
+                            <GradientStop Color="#2C7DD9" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Grid Padding="22,20,22,18"
+                              ColumnDefinitions="*,Auto,Auto,Auto"
+                              ColumnSpacing="14">
+                            <VerticalStackLayout Spacing="4">
+                                <Label x:Name="DailyHeaderLabel"
+                                       Text="Next Daily Workout"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#DDF6FF" />
+                                <Label x:Name="DailyAvailabilityLabel"
+                                       Text="Available in:"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                            </VerticalStackLayout>
+
+                            <Border x:Name="HoursTimerCard"
+                                    Grid.Column="1"
+                                    Padding="14,12"
+                                    BackgroundColor="#2C6CAA"
+                                    Opacity="0.95"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <VerticalStackLayout Spacing="1">
+                                    <Label x:Name="HoursValueLabel"
+                                           Text="10"
+                                           FontSize="26"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="White" />
+                                    <Label x:Name="HoursCaptionLabel"
+                                           Text="hours"
+                                           FontSize="11"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="#D8EDFF" />
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border x:Name="MinutesTimerCard"
+                                    Grid.Column="2"
+                                    Padding="14,12"
+                                    BackgroundColor="#2C6CAA"
+                                    Opacity="0.95"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <VerticalStackLayout Spacing="1">
+                                    <Label x:Name="MinutesValueLabel"
+                                           Text="48"
+                                           FontSize="26"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="White" />
+                                    <Label x:Name="MinutesCaptionLabel"
+                                           Text="mins"
+                                           FontSize="11"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="#D8EDFF" />
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border x:Name="SecondsTimerCard"
+                                    Grid.Column="3"
+                                    Padding="14,12"
+                                    BackgroundColor="#2C6CAA"
+                                    Opacity="0.95"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <VerticalStackLayout Spacing="1">
+                                    <Label x:Name="SecondsValueLabel"
+                                           Text="20"
+                                           FontSize="26"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="White" />
+                                    <Label x:Name="SecondsCaptionLabel"
+                                           Text="secs"
+                                           FontSize="11"
+                                           HorizontalTextAlignment="Center"
+                                           TextColor="#D8EDFF" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+
+                        <Border Padding="20,14"
+                                BackgroundColor="#57B7EE"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 0,0,26,26">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label x:Name="UnlockNowLabel"
+                                       Text="Daily mix refreshes tomorrow"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                                <Button Grid.Column="1"
+                                        x:Name="DailyWorkoutPlayButton"
+                                        Text="&#x203A;"
+                                        FontSize="26"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Transparent"
+                                        TextColor="White"
+                                        WidthRequest="72"
+                                        HeightRequest="34"
+                                        Clicked="OnPlayClicked" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid Margin="0,-2,0,0">
+                    <Border Margin="16,0,0,-10"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            BackgroundColor="White"
+                            Rotation="45"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            HorizontalOptions="Start"
+                            VerticalOptions="End" />
+
+                    <Border Padding="22,18"
+                            BackgroundColor="#F7FBFF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 24">
+                        <Border.Shadow>
+                            <Shadow Brush="#140F2740"
+                                    Offset="0,8"
+                                    Opacity="0.12"
+                                    Radius="16" />
+                        </Border.Shadow>
+                        <Label x:Name="ProgressBubbleLabel"
+                               Text="You've just begun your brain training journey! Check in tomorrow for your next workout or unlock more below."
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               LineBreakMode="WordWrap"
+                               LineHeight="1.2"
+                               TextColor="#4A4A53" />
+                    </Border>
+                </Grid>
+
+                <Border Padding="20,18"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.Shadow>
+                        <Shadow Brush="#140F2740"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#F6FBFF" Offset="0" />
+                            <GradientStop Color="#EEF7FF" Offset="0.52" />
+                            <GradientStop Color="#FFF4FD" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="12">
+                            <Border WidthRequest="58"
+                                    HeightRequest="58"
+                                    BackgroundColor="#DFF3FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 28"
+                                    VerticalOptions="Center">
+                                <Image Source="rainbow_puzzle_icon.svg"
+                                       WidthRequest="34"
+                                       HeightRequest="34"
+                                       Aspect="AspectFit"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2">
+                                <Label Text="Apex Points"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#7B8692" />
+                                <Label x:Name="ApexPointsBalanceLabel"
+                                       Text="0"
+                                       FontSize="30"
+                                       FontAttributes="Bold"
+                                       TextColor="#1177E6" />
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="2"
+                                    Padding="12,8"
+                                    BackgroundColor="#D9EEFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16"
+                                    VerticalOptions="Center">
+                                <Label Text="Spend in All Games"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="#2E8FEA" />
+                            </Border>
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 Color="#EEF1F4" />
+
+                        <Border Padding="16,14"
+                                BackgroundColor="#EDF8FF"
+                                Stroke="#CFE8FF"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 20">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="Daily Tasks"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#44454D" />
+                                <VerticalStackLayout x:Name="DailyTasksHost"
+                                                     Spacing="10" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Padding="16,14"
+                                BackgroundColor="#FFF1F8"
+                                Stroke="#FFD3EA"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 20">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="Weekly Tasks"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#44454D" />
+                                <VerticalStackLayout x:Name="WeeklyTasksHost"
+                                                     Spacing="10" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="20,18"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.Shadow>
+                        <Shadow Brush="#140F2740"
+                                Offset="0,8"
+                                Opacity="0.12"
+                                Radius="16" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#DDF2FF" Offset="0" />
+                            <GradientStop Color="#C7E4FF" Offset="0.55" />
+                            <GradientStop Color="#E6F6FF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="12">
+                        <Border WidthRequest="54"
+                                HeightRequest="54"
+                                BackgroundColor="#8CC6FF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 27"
+                                VerticalOptions="Start">
+                            <Label Text="&#x1F4D8;"
+                                   FontSize="26"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="White" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="4">
+                            <Label Text="Daily Knowledge"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#1C4FA0" />
+                            <Label x:Name="DailyKnowledgeTitleLabel"
+                                   Text="Did you know?"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#2A8CEE" />
+                            <Label x:Name="DailyKnowledgeBodyLabel"
+                                   Text="Your brain uses pattern recognition to make fast predictions from incomplete information."
+                                   FontSize="16"
+                                   LineHeight="1.15"
+                                   TextColor="#3F5976" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border Padding="0"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26">
+                    <Border.Shadow>
+                        <Shadow Brush="#140F2740"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="0">
+                        <VerticalStackLayout Padding="20,18,20,8"
+                                             Spacing="2">
+                            <Label Text="Today's Daily Mix"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="#41424A" />
+                            <Label Text="Quick picks chosen for today."
+                                   FontSize="13"
+                                   TextColor="#7B8692" />
+                        </VerticalStackLayout>
+
+                        <Grid x:Name="WorkoutItem1Row"
+                              Padding="20,14"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="14">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnWorkoutItem1Tapped" />
+                            </Grid.GestureRecognizers>
+                            <Border x:Name="WorkoutItem1IconFrame"
+                                    WidthRequest="68"
+                                    HeightRequest="68"
+                                    BackgroundColor="#67E66F"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <Grid>
+                                    <Image x:Name="WorkoutItem1IconImage"
+                                           Source="ach_logic_fire.svg"
+                                           WidthRequest="34"
+                                           HeightRequest="34"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Border Padding="8,3"
+                                            BackgroundColor="White"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 14"
+                                            VerticalOptions="End"
+                                            HorizontalOptions="Center"
+                                            Margin="0,0,0,-12">
+                                        <Label Text="Pro"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               TextColor="#48C55A" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 VerticalOptions="Center">
+                                <Label x:Name="WorkoutItem1TitleLabel"
+                                       Text="Problem Solving"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#44454D" />
+                                <Label x:Name="WorkoutItem1SubtitleLabel"
+                                       Text="Games to make you think creatively."
+                                       FontSize="15"
+                                       LineHeight="1.15"
+                                       TextColor="#7A7D85" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="2"
+                                   Text="&#x203A;"
+                                   FontSize="34"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="#585B63" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 Margin="20,0"
+                                 Color="#E7EAF0" />
+
+                        <Grid x:Name="WorkoutItem2Row"
+                              Padding="20,14"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="14">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnWorkoutItem2Tapped" />
+                            </Grid.GestureRecognizers>
+                            <Border x:Name="WorkoutItem2IconFrame"
+                                    WidthRequest="68"
+                                    HeightRequest="68"
+                                    BackgroundColor="#6B63F5"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <Grid>
+                                    <Image x:Name="WorkoutItem2IconImage"
+                                           Source="ach_word_lift.svg"
+                                           WidthRequest="34"
+                                           HeightRequest="34"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Border Padding="8,3"
+                                            BackgroundColor="White"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 14"
+                                            VerticalOptions="End"
+                                            HorizontalOptions="Center"
+                                            Margin="0,0,0,-12">
+                                        <Label Text="Pro"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               TextColor="#5E59F0" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 VerticalOptions="Center">
+                                <Label x:Name="WorkoutItem2TitleLabel"
+                                       Text="Language"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#44454D" />
+                                <Label x:Name="WorkoutItem2SubtitleLabel"
+                                       Text="Games to challenge your language skills."
+                                       FontSize="15"
+                                       LineHeight="1.15"
+                                       TextColor="#7A7D85" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="2"
+                                   Text="&#x203A;"
+                                   FontSize="34"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="#585B63" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1"
+                                 Margin="20,0"
+                                 Color="#E7EAF0" />
+
+                        <Grid x:Name="WorkoutItem3Row"
+                              Padding="20,14"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="14">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnWorkoutItem3Tapped" />
+                            </Grid.GestureRecognizers>
+                            <Border x:Name="WorkoutItem3IconFrame"
+                                    WidthRequest="68"
+                                    HeightRequest="68"
+                                    BackgroundColor="#FF8F8F"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    VerticalOptions="Center">
+                                <Grid>
+                                    <Image x:Name="WorkoutItem3IconImage"
+                                           Source="ach_steady_climber.svg"
+                                           WidthRequest="34"
+                                           HeightRequest="34"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Border Padding="8,3"
+                                            BackgroundColor="White"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 14"
+                                            VerticalOptions="End"
+                                            HorizontalOptions="Center"
+                                            Margin="0,0,0,-12">
+                                        <Label Text="Pro"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               TextColor="#FF6D6D" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 VerticalOptions="Center">
+                                <Label x:Name="WorkoutItem3TitleLabel"
+                                       Text="Coffee Break"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#44454D" />
+                                <Label x:Name="WorkoutItem3SubtitleLabel"
+                                       Text="A short and sharp workout."
+                                       FontSize="15"
+                                       LineHeight="1.15"
+                                       TextColor="#7A7D85" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="2"
+                                   Text="&#x203A;"
+                                   FontSize="34"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="#585B63" />
+                        </Grid>
+
+                        <Border Padding="20,18"
+                                BackgroundColor="#FAFBFD"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 0,0,26,26">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMoreWorkoutsTapped" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Explore Skill Library"
+                                           FontSize="21"
+                                           FontAttributes="Bold"
+                                           TextColor="#474850" />
+                                    <Label Text="Browse every category"
+                                           FontSize="14"
+                                           TextColor="#8B9198" />
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="1"
+                                       Text="&#x2304;"
+                                       FontSize="32"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="#555861" />
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#74E3FA" Offset="0" />
+                            <GradientStop Color="#2EA6F4" Offset="0.6" />
+                            <GradientStop Color="#256BCC" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Grid Padding="20"
+                          ColumnDefinitions="Auto,*"
+                          ColumnSpacing="16">
+                        <Border WidthRequest="84"
+                                HeightRequest="84"
+                                BackgroundColor="#1A1B72"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 42"
+                                VerticalOptions="Center">
+                            <Label Text="&#x2728;"
+                                   FontSize="38"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="#FFD34D" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="4"
+                                             VerticalOptions="Center">
+                            <Label x:Name="PromoTitleLabel"
+                                   Text="Get Pro for Free"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+                            <Label x:Name="PromoSubtitleLabel"
+                                   Text="Unlock more workouts, sharper insights, and a more complete training plan."
+                                   FontSize="14"
+                                   LineHeight="1.15"
+                                   TextColor="#E5F5FF" />
+                            <Image x:Name="PromoIconImage"
+                                   Source="ach_all_terrain.svg"
+                                   IsVisible="True"
+                                   WidthRequest="1"
+                                   HeightRequest="1"
+                                   Opacity="0" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid x:Name="MoreWorkoutsOverlay"
+              IsVisible="False"
+              Opacity="0"
+              BackgroundColor="#66000000"
+              ZIndex="25">
+            <BoxView Color="Transparent">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnMoreWorkoutsOverlayTapped" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border x:Name="MoreWorkoutsPanel"
+                    WidthRequest="390"
+                    MaximumWidthRequest="390"
+                    Margin="18,60,18,30"
+                    Padding="14,14,14,10"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 24"
+                    TranslationY="18"
+                    VerticalOptions="Center">
+                <Grid RowDefinitions="Auto,Auto,*" RowSpacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="More Workouts for you"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#43444A"
+                               VerticalOptions="Center" />
+                        <Button Grid.Column="1"
+                                Text="&#x2715;"
+                                BackgroundColor="#B7B7B7"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="18"
+                                WidthRequest="36"
+                                HeightRequest="36"
+                                Clicked="OnCloseMoreWorkoutsClicked" />
+                    </Grid>
+
+                    <Border Padding="3"
+                            BackgroundColor="#ECECEC"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22">
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="0">
+                            <Button x:Name="AdvancedTabButton"
+                                    Text="Advanced"
+                                    Clicked="OnAdvancedTabClicked"
+                                    BackgroundColor="#47AEF5"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="20"
+                                    HeightRequest="42" />
+                            <Button x:Name="SkillsTabButton"
+                                    Grid.Column="1"
+                                    Text="Skills"
+                                    Clicked="OnSkillsTabClicked"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#777777"
+                                    FontAttributes="Bold"
+                                    CornerRadius="20"
+                                    HeightRequest="42" />
+                        </Grid>
+                    </Border>
+
+                    <ScrollView Grid.Row="2">
+                        <VerticalStackLayout Spacing="0">
+                            <Grid x:Name="SheetRow1"
+                                  ClassId="0"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem1IconFrame"
+                                        WidthRequest="74"
+                                        HeightRequest="74"
+                                        BackgroundColor="#70C9FF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem1IconImage"
+                                               WidthRequest="38"
+                                               HeightRequest="38"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem1Badge"
+                                                Padding="8,3"
+                                                BackgroundColor="White"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 14"
+                                                VerticalOptions="End"
+                                                HorizontalOptions="Center"
+                                                Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem1BadgeLabel"
+                                                   Text="Pro"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#47AEF5" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="1"
+                                                     VerticalOptions="Center">
+                                    <Label x:Name="SheetItem1TitleLabel"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#46464D" />
+                                    <Label x:Name="SheetItem1SubtitleLabel"
+                                           FontSize="14"
+                                           LineHeight="1.1"
+                                           TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2"
+                                       Text="&#x203A;"
+                                       FontSize="32"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="#555861" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="#ECEFF3" />
+
+                            <Grid x:Name="SheetRow2"
+                                  ClassId="1"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem2IconFrame" WidthRequest="74" HeightRequest="74" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem2IconImage" WidthRequest="38" HeightRequest="38" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem2Badge" Padding="8,3" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem2BadgeLabel" Text="Pro" FontSize="10" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label x:Name="SheetItem2TitleLabel" FontSize="18" FontAttributes="Bold" TextColor="#46464D" />
+                                    <Label x:Name="SheetItem2SubtitleLabel" FontSize="14" LineHeight="1.1" TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="&#x203A;" FontSize="32" VerticalTextAlignment="Center" TextColor="#555861" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="#ECEFF3" />
+
+                            <Grid x:Name="SheetRow3"
+                                  ClassId="2"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem3IconFrame" WidthRequest="74" HeightRequest="74" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem3IconImage" WidthRequest="38" HeightRequest="38" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem3Badge" Padding="8,3" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem3BadgeLabel" Text="Pro" FontSize="10" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label x:Name="SheetItem3TitleLabel" FontSize="18" FontAttributes="Bold" TextColor="#46464D" />
+                                    <Label x:Name="SheetItem3SubtitleLabel" FontSize="14" LineHeight="1.1" TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="&#x203A;" FontSize="32" VerticalTextAlignment="Center" TextColor="#555861" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="#ECEFF3" />
+
+                            <Grid x:Name="SheetRow4"
+                                  ClassId="3"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem4IconFrame" WidthRequest="74" HeightRequest="74" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem4IconImage" WidthRequest="38" HeightRequest="38" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem4Badge" Padding="8,3" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem4BadgeLabel" Text="Pro" FontSize="10" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label x:Name="SheetItem4TitleLabel" FontSize="18" FontAttributes="Bold" TextColor="#46464D" />
+                                    <Label x:Name="SheetItem4SubtitleLabel" FontSize="14" LineHeight="1.1" TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="&#x203A;" FontSize="32" VerticalTextAlignment="Center" TextColor="#555861" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="#ECEFF3" />
+
+                            <Grid x:Name="SheetRow5"
+                                  ClassId="4"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem5IconFrame" WidthRequest="74" HeightRequest="74" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem5IconImage" WidthRequest="38" HeightRequest="38" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem5Badge" Padding="8,3" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem5BadgeLabel" Text="Pro" FontSize="10" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label x:Name="SheetItem5TitleLabel" FontSize="18" FontAttributes="Bold" TextColor="#46464D" />
+                                    <Label x:Name="SheetItem5SubtitleLabel" FontSize="14" LineHeight="1.1" TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="&#x203A;" FontSize="32" VerticalTextAlignment="Center" TextColor="#555861" />
+                            </Grid>
+
+                            <BoxView HeightRequest="1" Color="#ECEFF3" />
+
+                            <Grid x:Name="SheetRow6"
+                                  ClassId="5"
+                                  Padding="0,12"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  ColumnSpacing="12">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnSheetItemTapped" />
+                                </Grid.GestureRecognizers>
+                                <Border x:Name="SheetItem6IconFrame" WidthRequest="74" HeightRequest="74" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                    <Grid>
+                                        <Image x:Name="SheetItem6IconImage" WidthRequest="38" HeightRequest="38" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        <Border x:Name="SheetItem6Badge" Padding="8,3" BackgroundColor="White" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Label x:Name="SheetItem6BadgeLabel" Text="Pro" FontSize="10" FontAttributes="Bold" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label x:Name="SheetItem6TitleLabel" FontSize="18" FontAttributes="Bold" TextColor="#46464D" />
+                                    <Label x:Name="SheetItem6SubtitleLabel" FontSize="14" LineHeight="1.1" TextColor="#6C6F77" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="&#x203A;" FontSize="32" VerticalTextAlignment="Center" TextColor="#555861" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="AssessmentSummaryOverlay"
+              IsVisible="False"
+              Opacity="0"
+              BackgroundColor="#66091734"
+              ZIndex="28">
+            <BoxView Color="Transparent">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAssessmentSummaryOverlayTapped" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border x:Name="AssessmentSummaryPanel"
+                    Margin="16,80,16,28"
+                    Padding="0"
+                    BackgroundColor="#FFF8FB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28"
+                    TranslationY="24"
+                    VerticalOptions="Fill">
+                <Grid RowDefinitions="Auto,Auto,*" RowSpacing="0">
+                    <Grid Padding="20,18,16,14"
+                          ColumnDefinitions="*,Auto"
+                          ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Assessment Summary"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+                            <Label Text="Your current brain-training snapshot"
+                                   FontSize="13"
+                                   TextColor="#FFE6F1" />
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="1"
+                                Text="&#x2715;"
+                                BackgroundColor="#30FFFFFF"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="18"
+                                WidthRequest="36"
+                                HeightRequest="36"
+                                Clicked="OnCloseAssessmentSummaryClicked" />
+
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FF4B6E" Offset="0" />
+                                <GradientStop Color="#FF3D86" Offset="0.55" />
+                                <GradientStop Color="#F42D62" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                    </Grid>
+
+                    <Border Padding="4"
+                            Margin="18,14,18,8"
+                            BackgroundColor="#FFE6EE"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22">
+                        <Grid ColumnDefinitions="*,*">
+                            <Button x:Name="AssessmentOverviewTabButton"
+                                    Text="Overview"
+                                    BackgroundColor="#FF4377"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="18"
+                                    HeightRequest="40"
+                                    Clicked="OnAssessmentOverviewTabClicked" />
+                            <Button x:Name="AssessmentRewardsTabButton"
+                                    Grid.Column="1"
+                                    Text="Rewards"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#C54773"
+                                    FontAttributes="Bold"
+                                    CornerRadius="18"
+                                    HeightRequest="40"
+                                    Clicked="OnAssessmentRewardsTabClicked" />
+                        </Grid>
+                    </Border>
+
+                    <ScrollView Grid.Row="2">
+                        <VerticalStackLayout Padding="18,10,18,20"
+                                             Spacing="14">
+                            <VerticalStackLayout x:Name="AssessmentOverviewTab"
+                                                 Spacing="14">
+                                <Border Padding="16"
+                                        BackgroundColor="White"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 22">
+                                    <Border.Shadow>
+                                        <Shadow Brush="#1A7B1535"
+                                                Offset="0,8"
+                                                Opacity="0.14"
+                                                Radius="16" />
+                                    </Border.Shadow>
+                                    <VerticalStackLayout Spacing="12">
+                                        <Label Text="Current Brain Snapshot"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="#2B2141" />
+                                        <Grid ColumnDefinitions="*,*"
+                                              ColumnSpacing="12">
+                                            <Border Padding="14"
+                                                    BackgroundColor="#FFF3F7"
+                                                    StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 18">
+                                                <VerticalStackLayout Spacing="4">
+                                                    <Label Text="Peak Score"
+                                                           FontSize="12"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#AA6781" />
+                                                    <Label x:Name="AssessmentPeakScoreLabel"
+                                                           Text="0"
+                                                           FontSize="28"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#F22E64" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                            <Border Grid.Column="1"
+                                                    Padding="14"
+                                                    BackgroundColor="#FFF3D7"
+                                                    StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 18">
+                                                <VerticalStackLayout Spacing="4">
+                                                    <Label Text="Current Rank"
+                                                           FontSize="12"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#B07A21" />
+                                                    <Label x:Name="AssessmentRankLabel"
+                                                           Text="Basecamp"
+                                                           FontSize="24"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#D98900" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                        </Grid>
+                                        <Label x:Name="AssessmentSummaryBodyLabel"
+                                               Text="Your strongest gains and current training pace will appear here."
+                                               FontSize="14"
+                                               LineHeight="1.2"
+                                               TextColor="#635A73" />
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <Border Padding="16"
+                                        BackgroundColor="White"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 22">
+                                    <VerticalStackLayout Spacing="10">
+                                        <Label Text="Category Focus"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="#2B2141" />
+                                        <Grid ColumnDefinitions="*,*"
+                                              ColumnSpacing="10"
+                                              RowDefinitions="Auto,Auto">
+                                            <Border Padding="12" BackgroundColor="#FFF3F7" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                                <VerticalStackLayout Spacing="2">
+                                                    <Label Text="Memory" FontSize="12" TextColor="#9D7890" />
+                                                    <Label x:Name="AssessmentMemoryLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#F03E7D" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                            <Border Grid.Column="1" Padding="12" BackgroundColor="#EEF8FF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                                <VerticalStackLayout Spacing="2">
+                                                    <Label Text="Problem Solving" FontSize="12" TextColor="#61839B" />
+                                                    <Label x:Name="AssessmentProblemSolvingLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#2196F3" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                            <Border Grid.Row="1" Padding="12" BackgroundColor="#F2F1FF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                                <VerticalStackLayout Spacing="2">
+                                                    <Label Text="Language" FontSize="12" TextColor="#756DAD" />
+                                                    <Label x:Name="AssessmentLanguageLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#6957F5" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                            <Border Grid.Row="1" Grid.Column="1" Padding="12" BackgroundColor="#EFFBF5" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                                <VerticalStackLayout Spacing="2">
+                                                    <Label Text="Focus" FontSize="12" TextColor="#5D8E76" />
+                                                    <Label x:Name="AssessmentFocusLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#18A961" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout x:Name="AssessmentRewardsTab"
+                                                 IsVisible="False"
+                                                 Spacing="14">
+                                <Border Padding="16"
+                                        BackgroundColor="White"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 22">
+                                    <VerticalStackLayout Spacing="12">
+                                        <Label Text="Reward Momentum"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="#2B2141" />
+                                        <Grid ColumnDefinitions="*,*"
+                                              ColumnSpacing="12">
+                                            <Border Padding="14"
+                                                    BackgroundColor="#EEF8FF"
+                                                    StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 18">
+                                                <VerticalStackLayout Spacing="4">
+                                                    <Label Text="Apex Points"
+                                                           FontSize="12"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#5D87A6" />
+                                                    <Label x:Name="AssessmentApexPointsLabel"
+                                                           Text="0"
+                                                           FontSize="28"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#1486E7" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                            <Border Grid.Column="1"
+                                                    Padding="14"
+                                                    BackgroundColor="#EFFBF5"
+                                                    StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 18">
+                                                <VerticalStackLayout Spacing="4">
+                                                    <Label Text="Workout Streak"
+                                                           FontSize="12"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#5E9277" />
+                                                    <Label x:Name="AssessmentStreakLabel"
+                                                           Text="0"
+                                                           FontSize="28"
+                                                           FontAttributes="Bold"
+                                                           TextColor="#19AA63" />
+                                                </VerticalStackLayout>
+                                            </Border>
+                                        </Grid>
+                                        <Label x:Name="AssessmentRewardBodyLabel"
+                                               Text="Daily tasks, weekly targets, and strong game sessions feed your Apex wallet and unlock more choices."
+                                               FontSize="14"
+                                               LineHeight="1.2"
+                                               TextColor="#635A73" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border x:Name="AchievementToast"
+                IsVisible="False"
+                Opacity="0"
+                StrokeShape="RoundRectangle 16"
+                BackgroundColor="#1E2A36"
+                Stroke="#2E3F4F"
+                StrokeThickness="1"
+                Padding="12"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Margin="18,0,18,26"
+                TranslationY="24">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Image x:Name="AchievementToastIcon"
+                       Source="ach_first_steps.svg"
+                       WidthRequest="28"
+                       HeightRequest="28"
+                       VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="1">
+                    <Label x:Name="AchievementToastTitle"
+                           Text="Achievement Unlocked"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label x:Name="AchievementToastMessage"
+                           Text="First Steps"
+                           FontSize="12"
+                           TextColor="#D6E2EE" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

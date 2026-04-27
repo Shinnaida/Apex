@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.AccountAccessPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F3F7FB"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="310,*">
+
+        <Grid Grid.Row="0"
+              MinimumHeightRequest="310">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1A6EE8" Offset="0.0" />
+                    <GradientStop Color="#4E6CF4" Offset="0.55" />
+                    <GradientStop Color="#7B61FF" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border WidthRequest="180"
+                    HeightRequest="180"
+                    BackgroundColor="#24FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 90"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,-48,-30,0"
+                    InputTransparent="True" />
+
+            <Border WidthRequest="120"
+                    HeightRequest="120"
+                    BackgroundColor="#18FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 60"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End"
+                    Margin="-16,0,0,-20"
+                    InputTransparent="True" />
+
+            <Border WidthRequest="78"
+                    HeightRequest="78"
+                    BackgroundColor="#12FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 39"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Margin="0,42,112,0"
+                    InputTransparent="True" />
+
+            <VerticalStackLayout Padding="24,72,24,36" Spacing="17">
+                <Label x:Name="HeroTitleLabel"
+                       Text="Welcome Back"
+                       FontSize="34"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+
+                <Border x:Name="RecentAccountCard"
+                        Padding="14,10"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 18"
+                        Margin="0,0,0,2">
+                    <HorizontalStackLayout Spacing="20">
+                        <Border x:Name="RecentAccountAvatarContainer"
+                                WidthRequest="80"
+                                HeightRequest="80"
+                                BackgroundColor="#F4F8FF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 40"
+                                VerticalOptions="Center">
+                            <Grid>
+                                <Image x:Name="RecentAccountAvatarImage"
+                                       Aspect="AspectFill"
+                                       IsVisible="False" />
+                                <Label x:Name="RecentAccountAvatarEmojiLabel"
+                                       Text="🙂"
+                                       FontSize="34"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       IsVisible="True" />
+                            </Grid>
+                        </Border>
+                        <Label x:Name="RecentAccountLabel"
+                                FontSize="20"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Label x:Name="HeroSubtitleLabel"
+                       Text="Your progress is saved on this device. Sign in and jump right back in."
+                       FontSize="16"
+                       TextColor="#EAF3FF"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,28,20,26" Spacing="16">
+                <Border Padding="22"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.18"
+                                Radius="18" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="18">
+                        <Grid ColumnDefinitions="*,*"
+                              ColumnSpacing="10">
+                            <Button x:Name="LoginTabButton"
+                                    Text="Log In"
+                                    BackgroundColor="#1A6EE8"
+                                    TextColor="White"
+                                    CornerRadius="18"
+                                    FontAttributes="Bold"
+                                    HeightRequest="44"
+                                    Clicked="OnLoginTabClicked" />
+
+                            <Button x:Name="SignupTabButton"
+                                    Grid.Column="1"
+                                    Text="Create Account"
+                                    BackgroundColor="#EEF3FB"
+                                    TextColor="#61748B"
+                                    CornerRadius="18"
+                                    FontAttributes="Bold"
+                                    HeightRequest="44"
+                                    Clicked="OnSignupTabClicked" />
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="LoginPanel"
+                                             Spacing="12">
+                            <Label Text="Sign in to continue"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#16304B" />
+
+                            <Label Text="We will keep your account access out of onboarding from now on."
+                                   FontSize="14"
+                                   TextColor="#72859A" />
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="LoginUsernameEntry"
+                                       Placeholder="Username"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D"
+                                       TextChanged="OnLoginUsernameEntryTextChanged" />
+                            </Border>
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="LoginPasswordEntry"
+                                       Placeholder="Password"
+                                       IsPassword="True"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D" />
+                            </Border>
+
+                            <Border x:Name="BiometricPanel"
+                                    Padding="10"
+                                    BackgroundColor="#F7FAFE"
+                                    Stroke="#DCE7F4"
+                                    StrokeShape="RoundRectangle 18"
+                                    StrokeThickness="1">
+                                <VerticalStackLayout Spacing="0">
+                                    <Border BackgroundColor="#EEF5FF"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 18"
+                                            HorizontalOptions="Fill">
+                                        <ImageButton x:Name="FingerprintLoginButton"
+                                                     Source="biometric_blue.png"
+                                                     BackgroundColor="Transparent"
+                                                     HeightRequest="48"
+                                                     WidthRequest="48"
+                                                     Padding="10"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="Center"
+                                                     Aspect="AspectFit"
+                                                     Clicked="OnBiometricSignInClicked"
+                                                     SemanticProperties.Description="Use biometric sign in" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Button Text="Log In"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Clicked="OnSignInClicked" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout x:Name="SignupPanel"
+                                             IsVisible="False"
+                                             Spacing="12">
+                            <Label Text="Create another account"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#16304B" />
+
+                            <Label Text="You can still create a new local account on this device whenever you want."
+                                   FontSize="14"
+                                   TextColor="#72859A" />
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="SignupUsernameEntry"
+                                       Placeholder="Username"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D" />
+                            </Border>
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="SignupAgeEntry"
+                                       Placeholder="Age"
+                                       Keyboard="Numeric"
+                                       MaxLength="2"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D" />
+                            </Border>
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="SignupPasswordEntry"
+                                       Placeholder="Password"
+                                       IsPassword="True"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D" />
+                            </Border>
+
+                            <Border Style="{StaticResource FieldShellStyle}">
+                                <Entry x:Name="SignupConfirmPasswordEntry"
+                                       Placeholder="Confirm password"
+                                       IsPassword="True"
+                                       PlaceholderColor="#93A2B4"
+                                       BackgroundColor="Transparent"
+                                       TextColor="#17324D" />
+                            </Border>
+
+                            <Button Text="Create Account"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Clicked="OnCreateAccountClicked" />
+                        </VerticalStackLayout>
+
+                        <Label x:Name="FlowStatusLabel"
+                               IsVisible="False"
+                               FontSize="13"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#C83A4A" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button x:Name="BackToOnboardingButton"
+                        Text="Back to onboarding"
+                        BackgroundColor="Transparent"
+                        TextColor="#607890"
+                        FontAttributes="Bold"
+                        IsVisible="False"
+                        Clicked="OnBackToOnboardingClicked" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

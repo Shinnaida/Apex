@@ -1,0 +1,274 @@
+<ContentPage
+    x:Class="Peak.TestsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEF4FB"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0,0,0,30"
+                             Spacing="18">
+            <Grid Padding="20,22,20,26">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#37C6FF" Offset="0" />
+                        <GradientStop Color="#159BE8" Offset="0.55" />
+                        <GradientStop Color="#0A75D0" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Assessments"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+
+                    <Border Padding="20"
+                            BackgroundColor="#24FFFFFF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 28">
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="16">
+                            <VerticalStackLayout Spacing="10"
+                                                 VerticalOptions="Center">
+                                <Label Text="Featured"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       TextColor="#DBF6FF" />
+                                <Label Text="General IQ Challenge"
+                                       FontSize="26"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                                <Label Text="A structured mixed assessment with weighted scoring, category breakdowns, and a polished end summary."
+                                       FontSize="14"
+                                       TextColor="#E6F8FF" />
+                                <HorizontalStackLayout Spacing="8">
+                                    <Border Padding="10,6"
+                                            BackgroundColor="#23094164"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 16">
+                                        <Label Text="18 questions"
+                                               FontSize="12"
+                                               TextColor="White" />
+                                    </Border>
+                                    <Border Padding="10,6"
+                                            BackgroundColor="#23094164"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 16">
+                                        <Label Text="20 sec / item"
+                                               FontSize="12"
+                                               TextColor="White" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1"
+                                    Text="Start"
+                                    Clicked="OnGeneralChallengeClicked"
+                                    BackgroundColor="White"
+                                    TextColor="#1487DA"
+                                    CornerRadius="24"
+                                    HeightRequest="48"
+                                    WidthRequest="110"
+                                    VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Padding="16,0"
+                                 Spacing="14">
+                <Label Text="Choose an assessment"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#14314C" />
+
+                <Border x:Name="GeneralCard"
+                        Padding="18"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#DFF0FF" Offset="0" />
+                            <GradientStop Color="#C9E6FF" Offset="0.6" />
+                            <GradientStop Color="#EAF6FF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGeneralChallengeTapped" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14">
+                        <Border Padding="10"
+                                BackgroundColor="#F8FCFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 22"
+                                VerticalOptions="Start">
+                            <Image Source="iq_test_logo.svg"
+                                   WidthRequest="86"
+                                   HeightRequest="86"
+                                   Aspect="AspectFit" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="6">
+                            <Label Text="General IQ Challenge"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#184277" />
+                            <Label Text="A full-length assessment with math, language, visual, science, abstract, and history questions."
+                                   FontSize="13"
+                                   TextColor="#5B7A94" />
+                            <HorizontalStackLayout Spacing="8">
+                                <Border Padding="10,5" BackgroundColor="#F8FCFF" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                                    <Label Text="Weighted scoring"
+                                           FontSize="11"
+                                           TextColor="#4E6C86" />
+                                </Border>
+                                <Border Padding="10,5" BackgroundColor="#F8FCFF" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                                    <Label Text="Randomized"
+                                           FontSize="11"
+                                           TextColor="#4E6C86" />
+                                </Border>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2"
+                               Text="&#x203A;"
+                               FontSize="30"
+                               VerticalTextAlignment="Center"
+                               TextColor="#8EA8BE" />
+                    </Grid>
+                </Border>
+
+                <Border x:Name="QuickCard"
+                        Padding="18"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#E2FBF7" Offset="0" />
+                            <GradientStop Color="#CFF7F1" Offset="0.6" />
+                            <GradientStop Color="#F0FFFC" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnQuickCheckTapped" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto,*,Auto"
+                          ColumnSpacing="14">
+                        <Border Padding="8"
+                                BackgroundColor="#F7FFFD"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 22"
+                                VerticalOptions="Start">
+                            <Image Source="quick_brain_check_logo.svg"
+                                   WidthRequest="94"
+                                   HeightRequest="94"
+                                   Aspect="AspectFit" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             Spacing="6">
+                            <Label Text="Quick Brain Check"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#0E6A74" />
+                            <Label Text="A shorter session for daily scoring, fast feedback, and lighter training days."
+                                   FontSize="13"
+                                   TextColor="#5A7E82" />
+                            <HorizontalStackLayout Spacing="8">
+                                <Border Padding="10,5" BackgroundColor="#F7FFFD" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                                    <Label Text="Quick profile"
+                                           FontSize="11"
+                                           TextColor="#4E6C86" />
+                                </Border>
+                                <Border Padding="10,5" BackgroundColor="#F7FFFD" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                                    <Label Text="12 questions"
+                                           FontSize="11"
+                                           TextColor="#4E6C86" />
+                                </Border>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2"
+                               Text="&#x203A;"
+                               FontSize="30"
+                               VerticalTextAlignment="Center"
+                               TextColor="#8EA8BE" />
+                    </Grid>
+                </Border>
+
+                <Border Padding="18"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#EEF2FF" Offset="0" />
+                            <GradientStop Color="#F7EEFF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="How scoring feels"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#4D3AAE" />
+                        <Label Text="Each question is scored by difficulty, every category contributes to the final result, and the end screen highlights both peak score and category balance."
+                               FontSize="13"
+                               TextColor="#6A6C9A" />
+                        <Grid ColumnDefinitions="*,*,*"
+                              ColumnSpacing="10">
+                            <Border Padding="12"
+                                    BackgroundColor="#FFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="Easy"
+                                           FontSize="12"
+                                           TextColor="#6A8399" />
+                                    <Label Text="80"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="1"
+                                    Padding="12"
+                                    BackgroundColor="#FFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="Medium"
+                                           FontSize="12"
+                                           TextColor="#6A8399" />
+                                    <Label Text="120"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="2"
+                                    Padding="12"
+                                    BackgroundColor="#FFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="Hard"
+                                           FontSize="12"
+                                           TextColor="#6A8399" />
+                                    <Label Text="170"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

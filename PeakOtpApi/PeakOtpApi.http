@@ -1,0 +1,6 @@
+@PeakOtpApi_HostAddress = http://localhost:5138
+
+GET {{PeakOtpApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

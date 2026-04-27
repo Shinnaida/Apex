@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.VerifyCodePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource PageBackground}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid Padding="20,66,20,22">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#2747C7" Offset="0.0" />
+                    <GradientStop Color="#5A68F2" Offset="0.55" />
+                    <GradientStop Color="#7E6BFF" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border WidthRequest="180"
+                    HeightRequest="180"
+                    BackgroundColor="#16FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 90"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,-44,-42,0" />
+
+            <VerticalStackLayout Spacing="14">
+                <Image HeightRequest="22"
+                       Source="icon_back.png"
+                       WidthRequest="22">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChangeEmailTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Account verification"
+                           Style="{StaticResource TitleLabelStyle}"
+                           TextColor="White" />
+                    <Label x:Name="SentToLabel"
+                           Text="Email sent to"
+                           FontSize="14"
+                           TextColor="#EAF3FF" />
+                    <Label x:Name="EmailLabel"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,0,18,26"
+                                 Spacing="16">
+                <Border Padding="22"
+                        Margin="0,-18,0,0"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.18"
+                                Radius="18" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Enter the 4-digit code"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="We sent a one-time verification code to your Gmail address."
+                                   Style="{StaticResource SubtitleLabelStyle}"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+
+                        <HorizontalStackLayout HorizontalOptions="Center"
+                                               Spacing="12">
+                            <Border Style="{StaticResource FieldShellStyle}"
+                                    WidthRequest="60"
+                                    HeightRequest="68">
+                                <Entry x:Name="D1"
+                                       MaxLength="1"
+                                       Keyboard="Numeric"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="Transparent"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       TextChanged="OnDigitChanged" />
+                            </Border>
+                            <Border Style="{StaticResource FieldShellStyle}"
+                                    WidthRequest="60"
+                                    HeightRequest="68">
+                                <Entry x:Name="D2"
+                                       MaxLength="1"
+                                       Keyboard="Numeric"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="Transparent"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       TextChanged="OnDigitChanged" />
+                            </Border>
+                            <Border Style="{StaticResource FieldShellStyle}"
+                                    WidthRequest="60"
+                                    HeightRequest="68">
+                                <Entry x:Name="D3"
+                                       MaxLength="1"
+                                       Keyboard="Numeric"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="Transparent"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       TextChanged="OnDigitChanged" />
+                            </Border>
+                            <Border Style="{StaticResource FieldShellStyle}"
+                                    WidthRequest="60"
+                                    HeightRequest="68">
+                                <Entry x:Name="D4"
+                                       MaxLength="1"
+                                       Keyboard="Numeric"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="Transparent"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       TextChanged="OnDigitChanged" />
+                            </Border>
+                        </HorizontalStackLayout>
+
+                        <Border Padding="14"
+                                BackgroundColor="#F7FAFE"
+                                Stroke="#E2EAF3"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18">
+                            <VerticalStackLayout Spacing="8">
+                                <Label x:Name="ResendLabel"
+                                       Text="Resend code 30 secs"
+                                       FontSize="13"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource TextSecondary}" />
+
+                                <Label Text="Change Email"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource BrandPrimary}"
+                                       HorizontalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnChangeEmailTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Verification protects"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Secure purchases"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextSecondary}" />
+                            <Label Text="Save and restore progress"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextSecondary}" />
+                            <Label Text="Personalized reports"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextSecondary}" />
+                            <Label Text="Password-free access"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextSecondary}" />
+                        </VerticalStackLayout>
+
+                        <Label x:Name="ErrorLabel"
+                               Text=""
+                               FontSize="12"
+                               TextColor="{StaticResource DangerColor}"
+                               IsVisible="False"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

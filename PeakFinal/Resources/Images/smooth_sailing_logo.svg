@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="8" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2BE6D3"/>
+      <stop offset="0.58" stop-color="#0EC6B0"/>
+      <stop offset="1" stop-color="#0A9E97"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="92" height="92" rx="22" fill="url(#bg)"/>
+  <circle cx="48" cy="50" r="31" fill="#0A8E88" fill-opacity="0.26"/>
+  <path d="M31 17C28 35.5 27.8 50 33.2 62H41V17H31Z" fill="#F7FFFF"/>
+  <path d="M50 17V62H58.8C64.2 50 64 35.5 61 17H50Z" fill="#F7FFFF"/>
+  <rect x="42.5" y="61.5" width="7.2" height="7.5" rx="1.6" fill="#145B59"/>
+  <rect x="39" y="68.5" width="14" height="6.5" rx="2.6" fill="#155A57"/>
+  <path d="M61 48C63.8 42.8 69.4 40.2 75.8 40.2C84.4 40.2 91 46 91 53.6C91 61.4 84.7 67 76.2 67H58.5C54 67 50.8 64.3 50.8 60.4C50.8 56.6 54.2 53.6 58.3 53.6C59.2 53.6 60.2 53.8 61 54.1V48Z" fill="#F7FFFF"/>
+  <path d="M17 49.5C18.8 45.8 22.8 43.6 27.2 43.6C33.1 43.6 37.6 47.6 37.6 52.8C37.6 58.1 33.3 62 27.5 62H14.8C11.8 62 9.6 60.1 9.6 57.4C9.6 54.9 11.9 52.8 14.7 52.8C15.5 52.8 16.3 53 17 53.3V49.5Z" fill="#F7FFFF"/>
+  <path d="M29 77.5C31.8 72.1 37.3 68.8 43.8 68.8C52.5 68.8 59 74.8 59 82.2H25.2C25.2 80.5 26.5 78.7 29 77.5Z" fill="#BDF4EA" fill-opacity="0.95"/>
+  <path d="M56.5 78C58.7 73.6 63.2 71 68.3 71C75.3 71 80.7 75.6 80.7 81.8H52.5C52.5 80.4 53.6 79 56.5 78Z" fill="#8BE6D6" fill-opacity="0.9"/>
+</svg>

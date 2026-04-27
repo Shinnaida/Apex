@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pixel Logic</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="title-block">
+        <h1>Pixel Logic</h1>
+        <p>Reveal the hidden image with logic.</p>
+      </div>
+      <div class="meta">
+        <div class="pill"><span id="timer">00:00</span></div>
+        <div class="pill"><span id="mistakes">0</span> mistakes</div>
+      </div>
+    </header>
+
+    <section class="controls">
+      <div class="control-group grow">
+        <label for="puzzleSelect">Puzzle</label>
+        <select id="puzzleSelect" aria-label="Select puzzle"></select>
+      </div>
+      <button id="restartBtn" type="button">Restart</button>
+      <button id="checkBtn" type="button">Check Progress</button>
+      <button id="hintBtn" type="button">Hint <span id="hintCount">3</span></button>
+      <button id="pauseBtn" type="button">Pause</button>
+      <button id="revealBtn" type="button" class="danger">Reveal</button>
+      <button id="themeBtn" type="button">Dark</button>
+      <button id="soundBtn" type="button">Sound On</button>
+    </section>
+
+    <section class="mobile-modes" aria-label="Touch input mode">
+      <button id="fillModeBtn" class="mode active" type="button">Fill</button>
+      <button id="xModeBtn" class="mode" type="button">X</button>
+    </section>
+
+    <section class="status-row">
+      <div class="status-card">
+        <span class="status-label">Best</span>
+        <strong id="bestTime">--:--</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">Hints Left</span>
+        <strong id="hintStatus">3</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">Mode</span>
+        <strong id="modeStatus">Fill</strong>
+      </div>
+    </section>
+
+    <section class="board-shell">
+      <div id="boardWrap" class="board-wrap" aria-live="polite">
+        <div id="board" class="board"></div>
+      </div>
+    </section>
+
+    <section class="message-card">
+      <p id="message">Tap to fill. Right click to mark X. On touch devices, use Fill/X mode.</p>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h2 id="modalTitle">Puzzle Solved</h2>
+      <p id="modalText">You completed the puzzle.</p>
+      <button id="modalCloseBtn" type="button">Play Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

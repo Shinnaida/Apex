@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.AchievementsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    Title="Achievements"
+    BackgroundColor="#F4F6F8">
+
+    <Grid Padding="16"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="12">
+
+        <Border StrokeThickness="0"
+                BackgroundColor="White"
+                Padding="14"
+                StrokeShape="RoundRectangle 14">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Achievement Progress"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#22313F"/>
+                <Label x:Name="AchievementSummaryLabel"
+                       Text="Tap to load"
+                       FontSize="14"
+                       TextColor="#5A6A78"/>
+                <Label x:Name="AchievementRankLabel"
+                       Text="Current rank: Basecamp"
+                       FontSize="14"
+                       TextColor="#5A6A78"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Border x:Name="AchievementsLoadingCard"
+                Grid.Row="1"
+                IsVisible="False"
+                StrokeThickness="0"
+                BackgroundColor="#F4F9FF"
+                Padding="14"
+                StrokeShape="RoundRectangle 14">
+            <HorizontalStackLayout Spacing="10">
+                <ActivityIndicator x:Name="AchievementsLoadingIndicator"
+                                   IsVisible="False"
+                                   IsRunning="False"
+                                   Color="#4FA7F5"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   VerticalOptions="Center" />
+                <Label Text="Loading achievements..."
+                       FontSize="13"
+                       TextColor="#6E7C93"
+                       VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+        </Border>
+
+        <CollectionView x:Name="AchievementsCollectionView"
+                        Grid.Row="2"
+                        SelectionMode="Single"
+                        SelectionChanged="OnAchievementSelectionChanged"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:AchievementListItemViewModel">
+                    <Border Padding="12"
+                            BackgroundColor="{Binding BackgroundColor}"
+                            Stroke="{Binding StrokeColor}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="12">
+                            <Image Source="{Binding IconSource}"
+                                   WidthRequest="44"
+                                   HeightRequest="44"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start" />
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="8">
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           TextColor="#203040"
+                                           VerticalTextAlignment="Center" />
+                                    <Border Padding="10,4"
+                                            BackgroundColor="{Binding CategoryBackgroundColor}"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 12"
+                                            VerticalOptions="Center">
+                                        <Label Text="{Binding Category}"
+                                               FontSize="11"
+                                               FontAttributes="Bold"
+                                               TextColor="{Binding CategoryTextColor}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding Description}"
+                                       FontSize="13"
+                                       TextColor="#5A6A78" />
+
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding StatusText}"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding StatusColor}" />
+                                    <Label Text="{Binding ProgressText}"
+                                           FontSize="12"
+                                           TextColor="{Binding StatusColor}" />
+                                </HorizontalStackLayout>
+
+                                <ProgressBar HeightRequest="8"
+                                             Progress="{Binding ProgressFraction}"
+                                             ProgressColor="{Binding StatusColor}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

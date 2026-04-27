@@ -1,0 +1,13 @@
+.vs/
+.vscode/
+.dotnet/
+PeakFinal/_tools/
+
+**/bin/
+**/obj/
+
+*.user
+*.suo
+*.cache
+*.log
+*.zip

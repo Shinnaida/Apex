@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WordALikeGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#3B2F57"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <Grid BackgroundColor="#221C2F"
+              HeightRequest="56"
+              Padding="10"
+              ColumnDefinitions="Auto,*,Auto">
+            <Border WidthRequest="42"
+                    HeightRequest="42"
+                    BackgroundColor="#FFF8FB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 16"
+                    VerticalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="#20000000"
+                            Offset="0,8"
+                            Opacity="0.18"
+                            Radius="14" />
+                </Border.Shadow>
+                <Grid Padding="12,10"
+                      ColumnDefinitions="Auto,Auto"
+                      ColumnSpacing="5">
+                    <BoxView Grid.Column="0"
+                             BackgroundColor="#5D1839"
+                             CornerRadius="2.5"
+                             WidthRequest="4"
+                             HeightRequest="16"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+                    <BoxView Grid.Column="1"
+                             BackgroundColor="#5D1839"
+                             CornerRadius="2.5"
+                             WidthRequest="4"
+                             HeightRequest="16"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPauseClicked" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Border>
+
+            <Label x:Name="TimerLabel"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#FFD700"
+                   Text="01:56" />
+
+            <HorizontalStackLayout Grid.Column="2"
+                                   Spacing="6"
+                                   VerticalOptions="Center">
+                <Label Text="Score"
+                       FontSize="16"
+                       TextColor="#CCCCCC" />
+
+                <Label x:Name="ScoreLabel"
+                       Text="0"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFD700" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="6"
+                             Padding="0,40,0,20"
+                             HorizontalOptions="Center">
+            <Label x:Name="PromptLabel"
+                   Text="OFFER"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Label Text="is associated with..."
+                   FontSize="16"
+                   TextColor="#C8C8C8"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2"
+                             x:Name="AnswersContainer"
+                             Spacing="40"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Start"
+                             Margin="0,20,0,0" />
+
+        <VerticalStackLayout Grid.Row="3"
+                             Padding="12"
+                             Spacing="8"
+                             BackgroundColor="#2E2444">
+            <Grid x:Name="LetterPoolRow1"
+                  ColumnSpacing="6" />
+            <Grid x:Name="LetterPoolRow2"
+                  ColumnSpacing="6" />
+
+            <Grid ColumnDefinitions="*,*"
+                  ColumnSpacing="8"
+                  Margin="0,6,0,0">
+                <Button Text="&#x1F5D1;"
+                        BackgroundColor="#FF2957"
+                        TextColor="White"
+                        HeightRequest="48"
+                        CornerRadius="6"
+                        Clicked="OnClearClicked" />
+
+                <Button Grid.Column="1"
+                        Text="SKIP"
+                        BackgroundColor="#FF2957"
+                        TextColor="White"
+                        HeightRequest="48"
+                        CornerRadius="6"
+                        Clicked="OnNextClicked" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

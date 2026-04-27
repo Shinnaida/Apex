@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.StatsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F4F3F5"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid BackgroundColor="#10A7E6"
+              Padding="16,18,18,14"
+              RowDefinitions="Auto,Auto">
+            <Label Text="YOUR PERFORMANCE"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   CharacterSpacing="1.1" />
+
+            <Grid Grid.Row="1"
+                  Margin="0,18,0,0"
+                  ColumnDefinitions="*,*,*,*"
+                  RowDefinitions="Auto,4">
+                <Label x:Name="TabBrain"
+                       Grid.Column="0"
+                       Text="BRAIN"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTabBrainTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="TabOverTime"
+                       Grid.Column="1"
+                       Text="OVER TIME"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#CCFFFFFF"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTabOverTimeTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="TabGames"
+                       Grid.Column="2"
+                       Text="GAMES"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#CCFFFFFF"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTabGamesTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="TabLeaderboards"
+                       Grid.Column="3"
+                       Text="RANKINGS"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#CCFFFFFF"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTabLeaderboardsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView x:Name="TabUnderline"
+                         Grid.Row="1"
+                         Grid.Column="0"
+                         HeightRequest="3"
+                         BackgroundColor="White"
+                         Margin="10,0" />
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16,18,16,22"
+                                 Spacing="18">
+                <Border BackgroundColor="White"
+                        Stroke="#E7E3E8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="18,16,18,14">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Your Peak Brain Score"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#4C4C55" />
+                            <Label Text="This is a measure of your progress in Peak"
+                                   FontSize="13"
+                                   TextColor="#91939D" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="10">
+                            <Label x:Name="PeakScoreLabel"
+                                   Text="177/1000"
+                                   FontSize="33"
+                                   FontAttributes="Bold"
+                                   TextColor="#4C4C55"
+                                   VerticalOptions="Center" />
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="2"
+                                                 HorizontalOptions="End"
+                                                 VerticalOptions="Center">
+                                <Label Text="Your 6 month's goal"
+                                       FontSize="13"
+                                       TextColor="#6E7079"
+                                       HorizontalTextAlignment="End" />
+                                <Label x:Name="PeakGoalLabel"
+                                       Text="269"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#F0A728"
+                                       HorizontalTextAlignment="End" />
+                                <Label x:Name="PeakRankLabel"
+                                       Text="Basecamp"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       TextColor="#8B8D95"
+                                       HorizontalTextAlignment="End" />
+                                <Label x:Name="PeakRankHintLabel"
+                                       Text="0 pts to Foothill"
+                                       FontSize="12"
+                                       TextColor="#9AA0A6"
+                                       HorizontalTextAlignment="End" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Grid RowDefinitions="Auto,Auto"
+                              RowSpacing="10">
+                            <Border Stroke="#D8D5DA"
+                                    StrokeThickness="2"
+                                    BackgroundColor="White"
+                                    HeightRequest="38"
+                                    StrokeShape="RoundRectangle 19"
+                                    Padding="5">
+                                <Grid>
+                                    <Border x:Name="PeakFill"
+                                            WidthRequest="40"
+                                            HorizontalOptions="Start"
+                                            BackgroundColor="#10B5E5"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 14" />
+
+                                    <Border x:Name="GoalMarker"
+                                            WidthRequest="18"
+                                            HeightRequest="18"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center"
+                                            BackgroundColor="#F0A728"
+                                            Stroke="White"
+                                            StrokeThickness="2"
+                                            StrokeShape="RoundRectangle 9"
+                                            Margin="42,0,0,0">
+                                        <Label Text="▶"
+                                               FontSize="9"
+                                               TextColor="White"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <Label Grid.Row="1"
+                                   Text="LEARN MORE"
+                                   FontSize="14"
+                                   TextColor="#808089"
+                                   HorizontalTextAlignment="End" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="#E6E1E8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid x:Name="RankLadderHeader"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="10">
+                            <Image Source="icon_stats.svg"
+                                   WidthRequest="22"
+                                   HeightRequest="22"
+                                   VerticalOptions="Start" />
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="3">
+                                <Label Text="Peak Rank Ladder"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#2F3A48" />
+                                <Label x:Name="RankProgressLabel"
+                                       Text="Tap to view all ranks."
+                                       FontSize="13"
+                                       TextColor="#7A8795" />
+                            </VerticalStackLayout>
+
+                            <Label x:Name="RankLadderChevronLabel"
+                                   Grid.Column="2"
+                                   Text="v"
+                                   FontSize="18"
+                                   TextColor="#6D7C8C"
+                                   VerticalOptions="Center" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRankLadderHeaderTapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="RankLadderContainer"
+                                             IsVisible="False"
+                                             Opacity="0"
+                                             Spacing="8"
+                                             Margin="0,4,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid x:Name="CompareHeaderRow"
+                      ColumnDefinitions="Auto,Auto,Auto,*"
+                      ColumnSpacing="8"
+                      Margin="0,2,0,0"
+                      IsVisible="False">
+                    <Label x:Name="CompareYouLabel"
+                           Text="YOU"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#53C5F0" />
+                    <Label Grid.Column="1"
+                           Text="VS"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#9B9CA4" />
+                    <Label x:Name="CompareTargetLabel"
+                           Grid.Column="2"
+                           Text="ACTOR"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#8B8D95" />
+                </Grid>
+
+                <VerticalStackLayout Spacing="18">
+                    <Grid RowDefinitions="Auto,Auto,Auto"
+                          RowSpacing="6">
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              ColumnSpacing="10">
+                            <Label Text="Memory"
+                                   FontSize="18"
+                                   TextColor="#55555C" />
+                            <Label x:Name="MemoryValue"
+                                   Grid.Column="1"
+                                   Text="177"
+                                   FontSize="18"
+                                   TextColor="#777983" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,2,0,0">
+                            <Border Stroke="#E4E1E5"
+                                    StrokeThickness="2"
+                                    BackgroundColor="#F8F7FA"
+                                    HeightRequest="18"
+                                    StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="MemoryFill"
+                                    BackgroundColor="#F5A623"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    HeightRequest="14"
+                                    HorizontalOptions="Start"
+                                    Margin="2"
+                                    WidthRequest="60"
+                                    VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid x:Name="MemoryBenchmarkRow"
+                              Grid.Row="2"
+                              IsVisible="False">
+                            <Border Stroke="#E4E1E5"
+                                    StrokeThickness="2"
+                                    BackgroundColor="#F8F7FA"
+                                    HeightRequest="18"
+                                    StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="MemoryBenchmarkFill"
+                                    BackgroundColor="#8F8F96"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    HeightRequest="14"
+                                    HorizontalOptions="Start"
+                                    Margin="2"
+                                    WidthRequest="84"
+                                    VerticalOptions="Center" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid RowDefinitions="Auto,Auto,Auto"
+                          RowSpacing="6">
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              ColumnSpacing="10">
+                            <Label Text="Problem Solving"
+                                   FontSize="18"
+                                   TextColor="#55555C" />
+                            <Label x:Name="ProblemValue"
+                                   Grid.Column="1"
+                                   Text="180"
+                                   FontSize="18"
+                                   TextColor="#777983" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,2,0,0">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="ProblemFill" BackgroundColor="#35C85A" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="60" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid x:Name="ProblemBenchmarkRow"
+                              Grid.Row="2"
+                              IsVisible="False">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="ProblemBenchmarkFill" BackgroundColor="#8F8F96" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="84" VerticalOptions="Center" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid RowDefinitions="Auto,Auto,Auto"
+                          RowSpacing="6">
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              ColumnSpacing="10">
+                            <Label Text="Language"
+                                   FontSize="18"
+                                   TextColor="#55555C" />
+                            <Label x:Name="LanguageValue"
+                                   Grid.Column="1"
+                                   Text="177"
+                                   FontSize="18"
+                                   TextColor="#777983" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,2,0,0">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="LanguageFill" BackgroundColor="#5A60F0" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="60" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid x:Name="LanguageBenchmarkRow"
+                              Grid.Row="2"
+                              IsVisible="False">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="LanguageBenchmarkFill" BackgroundColor="#8F8F96" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="84" VerticalOptions="Center" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid RowDefinitions="Auto,Auto,Auto"
+                          RowSpacing="6">
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              ColumnSpacing="10">
+                            <Label Text="Mental Agility"
+                                   FontSize="18"
+                                   TextColor="#55555C" />
+                            <Label x:Name="AgilityValue"
+                                   Grid.Column="1"
+                                   Text="183"
+                                   FontSize="18"
+                                   TextColor="#777983" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,2,0,0">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="AgilityFill" BackgroundColor="#1E88FF" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="60" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid x:Name="AgilityBenchmarkRow"
+                              Grid.Row="2"
+                              IsVisible="False">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="AgilityBenchmarkFill" BackgroundColor="#8F8F96" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="84" VerticalOptions="Center" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid RowDefinitions="Auto,Auto,Auto"
+                          RowSpacing="6">
+                        <Grid ColumnDefinitions="Auto,Auto,*"
+                              ColumnSpacing="10">
+                            <Label Text="Focus"
+                                   FontSize="18"
+                                   TextColor="#55555C" />
+                            <Label x:Name="FocusValue"
+                                   Grid.Column="1"
+                                   Text="169"
+                                   FontSize="18"
+                                   TextColor="#777983" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,2,0,0">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="FocusFill" BackgroundColor="#FF2D55" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="60" VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid x:Name="FocusBenchmarkRow"
+                              Grid.Row="2"
+                              IsVisible="False">
+                            <Border Stroke="#E4E1E5" StrokeThickness="2" BackgroundColor="#F8F7FA" HeightRequest="18" StrokeShape="RoundRectangle 9" />
+                            <Grid Margin="14,0" ColumnDefinitions="*,*,*,*" VerticalOptions="Center">
+                                <BoxView Grid.Column="0" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="1" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="2" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                                <BoxView Grid.Column="3" WidthRequest="2" HeightRequest="9" BackgroundColor="#F0EDF2" HorizontalOptions="Center" />
+                            </Grid>
+                            <Border x:Name="FocusBenchmarkFill" BackgroundColor="#8F8F96" StrokeThickness="0" StrokeShape="RoundRectangle 8" HeightRequest="14" HorizontalOptions="Start" Margin="2" WidthRequest="84" VerticalOptions="Center" />
+                        </Grid>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="18"
+                      Margin="0,18,0,10">
+                    <Button Text="COMPARE"
+                            Grid.Column="0"
+                            BackgroundColor="#12B5E4"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="26"
+                            HeightRequest="56"
+                            Clicked="OnCompareClicked" />
+
+                    <Button Text="SHARE"
+                            Grid.Column="1"
+                            BackgroundColor="#12B5E4"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="26"
+                            HeightRequest="56"
+                            Clicked="OnShareClicked" />
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

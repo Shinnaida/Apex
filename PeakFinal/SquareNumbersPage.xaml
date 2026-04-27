@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.SquareNumbersPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#45E65F"
+    Padding="{OnPlatform Android='0,26,0,0', iOS='0,44,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="*,Auto">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20,18,20,24" Spacing="16">
+                    <Label Text="&#x2190;"
+                           FontSize="28"
+                           TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Grid ColumnDefinitions="*,178"
+                          Margin="0,8,0,0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Square Numbers"
+                                   FontAttributes="Bold"
+                                   FontSize="28"
+                                   TextColor="White" />
+
+                            <Label Text="Problem Solving"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="White" />
+
+                            <Border Stroke="#D8FFD8"
+                                    StrokeDashArray="2,4"
+                                    StrokeThickness="2"
+                                    StrokeShape="RoundRectangle 1"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="190" />
+
+                            <Grid ColumnDefinitions="42,*,Auto"
+                                  Margin="0,8,0,0">
+                                <Frame WidthRequest="32"
+                                       HeightRequest="32"
+                                       Padding="0"
+                                       BackgroundColor="Transparent"
+                                       BorderColor="#D8FFD8"
+                                       CornerRadius="16"
+                                       HasShadow="False"
+                                       VerticalOptions="Start">
+                                    <Label Text="&#x2605;"
+                                           FontSize="15"
+                                           HorizontalOptions="Center"
+                                           TextColor="White"
+                                           VerticalOptions="Center" />
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="0">
+                                    <Label Text="Best Rank"
+                                           FontSize="14"
+                                           TextColor="#E9FFEA" />
+                                    <Label x:Name="BestRankLabel"
+                                           Text="Beginner"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           TextColor="White" />
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="2"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       Text="i"
+                                       TextColor="White"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Column="1"
+                              WidthRequest="178"
+                              HeightRequest="178"
+                              HorizontalOptions="End"
+                              VerticalOptions="Start">
+                            <Frame Padding="0"
+                                   BackgroundColor="#67EA7B"
+                                   CornerRadius="89"
+                                   HasShadow="False" />
+
+                            <Label Margin="18,18,0,0"
+                                   FontSize="28"
+                                   HorizontalOptions="Start"
+                                   Text="&#x2606;"
+                                   TextColor="White"
+                                   VerticalOptions="Start" />
+
+                            <Grid WidthRequest="136"
+                                  HeightRequest="136"
+                                  ColumnDefinitions="*,*"
+                                  ColumnSpacing="10"
+                                  HorizontalOptions="Center"
+                                  RowDefinitions="*,*"
+                                  RowSpacing="10"
+                                  VerticalOptions="Center">
+                                <Border BackgroundColor="#22FFFFFF"
+                                        Padding="0"
+                                        Stroke="#F5FFF6"
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="3">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="34"
+                                           HorizontalTextAlignment="Center"
+                                           Text="10"
+                                           TextColor="#F5FFF6"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+
+                                <Border Grid.Column="1"
+                                        BackgroundColor="#22FFFFFF"
+                                        Padding="0"
+                                        Stroke="#F5FFF6"
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="3">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="34"
+                                           HorizontalTextAlignment="Center"
+                                           Text="5"
+                                           TextColor="#F5FFF6"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+
+                                <Border Grid.Row="1"
+                                        BackgroundColor="#22FFFFFF"
+                                        Padding="0"
+                                        Stroke="#F5FFF6"
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="3">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="34"
+                                           HorizontalTextAlignment="Center"
+                                           Text="16"
+                                           TextColor="#F5FFF6"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+
+                                <Border Grid.Row="1"
+                                        Grid.Column="1"
+                                        BackgroundColor="#22FFFFFF"
+                                        Padding="0"
+                                        Stroke="#F5FFF6"
+                                        StrokeShape="RoundRectangle 8"
+                                        StrokeThickness="3">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="34"
+                                           HorizontalTextAlignment="Center"
+                                           Text="25"
+                                           TextColor="#F5FFF6"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Frame Padding="20,16"
+                           BackgroundColor="White"
+                           CornerRadius="18"
+                           HasShadow="False">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Text="&#x1F3C6;"
+                                   FontSize="22"
+                                   TextColor="#56E669"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Margin="12,0,0,0"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   Text="BEST SCORE"
+                                   TextColor="#56E669"
+                                   VerticalOptions="Center" />
+                            <Label x:Name="BestScoreLabel"
+                                   Grid.Column="2"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   Text="0"
+                                   TextColor="#333333"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+
+                    <Grid HeightRequest="56">
+                        <Button BackgroundColor="#07941E"
+                                Clicked="OnHowToPlayClicked"
+                                CornerRadius="14"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HeightRequest="56"
+                                Padding="54,0,0,0"
+                                Text="HOW TO PLAY"
+                                TextColor="White" />
+                        <Frame WidthRequest="34"
+                               HeightRequest="34"
+                               Margin="10,0,0,0"
+                               Padding="0"
+                               BackgroundColor="White"
+                               CornerRadius="17"
+                               HasShadow="False"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center">
+                            <Label FontSize="16"
+                                   HorizontalOptions="Center"
+                                   Text="&#x1F393;"
+                                   TextColor="#07941E"
+                                   VerticalOptions="Center" />
+                        </Frame>
+                    </Grid>
+
+                    <Frame Margin="0,8,0,0"
+                           Padding="18,18,18,20"
+                           BackgroundColor="White"
+                           CornerRadius="20"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="16">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Text="&#x21E7;"
+                                       FontSize="24"
+                                       TextColor="#67E77B"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Margin="10,0,0,0"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       Text="Challenge"
+                                       TextColor="#67E77B"
+                                       VerticalOptions="Center" />
+                            </Grid>
+
+                            <Border Stroke="#CFCFCF"
+                                    StrokeDashArray="4,4"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 1" />
+
+                            <Label x:Name="ChallengeLabel"
+                                   FontSize="16"
+                                   Text="Score above 880 to rank up to Novice"
+                                   TextColor="#444444" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Margin="0,8,0,0"
+                           Padding="18,18,18,20"
+                           BackgroundColor="White"
+                           CornerRadius="20"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="16">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Text="&#x1F3A8;"
+                                       FontSize="24"
+                                       TextColor="#67E77B"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Margin="10,0,0,0"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       Text="Skills"
+                                       TextColor="#67E77B"
+                                       VerticalOptions="Center" />
+                            </Grid>
+
+                            <Border Stroke="#CFCFCF"
+                                    StrokeDashArray="4,4"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 1" />
+
+                            <Frame Padding="14,10"
+                                   BackgroundColor="#F8F8F8"
+                                   CornerRadius="12"
+                                   HasShadow="False">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="&#x2731;"
+                                           FontSize="18"
+                                           VerticalOptions="Center" />
+                                    <Label Grid.Column="1"
+                                           Margin="12,0,0,0"
+                                           FontSize="16"
+                                           Text="Quantitative Reasoning"
+                                           TextColor="#333333"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+
+                            <Frame Padding="14,10"
+                                   BackgroundColor="#F8F8F8"
+                                   CornerRadius="12"
+                                   HasShadow="False">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="&#x00D7;"
+                                           FontSize="18"
+                                           VerticalOptions="Center" />
+                                    <Label Grid.Column="1"
+                                           Margin="12,0,0,0"
+                                           FontSize="16"
+                                           Text="Arithmetic"
+                                           TextColor="#333333"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+
+                            <Frame Padding="14,10"
+                                   BackgroundColor="#F8F8F8"
+                                   CornerRadius="12"
+                                   HasShadow="False">
+                                <Grid ColumnDefinitions="Auto,*">
+                                    <Label Text="&#x1F550;"
+                                           FontSize="18"
+                                           VerticalOptions="Center" />
+                                    <Label Grid.Column="1"
+                                           Margin="12,0,0,0"
+                                           FontSize="16"
+                                           Text="Working Memory"
+                                           TextColor="#333333"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <BoxView HeightRequest="24"
+                             Opacity="0" />
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Grid Grid.Row="1"
+                  Padding="20,10,20,12"
+                  BackgroundColor="#11B32B">
+                <Button BackgroundColor="White"
+                        Clicked="OnPlayClicked"
+                        CornerRadius="32"
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HeightRequest="64"
+                        Text="PLAY"
+                        TextColor="#67E77B" />
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="HowToPlayOverlay"
+              IsVisible="False"
+              Opacity="0"
+              ZIndex="10">
+            <BoxView BackgroundColor="#80000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Grid Padding="12,0,12,20"
+                  VerticalOptions="End">
+                <Frame x:Name="HowToPlayPanel"
+                       Padding="20"
+                       BackgroundColor="White"
+                       CornerRadius="28"
+                       HasShadow="False"
+                       TranslationY="500">
+                    <VerticalStackLayout Spacing="16">
+                        <BoxView WidthRequest="46"
+                                 HeightRequest="5"
+                                 Color="#D0D0D0"
+                                 HorizontalOptions="Center" />
+
+                        <Label FontAttributes="Bold"
+                               FontSize="24"
+                               HorizontalOptions="Center"
+                               Text="How to Play"
+                               TextColor="#222" />
+
+                        <Label FontSize="16"
+                               Text="Move quickly through square-number challenges. Some rounds ask you to spot the perfect square, while others ask you to calculate a number squared."
+                               TextColor="#555" />
+
+                        <Label FontSize="16"
+                               Text="&#x2022; Tap the correct answer from four choices&#x0A;&#x2022; Build score by answering all 10 rounds correctly&#x0A;&#x2022; Focus on common squares like 4, 9, 16, 25, 36, 49, and beyond"
+                               TextColor="#444" />
+
+                        <Button BackgroundColor="#11B32B"
+                                Clicked="OnCloseHowToPlayClicked"
+                                CornerRadius="27"
+                                HeightRequest="54"
+                                Text="Got it"
+                                TextColor="White" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

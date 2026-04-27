@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.SpinCycleInsightsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F4A317"
+    Padding="{OnPlatform Android='0,24,0,0', iOS='0,44,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*"
+              Padding="14,8,14,10"
+              BackgroundColor="#F19C13">
+            <Label Text="&#x2190;"
+                   FontSize="28"
+                   TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Grid.Column="1"
+                   Text="PERFORMANCE INSIGHTS"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   HorizontalTextAlignment="Center"
+                   TextColor="White"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16,12,16,20" Spacing="12">
+                <VerticalStackLayout Spacing="6">
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Score evolution"
+                               FontAttributes="Bold"
+                               FontSize="34"
+                               TextColor="#FFF3CC" />
+                        <Label Text="&#x21E7;"
+                               FontSize="24"
+                               TextColor="#FFF3CC"
+                               VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Label x:Name="RankUpLabel"
+                           Text="Rank up: 560"
+                           FontSize="14"
+                           TextColor="#FFEAB8" />
+                </VerticalStackLayout>
+
+                <Border Padding="10,12"
+                        BackgroundColor="#F3A61C"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10">
+                    <Grid RowDefinitions="*,Auto"
+                          HeightRequest="140">
+                        <Grid>
+                            <BoxView HeightRequest="2"
+                                     Color="#F6CF79"
+                                     VerticalOptions="End"
+                                     Margin="10,0,10,26" />
+                            <BoxView HeightRequest="2"
+                                     Color="#FFF2D0"
+                                     Rotation="-8"
+                                     HorizontalOptions="Fill"
+                                     VerticalOptions="End"
+                                     Margin="8,0,8,35" />
+                            <Frame WidthRequest="16"
+                                   HeightRequest="16"
+                                   Padding="0"
+                                   CornerRadius="8"
+                                   HasShadow="False"
+                                   BackgroundColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,0,8,26" />
+                        </Grid>
+
+                        <Frame Grid.Row="1"
+                               Padding="8,3"
+                               BackgroundColor="White"
+                               CornerRadius="6"
+                               HasShadow="False"
+                               HorizontalOptions="End"
+                               Margin="0,0,6,0">
+                            <Label x:Name="ChartScoreLabel"
+                                   Text="0"
+                                   FontAttributes="Bold"
+                                   FontSize="22"
+                                   TextColor="#7A5A27" />
+                        </Frame>
+                    </Grid>
+                </Border>
+
+                <Frame Padding="14,10"
+                       BackgroundColor="#F7B336"
+                       BorderColor="#FFD583"
+                       CornerRadius="16"
+                       HasShadow="False">
+                    <Grid ColumnDefinitions="*,Auto,Auto">
+                        <Label Text="Rate this game!"
+                               FontAttributes="Bold"
+                               FontSize="30"
+                               TextColor="White" />
+                        <Label Grid.Column="1"
+                               Text="&#x1F44D;"
+                               FontSize="26"
+                               Margin="0,0,10,0"
+                               TextColor="White" />
+                        <Label Grid.Column="2"
+                               Text="&#x1F44E;"
+                               FontSize="26"
+                               TextColor="White" />
+                    </Grid>
+                </Frame>
+
+                <Frame Padding="16,14"
+                       BackgroundColor="#F4F4F4"
+                       CornerRadius="18"
+                       HasShadow="False">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Longest streak"
+                               FontAttributes="Bold"
+                               FontSize="34"
+                               TextColor="#2F2F2F" />
+
+                        <Grid Padding="16,6,16,0"
+                              ColumnDefinitions="*,*"
+                              HeightRequest="140">
+                            <VerticalStackLayout Spacing="4" VerticalOptions="End">
+                                <BoxView x:Name="YouBar"
+                                         WidthRequest="58"
+                                         HeightRequest="70"
+                                         HorizontalOptions="Center"
+                                         Color="#F3A616"
+                                         CornerRadius="8" />
+                                <Label Text="You"
+                                       FontSize="14"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#777777" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="End">
+                                <BoxView x:Name="AvgBar"
+                                         WidthRequest="58"
+                                         HeightRequest="90"
+                                         HorizontalOptions="Center"
+                                         Color="#2DAEE3"
+                                         CornerRadius="8" />
+                                <Label Text="Other players"
+                                       FontSize="14"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#777777" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Label x:Name="InsightLabel"
+                               FontSize="16"
+                               TextColor="#4D4D4D" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="2"
+              Padding="16,8,16,10"
+              RowDefinitions="Auto,Auto"
+              BackgroundColor="#E9872E">
+            <Grid>
+                <Button Text="REPLAY"
+                        Clicked="OnReplayClicked"
+                        BackgroundColor="White"
+                        CornerRadius="28"
+                        HeightRequest="56"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        TextColor="#E8A215" />
+                <Frame WidthRequest="36"
+                       HeightRequest="36"
+                       Padding="0"
+                       CornerRadius="18"
+                       BackgroundColor="#F6B11D"
+                       BorderColor="#E7A10F"
+                       HasShadow="False"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Margin="0,0,8,0">
+                    <Label Text="&#x1F39E;"
+                           FontSize="18"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           TextColor="White" />
+                </Frame>
+            </Grid>
+            <Label Grid.Row="1"
+                   Text="An ad will play before you can replay"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,4,0,0"
+                   TextColor="White" />
+        </Grid>
+    </Grid>
+</ContentPage>

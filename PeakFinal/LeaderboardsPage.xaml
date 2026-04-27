@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.LeaderboardsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEF2FF"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid Padding="18,24,18,18"
+              RowDefinitions="Auto,Auto,Auto"
+              RowSpacing="16">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#6B61F5" Offset="0" />
+                    <GradientStop Color="#5B7BFF" Offset="0.5" />
+                    <GradientStop Color="#42C9FF" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Label Text="YOUR PERFORMANCE"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   CharacterSpacing="1.1" />
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,*,*,*"
+                  RowDefinitions="Auto,4">
+                <Label Grid.Column="0"
+                       Text="BRAIN"
+                       TextColor="#DCE2FF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBrainTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="1"
+                       Text="OVER TIME"
+                       TextColor="#DCE2FF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOverTimeTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="2"
+                       Text="GAMES"
+                       TextColor="#DCE2FF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGamesTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="3"
+                       Text="RANKINGS"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLeaderboardsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView Grid.Row="1"
+                         Grid.Column="3"
+                         HeightRequest="3"
+                         Margin="10,0"
+                         BackgroundColor="White"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  ColumnDefinitions="*,Auto"
+                  VerticalOptions="Center">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Rankings"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label x:Name="LeaderboardSubtitleLabel"
+                           Text="See how your Peak Brain Score stacks up against other players."
+                           FontSize="13"
+                           TextColor="#DDE2FF" />
+                </VerticalStackLayout>
+
+                <Border Grid.Column="1"
+                        WidthRequest="54"
+                        HeightRequest="54"
+                        BackgroundColor="#FFF133"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 27"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center">
+                    <VerticalStackLayout Spacing="-2"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center">
+                        <Label Text="TOP"
+                               FontSize="11"
+                               FontAttributes="Bold"
+                               TextColor="#4538FF"
+                               HorizontalTextAlignment="Center" />
+                        <Label Text="25"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#4538FF"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+
+            <Border Grid.Row="1"
+                Margin="0,-6,0,0"
+                Padding="18,18,18,28"
+                BackgroundColor="#F8FAFF"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28,28,0,0">
+            <ScrollView>
+                <VerticalStackLayout Spacing="18">
+                    <Grid ColumnDefinitions="Auto,Auto,*"
+                          ColumnSpacing="10">
+                        <Button x:Name="WeeklyButton"
+                                Text="Weekly"
+                                BackgroundColor="#7A73E8"
+                                TextColor="White"
+                                CornerRadius="16"
+                                FontAttributes="Bold"
+                                HeightRequest="40"
+                                Padding="18,0"
+                                Clicked="OnWeeklyClicked" />
+
+                        <Button x:Name="AllTimeButton"
+                                Grid.Column="1"
+                                Text="All Time"
+                                BackgroundColor="#E8E4FF"
+                                TextColor="#716BA7"
+                                CornerRadius="16"
+                                FontAttributes="Bold"
+                                HeightRequest="40"
+                                Padding="18,0"
+                                Clicked="OnAllTimeClicked" />
+                    </Grid>
+
+                    <Border x:Name="ScopeTrigger"
+                            Padding="14,12"
+                            BackgroundColor="White"
+                            Stroke="#DED8FF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 18"
+                            Shadow="{OnPlatform WinUI='0,6,20,#110F2E5A', Android='0,6,20,#110F2E5A'}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnScopeTriggerTapped" />
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="10"
+                              VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="2">
+                                <Label x:Name="ScopeModeLabel"
+                                       Text="Leaderboard View"
+                                       FontSize="11"
+                                       FontAttributes="Bold"
+                                       TextColor="#8C84B1"
+                                       CharacterSpacing="0.6" />
+                                <Label x:Name="ScopeSelectionLabel"
+                                       Text="Overall"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#4538FF" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1"
+                                    WidthRequest="34"
+                                    HeightRequest="34"
+                                    BackgroundColor="#F1EEFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 17"
+                                    VerticalOptions="Center">
+                                <Label x:Name="ScopeChevronLabel"
+                                       Text="v"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       TextColor="#4538FF"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="InsightCard"
+                            Padding="16,14"
+                            BackgroundColor="#FFA96F"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 20">
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="12">
+                            <Border WidthRequest="44"
+                                    HeightRequest="44"
+                                    BackgroundColor="#FFFFFF26"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14"
+                                    VerticalOptions="Start">
+                                <Label x:Name="InsightRankLabel"
+                                       Text="#--"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="#4538FF"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="3"
+                                                 VerticalOptions="Center">
+                                <Label x:Name="InsightTitleLabel"
+                                       Text="Loading rankings..."
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                                <Label x:Name="InsightDetailLabel"
+                                       Text="We are refreshing the latest player standings."
+                                       FontSize="12"
+                                       TextColor="#FFF4EA" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border Padding="16,18,16,12"
+                            BackgroundColor="White"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 24">
+                        <VerticalStackLayout Spacing="14">
+                            <Grid x:Name="PodiumHost"
+                                  ColumnDefinitions="*,*,*"
+                                  ColumnSpacing="10"
+                                  HeightRequest="250"
+                                  VerticalOptions="End" />
+
+                            <Label Text="Top players right now"
+                                   FontSize="12"
+                                   FontAttributes="Bold"
+                                   TextColor="#8C84B1"
+                                   CharacterSpacing="0.8" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Padding="14"
+                            BackgroundColor="White"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22">
+                        <VerticalStackLayout Spacing="12">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  VerticalOptions="Center">
+                                <Label Text="Full rankings"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       TextColor="#403A62" />
+                                <Label Grid.Column="1"
+                                       x:Name="BoardCaptionLabel"
+                                       Text="Top 25"
+                                       FontSize="12"
+                                       TextColor="#4538FF"
+                                       VerticalTextAlignment="Center" />
+                            </Grid>
+
+                            <VerticalStackLayout x:Name="LeaderboardHost"
+                                                 Spacing="10" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+
+        <Grid x:Name="CelebrationLayer"
+              Grid.RowSpan="2"
+              InputTransparent="True"
+              IsVisible="False" />
+
+        <Grid x:Name="ScopeOverlay"
+              Grid.RowSpan="2"
+              BackgroundColor="#520E0B2A"
+              IsVisible="False"
+              Opacity="0">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnScopeBackdropTapped" />
+            </Grid.GestureRecognizers>
+
+            <Grid Padding="18,140,18,24"
+                  VerticalOptions="Start">
+                <Border x:Name="ScopeSheet"
+                        BackgroundColor="White"
+                        Padding="18"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24"
+                        TranslationY="-20">
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto"
+                              VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3">
+                                <Label Text="Choose leaderboard"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#2E294B" />
+                                <Label Text="Overall is the default. Pick a game to see that game only."
+                                       FontSize="12"
+                                       TextColor="#877FAE" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1"
+                                    Text="Close"
+                                    BackgroundColor="#F1EEFF"
+                                    TextColor="#6F68A6"
+                                    CornerRadius="16"
+                                    HeightRequest="34"
+                                    Padding="14,0"
+                                    Clicked="OnCloseScopeClicked" />
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="ScopeOptionHost"
+                                             Spacing="10" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="ProfileOverlay"
+              Grid.RowSpan="2"
+              BackgroundColor="#800E0B2A"
+              IsVisible="False"
+              Opacity="0">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnProfileBackdropTapped" />
+            </Grid.GestureRecognizers>
+
+            <Grid Padding="18,30,18,24"
+                  VerticalOptions="End">
+                <Border x:Name="ProfileSheet"
+                        BackgroundColor="White"
+                        Padding="20,20,20,22"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28"
+                        TranslationY="420">
+                    <VerticalStackLayout Spacing="18">
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="14">
+                            <Border x:Name="ProfileAvatarBorder"
+                                    WidthRequest="72"
+                                    HeightRequest="72"
+                                    BackgroundColor="#7A73E8"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 36">
+                                <Grid>
+                                    <Image x:Name="ProfileAvatarImage"
+                                           Aspect="AspectFill"
+                                           IsVisible="False" />
+                                    <Label x:Name="ProfileAvatarLabel"
+                                           Text="A"
+                                           FontSize="30"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center" />
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="4"
+                                                 VerticalOptions="Center">
+                                <Label x:Name="ProfileNameLabel"
+                                       Text="Player"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#2E294B" />
+                                <Label x:Name="ProfileRankLabel"
+                                       Text="Overall rank #1"
+                                       FontSize="13"
+                                       TextColor="#7C76A1" />
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2"
+                                    Text="Close"
+                                    BackgroundColor="#F1EEFF"
+                                    TextColor="#6F68A6"
+                                    CornerRadius="16"
+                                    HeightRequest="34"
+                                    Padding="14,0"
+                                    Clicked="OnCloseProfileClicked"
+                                    VerticalOptions="Start" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*"
+                              ColumnSpacing="12">
+                            <Border BackgroundColor="#F6F3FF"
+                                    Padding="14"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Best Skill"
+                                           FontSize="12"
+                                           TextColor="#958FB6" />
+                                    <Label x:Name="ProfileBestSkillLabel"
+                                           Text="Language"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#453F69" />
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border Grid.Column="1"
+                                    BackgroundColor="#F6F3FF"
+                                    Padding="14"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Games Played"
+                                           FontSize="12"
+                                           TextColor="#958FB6" />
+                                    <Label x:Name="ProfileGamesPlayedLabel"
+                                           Text="0"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#453F69" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+
+                        <Border BackgroundColor="#6F63E5"
+                                Padding="16"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 22">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="14">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label x:Name="ProfileScoreLabel"
+                                           Text="Peak Brain Score"
+                                           FontSize="12"
+                                           TextColor="#DED9FF" />
+                                    <Label x:Name="ProfilePrimaryScoreValueLabel"
+                                           Text="0"
+                                           FontSize="30"
+                                           FontAttributes="Bold"
+                                           TextColor="White" />
+                                </VerticalStackLayout>
+
+                                <Border Grid.Column="1"
+                                        WidthRequest="44"
+                                        HeightRequest="44"
+                                        BackgroundColor="#FFFFFF1E"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 22"
+                                        VerticalOptions="Center">
+                                    <Label Text="#"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border BackgroundColor="#F6F3FF"
+                                Padding="16"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 22">
+                            <VerticalStackLayout Spacing="10">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="16"
+                                           FontAttributes="Bold"
+                                           Text="Achievements"
+                                           TextColor="#453F69" />
+                                    <Label x:Name="ProfileAchievementsSummaryLabel"
+                                           Grid.Column="1"
+                                           FontSize="12"
+                                           Text="0 unlocked"
+                                           TextColor="#8E88B1"
+                                           VerticalTextAlignment="Center" />
+                                </Grid>
+
+                                <ScrollView Orientation="Horizontal">
+                                    <HorizontalStackLayout x:Name="ProfileAchievementsHost"
+                                                           Spacing="10" />
+                                </ScrollView>
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

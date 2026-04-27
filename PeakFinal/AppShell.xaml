@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Peak.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    Shell.TabBarForegroundColor="#159BE8"
+    Shell.TabBarTitleColor="#159BE8"
+    Shell.TabBarUnselectedColor="#98A2B3"
+    Shell.TabBarBackgroundColor="White">
+
+    <!-- Bottom Tabs -->
+    <TabBar>
+
+        <ShellContent
+        x:Name="TodayTab"
+        Title="Daily Knowledge"
+        Icon="icon_today.svg"
+        Route="today"
+        ContentTemplate="{DataTemplate local:TodayPage}" />
+
+        <ShellContent
+        x:Name="GamesTab"
+        Title="All Games"
+        Icon="icon_games.svg"
+        Route="games"
+        ContentTemplate="{DataTemplate local:AllGamesPage}" />
+
+        <ShellContent
+        x:Name="StatsTab"
+        Title="Stats"
+        Icon="icon_stats.svg"
+        Route="stats"
+        ContentTemplate="{DataTemplate local:StatsPage}" />
+
+        <ShellContent
+        x:Name="TestsTab"
+        Title="Tests"
+        Icon="icon_tests.svg"
+        Route="tests"
+        ContentTemplate="{DataTemplate local:TestsPage}" />
+
+        <ShellContent
+        x:Name="MeTab"
+        Title="Me"
+        Icon="icon_me.svg"
+        Route="me"
+        ContentTemplate="{DataTemplate local:MePage}" />
+
+    </TabBar>
+
+
+
+</Shell>

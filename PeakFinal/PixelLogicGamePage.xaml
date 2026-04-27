@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.PixelLogicGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#102219"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid BackgroundColor="#1F7B32"
+              Padding="{OnPlatform Android='14,28,14,12', iOS='14,46,14,12'}"
+              ColumnDefinitions="Auto,*,Auto">
+            <Label Text="&#x2190;"
+                   FontSize="26"
+                   TextColor="White"
+                   VerticalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Grid.Column="1"
+                   Text="PIXEL LOGIC"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
+                   TextColor="White" />
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               Grid.Column="2"
+                               IsRunning="True"
+                               Color="White"
+                               VerticalOptions="Center" />
+        </Grid>
+
+        <WebView x:Name="GameWebView"
+                 Grid.Row="1"
+                 Navigating="OnWebViewNavigating" />
+    </Grid>
+</ContentPage>

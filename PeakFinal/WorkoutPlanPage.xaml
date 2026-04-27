@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WorkoutPlanPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    BackgroundColor="#EEF4FB"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="20,22,20,26">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#37C6FF" Offset="0" />
+                    <GradientStop Color="#149CE8" Offset="0.55" />
+                    <GradientStop Color="#0A74CF" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <VerticalStackLayout Spacing="14">
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="10">
+                    <Border Padding="8"
+                            BackgroundColor="#1FFFFFFF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 16">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Border.GestureRecognizers>
+                        <Label Text="&#x2039;"
+                               FontSize="22"
+                               TextColor="White" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1"
+                                         Spacing="4">
+                        <Label x:Name="HeroEyebrowLabel"
+                               Text="Today’s set"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="#DDF6FF" />
+                        <Label x:Name="HeroTitleLabel"
+                               Text="Adaptive Workout"
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               TextColor="White" />
+                        <HorizontalStackLayout Spacing="14">
+                            <Label x:Name="WorkoutTimeLabel"
+                                   Text="15 min"
+                                   FontSize="13"
+                                   TextColor="#F2FBFF" />
+                            <Label x:Name="WorkoutGamesLabel"
+                                   Text="6 games"
+                                   FontSize="13"
+                                   TextColor="#F2FBFF" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Border Padding="16,12"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 22">
+                    <Label x:Name="HeroDescriptionLabel"
+                           Text="A custom run with a smart mix of language, focus, memory, and problem-solving games."
+                           FontSize="14"
+                           TextColor="#567084" />
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16,16,16,24"
+                                 Spacing="16">
+                <Label Text="Workout lineup"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#16314B" />
+
+                <CollectionView x:Name="WorkoutTilesView"
+                                ItemsSource="{Binding WorkoutTiles}"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="2"
+                                         Orientation="Vertical"
+                                         HorizontalItemSpacing="14"
+                                         VerticalItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:WorkoutTileViewModel">
+                            <Border Padding="0"
+                                    BackgroundColor="White"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 20">
+                                <Border.Shadow>
+                                    <Shadow Brush="#140F2740"
+                                            Offset="0,8"
+                                            Opacity="0.12"
+                                            Radius="16" />
+                                </Border.Shadow>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTileTapped" />
+                                </Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="0">
+                                    <Grid HeightRequest="126"
+                                          BackgroundColor="{Binding AccentColor}">
+                                        <Grid Padding="12">
+                                            <Grid RowDefinitions="*,*"
+                                                  ColumnDefinitions="*,*"
+                                                  RowSpacing="6"
+                                                  ColumnSpacing="6">
+                                                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="{Binding TileAColor}" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                                                <Border Grid.Row="0" Grid.Column="1" BackgroundColor="{Binding TileBColor}" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                                                <Border Grid.Row="1" Grid.Column="0" BackgroundColor="{Binding TileCColor}" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                                                <Border Grid.Row="1" Grid.Column="1" BackgroundColor="{Binding TileDColor}" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                                            </Grid>
+                                            <Label Text="{Binding Glyph}"
+                                                   FontSize="34"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   TextColor="White" />
+                                        </Grid>
+                                        <Border IsVisible="{Binding IsLocked}"
+                                                Padding="8,4"
+                                                BackgroundColor="#EFFFFFFF"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 14"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+                                            <Label Text="Locked"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{Binding AccentDeepColor}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <VerticalStackLayout Padding="14,12,14,14"
+                                                         Spacing="2">
+                                        <Label Text="{Binding Title}"
+                                               FontSize="15"
+                                               FontAttributes="Bold"
+                                               TextColor="#17324B" />
+                                        <Label Text="{Binding Category}"
+                                               FontSize="11"
+                                               TextColor="#7A93A7" />
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="2"
+              Padding="16,10,16,18"
+              BackgroundColor="#EEF4FB">
+            <Button x:Name="StartWorkoutButton"
+                    Text="START WORKOUT"
+                    HeightRequest="58"
+                    CornerRadius="29"
+                    BackgroundColor="#12A5EA"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    Clicked="OnStartWorkoutClicked" />
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.TrainingPickerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+    Padding="20"
+    Title="">
+
+    <Grid RowDefinitions="*,Auto,Auto" RowSpacing="14">
+
+        <!-- Slider -->
+        <CarouselView x:Name="TrainingCarousel"
+                      Grid.Row="0"
+                      ItemsSource="{Binding Slides}"
+                      IndicatorView="{x:Reference Dots}"
+                      IsSwipeEnabled="True"
+                      PositionChanged="OnPositionChanged">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+
+                        <VerticalStackLayout VerticalOptions="Center"
+                                             HorizontalOptions="Center"
+                                             Spacing="18">
+
+                            <!-- Icon / image (using emoji for now) -->
+                            <Frame HeightRequest="180"
+                                   WidthRequest="180"
+                                   CornerRadius="90"
+                                   HasShadow="False"
+                                   Padding="0"
+                                   BackgroundColor="{Binding CircleColor}">
+                                <Label Text="{Binding Emoji}"
+                                       FontSize="90"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"/>
+                            </Frame>
+
+                            <!-- Title -->
+                            <Label Text="{Binding Title}"
+                                   FontSize="42"
+                                   FontAttributes="Bold"
+                                   TextColor="#333"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="0,10,0,0"/>
+
+                            <!-- Description -->
+                            <Label FontSize="16"
+                                   TextColor="Gray"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="18,0"
+                                   LineHeight="1.25">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding DescA}" />
+                                        <Span Text="{Binding BoldA}" FontAttributes="Bold"/>
+                                        <Span Text="{Binding DescB}" />
+                                        <Span Text="{Binding BoldB}" FontAttributes="Bold"/>
+                                        <Span Text="{Binding DescC}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- Dots -->
+        <IndicatorView x:Name="Dots"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       IndicatorColor="#D9D9D9"
+                       SelectedIndicatorColor="#1DA1F2"
+                       IndicatorSize="10"
+                       Margin="0,10"/>
+
+        <!-- Bottom question + buttons -->
+        <VerticalStackLayout Grid.Row="2" Spacing="14">
+
+            <Label x:Name="QuestionLabel"
+                   Text="Would you like to train your memory?"
+                   FontSize="16"
+                   TextColor="#444"
+                   HorizontalTextAlignment="Center"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                <Button Text="No"
+                        CornerRadius="28"
+                        HeightRequest="56"
+                        BackgroundColor="#1DA1F2"
+                        TextColor="White"
+                        Clicked="OnNoClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="Yes"
+                        CornerRadius="28"
+                        HeightRequest="56"
+                        BackgroundColor="#1DA1F2"
+                        TextColor="White"
+                        Clicked="OnYesClicked"/>
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

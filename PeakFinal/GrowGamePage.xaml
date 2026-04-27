@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.GrowGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#342A46"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*,Auto,Auto,Auto">
+            <Grid BackgroundColor="#221C2F"
+                  HeightRequest="56"
+                  Padding="10"
+                  ColumnDefinitions="Auto,*,Auto,Auto">
+                <Border WidthRequest="42"
+                        HeightRequest="42"
+                        BackgroundColor="#FFF8FB"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        VerticalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000"
+                                Offset="0,8"
+                                Opacity="0.18"
+                                Radius="14" />
+                    </Border.Shadow>
+                    <Grid Padding="12,10"
+                          ColumnDefinitions="Auto,Auto"
+                          ColumnSpacing="5">
+                        <BoxView Grid.Column="0"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Column="1"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPauseClicked" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+
+                <Label x:Name="TimerLabel"
+                       Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Margin="0,0,14,0"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFD700"
+                       Text="01:00" />
+
+                <Border Grid.Column="2"
+                        BackgroundColor="#3B334D"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10,6"
+                        VerticalOptions="Center">
+                    <Label x:Name="RoundLabel"
+                           Text="1/3"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#EFEAFF" />
+                </Border>
+
+                <HorizontalStackLayout Grid.Column="3"
+                                       Margin="14,0,0,0"
+                                       Spacing="6"
+                                       VerticalOptions="Center">
+                    <Label Text="Score"
+                           FontSize="16"
+                           TextColor="#CCCCCC" />
+                    <Label x:Name="ScoreLabel"
+                           Text="0"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#FFD700" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Padding="0"
+                  RowDefinitions="*,Auto">
+                <Grid>
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#8C7AB5" Offset="0" />
+                            <GradientStop Color="#75679F" Offset="0.62" />
+                            <GradientStop Color="#426E9A" Offset="1" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Ellipse WidthRequest="180"
+                             HeightRequest="70"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Start"
+                             Margin="70,54,0,0"
+                             Fill="#9A8AC1"
+                             Opacity="0.32" />
+
+                    <Ellipse WidthRequest="170"
+                             HeightRequest="64"
+                             HorizontalOptions="End"
+                             VerticalOptions="Start"
+                             Margin="0,90,54,0"
+                             Fill="#A596C6"
+                             Opacity="0.28" />
+
+                    <Ellipse WidthRequest="640"
+                             HeightRequest="340"
+                             HorizontalOptions="Start"
+                             VerticalOptions="End"
+                             Margin="-120,0,0,78"
+                             Fill="#6E6294"
+                             Opacity="0.58" />
+
+                    <Ellipse WidthRequest="780"
+                             HeightRequest="260"
+                             HorizontalOptions="Center"
+                             VerticalOptions="End"
+                             Margin="0,0,0,24"
+                             Fill="#344D72"
+                             Opacity="0.66" />
+
+                    <Ellipse WidthRequest="820"
+                             HeightRequest="150"
+                             HorizontalOptions="Center"
+                             VerticalOptions="End"
+                             Margin="0,0,0,-44"
+                             Fill="#0B9D8A"
+                             Opacity="0.94" />
+
+                    <Grid Padding="24,34,24,30"
+                          ColumnDefinitions="*,210">
+                        <Label x:Name="FoundWordsLabel"
+                               FontSize="18"
+                               TextColor="White"
+                               VerticalTextAlignment="End"
+                               LineBreakMode="WordWrap"
+                               MaxLines="8" />
+
+                        <AbsoluteLayout Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End"
+                                        WidthRequest="210"
+                                        HeightRequest="250">
+                            <Ellipse AbsoluteLayout.LayoutBounds="80,224,120,20"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Fill="#223446"
+                                     Opacity="0.34" />
+
+                            <BoxView x:Name="TreeTrunk"
+                                     AbsoluteLayout.LayoutBounds="124,80,22,146"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Color="#A593B0"
+                                     CornerRadius="12" />
+                            <BoxView x:Name="BranchOne"
+                                     AbsoluteLayout.LayoutBounds="120,130,14,86"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Color="#A593B0"
+                                     Rotation="-36"
+                                     CornerRadius="8" />
+                            <BoxView x:Name="BranchTwo"
+                                     AbsoluteLayout.LayoutBounds="148,108,12,78"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Color="#A593B0"
+                                     Rotation="28"
+                                     CornerRadius="8" />
+                            <BoxView x:Name="BranchThree"
+                                     AbsoluteLayout.LayoutBounds="142,164,10,58"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Color="#A593B0"
+                                     Rotation="48"
+                                     CornerRadius="7" />
+
+                            <Ellipse x:Name="Leaf1"
+                                     AbsoluteLayout.LayoutBounds="86,140,34,26"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Fill="#11D0C0"
+                                     IsVisible="False" />
+                            <Ellipse x:Name="Leaf2"
+                                     AbsoluteLayout.LayoutBounds="154,94,34,26"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Fill="#11D0C0"
+                                     IsVisible="False" />
+                            <Ellipse x:Name="Leaf3"
+                                     AbsoluteLayout.LayoutBounds="174,76,34,26"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Fill="#11D0C0"
+                                     IsVisible="False" />
+                            <Ellipse x:Name="Leaf4"
+                                     AbsoluteLayout.LayoutBounds="170,152,34,26"
+                                     AbsoluteLayout.LayoutFlags="None"
+                                     Fill="#11D0C0"
+                                     IsVisible="False" />
+
+                            <Border x:Name="Flower1"
+                                    AbsoluteLayout.LayoutBounds="112,164,26,26"
+                                    AbsoluteLayout.LayoutFlags="None"
+                                    BackgroundColor="#12C8FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 13"
+                                    IsVisible="False" />
+                            <Border x:Name="Flower2"
+                                    AbsoluteLayout.LayoutBounds="154,126,26,26"
+                                    AbsoluteLayout.LayoutFlags="None"
+                                    BackgroundColor="#12C8FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 13"
+                                    IsVisible="False" />
+                            <Border x:Name="Flower3"
+                                    AbsoluteLayout.LayoutBounds="138,94,24,24"
+                                    AbsoluteLayout.LayoutFlags="None"
+                                    BackgroundColor="#12C8FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12"
+                                    IsVisible="False" />
+                            <Border x:Name="Flower4"
+                                    AbsoluteLayout.LayoutBounds="106,128,24,24"
+                                    AbsoluteLayout.LayoutFlags="None"
+                                    BackgroundColor="#12C8FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12"
+                                    IsVisible="False" />
+                            <Border x:Name="Flower5"
+                                    AbsoluteLayout.LayoutBounds="170,104,24,24"
+                                    AbsoluteLayout.LayoutFlags="None"
+                                    BackgroundColor="#12C8FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 12"
+                                    IsVisible="False" />
+                        </AbsoluteLayout>
+                    </Grid>
+                </Grid>
+
+                <VerticalStackLayout Grid.Row="1"
+                                     Spacing="10"
+                                     Padding="28,0,28,14">
+                    <Label x:Name="PromptLabel"
+                           FontSize="17"
+                           TextColor="White"
+                           Text="PERKS" />
+
+                    <Border x:Name="EntryFrame"
+                            BackgroundColor="#30263F"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 20"
+                            Padding="18,14">
+                        <Label x:Name="CurrentEntryLabel"
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               TextColor="#08E3E7"
+                               Text="PE__" />
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border Grid.Row="2"
+                    Margin="18,6,18,10"
+                    Padding="18,14"
+                    BackgroundColor="#F9F7FD"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22">
+                <Label x:Name="HintLabel"
+                       Text="Type as many valid words as possible starting with the letters provided."
+                       FontSize="14"
+                       TextColor="#5E5677" />
+            </Border>
+
+            <VerticalStackLayout Grid.Row="3"
+                                 Padding="14,0,14,8"
+                                 Spacing="8">
+                <HorizontalStackLayout x:Name="KeyboardRow1"
+                                       HorizontalOptions="Center"
+                                       Spacing="8" />
+                <HorizontalStackLayout x:Name="KeyboardRow2"
+                                       HorizontalOptions="Center"
+                                       Spacing="8" />
+                <HorizontalStackLayout x:Name="KeyboardRow3"
+                                       HorizontalOptions="Center"
+                                       Spacing="8" />
+            </VerticalStackLayout>
+
+            <Grid Grid.Row="4"
+                  Padding="18,0,18,18">
+                <Button x:Name="SubmitButton"
+                        Text="SUBMIT"
+                        HeightRequest="62"
+                        CornerRadius="31"
+                        BackgroundColor="#3E63DB"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Clicked="OnSubmitClicked" />
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="ResultOverlay"
+              IsVisible="False"
+              BackgroundColor="#CC241B35"
+              Padding="26">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Spacing="18">
+                <Border BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28"
+                        Padding="24">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Grow Complete"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#3B3157" />
+                        <Label x:Name="ResultScoreLabel"
+                               Text="0"
+                               FontSize="46"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#4C43DA" />
+                        <Label x:Name="ResultBestLabel"
+                               Text="Best 0"
+                               FontSize="16"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#726A8F" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Play Again"
+                        HeightRequest="58"
+                        CornerRadius="29"
+                        BackgroundColor="White"
+                        TextColor="#4C43DA"
+                        FontAttributes="Bold"
+                        Clicked="OnPlayAgainClicked" />
+
+                <Button Text="Done"
+                        HeightRequest="58"
+                        CornerRadius="29"
+                        BackgroundColor="#4C43DA"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="OnDoneClicked" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <AbsoluteLayout x:Name="ConfettiHost"
+                        InputTransparent="True" />
+    </Grid>
+</ContentPage>

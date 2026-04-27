@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.IQGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    ios:Page.UseSafeArea="True"
+    BackgroundColor="#D8EBFF"
+    Padding="0"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid>
+            <Border
+                BackgroundColor="#B7D4FF"
+                HeightRequest="240"
+                HorizontalOptions="End"
+                Opacity="0.42"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 120"
+                TranslationX="76"
+                TranslationY="-86"
+                WidthRequest="240" />
+
+            <Border
+                BackgroundColor="#F8FCFF"
+                HeightRequest="170"
+                HorizontalOptions="Start"
+                Opacity="0.52"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 85"
+                TranslationX="-54"
+                TranslationY="34"
+                WidthRequest="170" />
+
+            <Border Margin="18,12,18,0"
+                    Padding="18,18,18,18"
+                    BackgroundColor="#D6EAFF"
+                    Stroke="#B9D7FF"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 34">
+                <Border.Shadow>
+                    <Shadow Brush="#2A24528A"
+                            Offset="0,14"
+                            Opacity="0.24"
+                            Radius="26" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="18">
+                    <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="6">
+                            <Label x:Name="ModeLabel"
+                                   FontAttributes="Bold"
+                                   FontFamily="Helvetica"
+                                   FontSize="22"
+                                   Text="General IQ Challenge"
+                                   TextColor="#FFFFFF" />
+
+                            <Label x:Name="HeaderLabel"
+                                   FontFamily="Helvetica"
+                                   FontSize="14"
+                                   Text="Question 1 of 18"
+                                   TextColor="#EEF6FF" />
+
+                        </VerticalStackLayout>
+
+                        <Border x:Name="TimerBadge"
+                                Grid.Column="1"
+                                Padding="14,10"
+                                BackgroundColor="#F6FBFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 26"
+                                VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="2">
+                                <Label x:Name="TimerCaptionLabel"
+                                       HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="11"
+                                       Text="TIME LEFT"
+                                       TextColor="#4C7BCB" />
+
+                                <Label x:Name="TimerLabel"
+                                       HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="26"
+                                       Text="00:20"
+                                       TextColor="#2458D3" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border x:Name="ScoreBadge"
+                                Grid.Column="2"
+                                Padding="14,10"
+                                BackgroundColor="#FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 24"
+                                VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="2">
+                                <Label HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="11"
+                                       Text="SCORE"
+                                       TextColor="#5D7FD6" />
+
+                                <Label x:Name="ScoreLabel"
+                                       HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="20"
+                                       Text="0 pts"
+                                       TextColor="#2458D3" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Grid.Column="3"
+                                WidthRequest="52"
+                                HeightRequest="52"
+                                Padding="0"
+                                BackgroundColor="#FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 26"
+                                VerticalOptions="Center">
+                            <Button Text="&#x23F8;"
+                                    Clicked="OnPauseClicked"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#2458D3"
+                                    FontSize="22"
+                                    FontAttributes="Bold"
+                                    CornerRadius="26"
+                                    Padding="0" />
+                        </Border>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontFamily="Helvetica"
+                                   FontSize="12"
+                                   Text="Session progress"
+                                   TextColor="#EDF6FF" />
+
+                            <Border Padding="5"
+                                    BackgroundColor="#C4DEFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14">
+                                <ProgressBar x:Name="Progress"
+                                             BackgroundColor="#C4DEFF"
+                                             HeightRequest="10"
+                                             Progress="0"
+                                             ProgressColor="#FFFFFF" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label FontFamily="Helvetica"
+                               FontSize="11"
+                               Text="Question timer"
+                               TextColor="#EDF6FF" />
+                        <Border Padding="4"
+                                BackgroundColor="#C4DEFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 14">
+                            <ProgressBar x:Name="TimerProgress"
+                                         BackgroundColor="#C4DEFF"
+                                         HeightRequest="10"
+                                         Progress="1"
+                                         ProgressColor="#FFFFFF" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,28" Spacing="16">
+                <Border Padding="18,18,18,18"
+                        BackgroundColor="#8CBFFF"
+                        Stroke="#79B3FF"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 32">
+                    <Border.Shadow>
+                        <Shadow Brush="#25163F7A"
+                                Offset="0,12"
+                                Opacity="0.18"
+                                Radius="24" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout MinimumHeightRequest="220"
+                                         Spacing="16"
+                                         Padding="2,4,2,0">
+                        <FlexLayout Wrap="Wrap"
+                                    Direction="Row"
+                                    JustifyContent="Start"
+                                    AlignItems="Center">
+                            <Border Margin="0,0,8,8"
+                                    Padding="12,6"
+                                    BackgroundColor="#D8ECFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <Label x:Name="CategoryLabel"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="12"
+                                       Text="Math &amp; Logic"
+                                       TextColor="#2959D4" />
+                            </Border>
+
+                            <Border Margin="0,0,8,8"
+                                    Padding="12,6"
+                                    BackgroundColor="#E8F4FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <Label x:Name="DifficultyLabel"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="12"
+                                       Text="Medium"
+                                       TextColor="#4B69A5" />
+                            </Border>
+
+                            <Border Margin="0,0,0,8"
+                                    Padding="12,6"
+                                    BackgroundColor="#FFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <Label x:Name="QuestionValueLabel"
+                                       FontAttributes="Bold"
+                                       FontFamily="Helvetica"
+                                       FontSize="12"
+                                       Text="120 pts"
+                                       TextColor="#2458D3" />
+                            </Border>
+                        </FlexLayout>
+
+                        <Label x:Name="PromptLabel"
+                               FontAttributes="Bold"
+                               FontFamily="Helvetica"
+                               FontSize="28"
+                               LineBreakMode="WordWrap"
+                               Text="Question text"
+                               TextColor="#FFFFFF" />
+
+                        <Image x:Name="QuestionImage"
+                               Aspect="AspectFit"
+                               HeightRequest="126"
+                               IsVisible="False" />
+
+                        <Label Text="Choose the best answer before the timer runs out."
+                               FontFamily="Helvetica"
+                               FontSize="14"
+                               LineBreakMode="WordWrap"
+                               TextColor="#F4F9FF" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="12">
+                    <Button x:Name="A0"
+                            Padding="20,18"
+                            BackgroundColor="#FFFFFF"
+                            BorderColor="#D6E2F2"
+                            BorderWidth="1"
+                            Clicked="OnOptionClicked"
+                            CornerRadius="24"
+                            FontFamily="Helvetica"
+                            FontSize="16"
+                            HorizontalOptions="Fill"
+                            TextColor="#0F172A" />
+                    <Button x:Name="A1"
+                            Padding="20,18"
+                            BackgroundColor="#FFFFFF"
+                            BorderColor="#D6E2F2"
+                            BorderWidth="1"
+                            Clicked="OnOptionClicked"
+                            CornerRadius="24"
+                            FontFamily="Helvetica"
+                            FontSize="16"
+                            HorizontalOptions="Fill"
+                            TextColor="#0F172A" />
+                    <Button x:Name="A2"
+                            Padding="20,18"
+                            BackgroundColor="#FFFFFF"
+                            BorderColor="#D6E2F2"
+                            BorderWidth="1"
+                            Clicked="OnOptionClicked"
+                            CornerRadius="24"
+                            FontFamily="Helvetica"
+                            FontSize="16"
+                            HorizontalOptions="Fill"
+                            TextColor="#0F172A" />
+                    <Button x:Name="A3"
+                            Padding="20,18"
+                            BackgroundColor="#FFFFFF"
+                            BorderColor="#D6E2F2"
+                            BorderWidth="1"
+                            Clicked="OnOptionClicked"
+                            CornerRadius="24"
+                            FontFamily="Helvetica"
+                            FontSize="16"
+                            HorizontalOptions="Fill"
+                            TextColor="#0F172A" />
+                </VerticalStackLayout>
+
+                <Border x:Name="FeedbackCard"
+                        Padding="18"
+                        BackgroundColor="#FFFFFF"
+                        IsVisible="False"
+                        Stroke="#D8E4F5"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.Shadow>
+                        <Shadow Brush="#180F172A"
+                                Offset="0,12"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="FeedbackTitle"
+                               FontAttributes="Bold"
+                               FontFamily="Helvetica"
+                               FontSize="20"
+                               Text="Correct"
+                               TextColor="#10223E" />
+
+                        <Label x:Name="PointsEarnedLabel"
+                               FontFamily="Helvetica"
+                               FontSize="14"
+                               Text="+120 points"
+                               TextColor="#188038" />
+
+                        <Label x:Name="ExplanationLabel"
+                               FontFamily="Helvetica"
+                               FontSize="15"
+                               LineBreakMode="WordWrap"
+                               Text="Explanation goes here."
+                               TextColor="#526277" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

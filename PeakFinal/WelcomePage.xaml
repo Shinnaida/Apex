@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource PageBackground}"
+    Padding="0">
+
+    <Grid RowDefinitions="*,Auto">
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1A6EE8" Offset="0.0" />
+                    <GradientStop Color="#4E6CF4" Offset="0.55" />
+                    <GradientStop Color="#7B61FF" Offset="1.0" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Border WidthRequest="220"
+                    HeightRequest="220"
+                    BackgroundColor="#18FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 110"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,-42,-60,0" />
+
+            <Border WidthRequest="128"
+                    HeightRequest="128"
+                    BackgroundColor="#10FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 64"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End"
+                    Margin="-26,0,0,26" />
+
+            <VerticalStackLayout Padding="24,72,24,24"
+                                 Spacing="24">
+                <Image Source="apex_logo_1.png"
+                       WidthRequest="96"
+                       HeightRequest="96"
+                       HorizontalOptions="Center"
+                       Aspect="AspectFit" />
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Welcome to Apex"
+                           Style="{StaticResource TitleLabelStyle}"
+                           HorizontalTextAlignment="Center"
+                           TextColor="White" />
+
+                    <Label Text="Sharpen memory, focus, language, and logic with quick daily sessions in a cleaner, more motivating experience."
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"
+                           TextColor="#EAF3FF"
+                           LineHeight="1.25" />
+                </VerticalStackLayout>
+
+                <Border Padding="18"
+                        BackgroundColor="#18FFFFFF"
+                        Stroke="#36FFFFFF"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 24">
+                    <VerticalStackLayout Spacing="12">
+                        <HorizontalStackLayout Spacing="10">
+                            <Border WidthRequest="38"
+                                    HeightRequest="38"
+                                    BackgroundColor="#1BFFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 19">
+                                <Label Text="&#x1F9E0;"
+                                       FontSize="20"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Daily knowledge"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                                <Label Text="Short insights and better progress tracking."
+                                       FontSize="13"
+                                       TextColor="#EAF3FF" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Border WidthRequest="38"
+                                    HeightRequest="38"
+                                    BackgroundColor="#1BFFFFFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 19">
+                                <Label Text="&#x1F4CA;"
+                                       FontSize="20"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Progress that feels clear"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                                <Label Text="Scores, streaks, and unlocks designed to keep momentum."
+                                       FontSize="13"
+                                       TextColor="#EAF3FF" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <HorizontalStackLayout HorizontalOptions="Center"
+                                       Spacing="8">
+                    <BoxView WidthRequest="26" HeightRequest="8" CornerRadius="4" Color="White" />
+                    <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" Color="#82D7FF" />
+                    <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4" Color="#82D7FF" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <Border Grid.Row="1"
+                Padding="20,18,20,24"
+                BackgroundColor="{StaticResource PageBackground}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28,28,0,0">
+            <VerticalStackLayout Spacing="12">
+                <Button Text="Get Started"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="OnGetStartedClicked" />
+
+                <Button Text="I already have an account"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Clicked="OnHaveAccountClicked" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+    Padding="20">
+
+    <Grid RowDefinitions="*,Auto,Auto" RowSpacing="14">
+
+        <CarouselView x:Name="OnboardingCarousel"
+                      Grid.Row="0"
+                      ItemsSource="{Binding Slides}"
+                      IndicatorView="{x:Reference Dots}"
+                      IsSwipeEnabled="True"
+                      PositionChanged="OnPositionChanged">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Spacing="20">
+
+                        <Label Text="{Binding Emoji}"
+                               FontSize="96"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Label Text="{Binding Title}"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Label Text="{Binding Subtitle}"
+                               FontSize="16"
+                               TextColor="Gray"
+                               HorizontalTextAlignment="Center"
+                               Margin="10,0"
+                               LineBreakMode="WordWrap"
+                               MaxLines="4"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="Dots"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       IndicatorColor="#D9D9D9"
+                       SelectedIndicatorColor="#1DA1F2"
+                       IndicatorSize="10"
+                       Margin="0,10"/>
+
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+
+            <Button x:Name="SkipButton"
+                    Text="Already have account?"
+                    BackgroundColor="Transparent"
+                    TextColor="#4D708F"
+                    FontAttributes="Bold"
+                    Clicked="OnAccountAccessClicked"/>
+
+            <Button Grid.Column="2"
+                    x:Name="PrimaryButton"
+                    Text="Next"
+                    CornerRadius="26"
+                    HeightRequest="52"
+                    Padding="18,10"
+                    BackgroundColor="#1DA1F2"
+                    TextColor="White"
+                    Clicked="OnPrimaryClicked"/>
+        </Grid>
+
+        <Grid x:Name="AccountOverlay"
+              Grid.RowSpan="3"
+              IsVisible="False"
+              Opacity="0">
+
+            <Border Opacity="0.82" StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#F2FFFFFF" Offset="0.0" />
+                        <GradientStop Color="#D8EEF7FF" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOverlayBackdropTapped"/>
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Grid Padding="16" VerticalOptions="End">
+                <Frame x:Name="AccountSheet"
+                       CornerRadius="24"
+                       Padding="18"
+                       HasShadow="True"
+                       BackgroundColor="White"
+                       TranslationY="420">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <Label Text="Account Access"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#18324E" />
+
+                            <Label Grid.Column="1"
+                                   Text="Close"
+                                   TextColor="#1DA1F2"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnCloseOverlayTapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                        <Label x:Name="OverlaySubtitle"
+                               Text="Choose how you want to continue."
+                               FontSize="13"
+                               TextColor="#6B8197" />
+
+                        <Grid x:Name="ChoicePanel" RowDefinitions="Auto,Auto" RowSpacing="10">
+                            <Button Text="Log In"
+                                    BackgroundColor="#1DA1F2"
+                                    TextColor="White"
+                                    CornerRadius="14"
+                                    HeightRequest="52"
+                                    Clicked="OnLoginChoiceClicked" />
+
+                            <Button Grid.Row="1"
+                                    Text="Create Account"
+                                    BackgroundColor="#EAF6FF"
+                                    TextColor="#0B5F9B"
+                                    CornerRadius="14"
+                                    HeightRequest="52"
+                                    Clicked="OnSignupChoiceClicked" />
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="LoginPanel" IsVisible="False" Opacity="0" Spacing="10">
+                            <Entry x:Name="LoginUsernameEntry"
+                                   Placeholder="Username"
+                                   PlaceholderColor="#8FA2B5"
+                                   BackgroundColor="#F5FAFF"
+                                   TextColor="#18324E" />
+
+                            <Entry x:Name="LoginPasswordEntry"
+                                   Placeholder="Password"
+                                   IsPassword="True"
+                                   PlaceholderColor="#8FA2B5"
+                                   BackgroundColor="#F5FAFF"
+                                   TextColor="#18324E" />
+
+                            <Button x:Name="FingerprintLoginButton"
+                                    Text="Use Fingerprint"
+                                    IsVisible="False"
+                                    BackgroundColor="#EEF6FF"
+                                    TextColor="#0B5F9B"
+                                    CornerRadius="14"
+                                    HeightRequest="48"
+                                    Clicked="OnBiometricSignInClicked" />
+
+                            <Button Text="Log In And Continue"
+                                    BackgroundColor="#1DA1F2"
+                                    TextColor="White"
+                                    CornerRadius="14"
+                                    HeightRequest="50"
+                                    Clicked="OnSignInClicked" />
+
+                            <Button Text="Back"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#4D708F"
+                                    Clicked="OnBackToChoicesClicked" />
+                        </VerticalStackLayout>
+
+                        <ScrollView x:Name="SignupPanel" IsVisible="False" Opacity="0" HeightRequest="280">
+                            <VerticalStackLayout Spacing="9" Padding="0,2,0,2">
+                                <Entry x:Name="SignupUsernameEntry"
+                                       Placeholder="Username"
+                                       PlaceholderColor="#8FA2B5"
+                                       BackgroundColor="#F5FAFF"
+                                       TextColor="#18324E" />
+
+                                <Entry x:Name="SignupAgeEntry"
+                                       Placeholder="Age"
+                                       Keyboard="Numeric"
+                                       MaxLength="2"
+                                       PlaceholderColor="#8FA2B5"
+                                       BackgroundColor="#F5FAFF"
+                                       TextColor="#18324E" />
+
+                                <Entry x:Name="SignupPasswordEntry"
+                                       Placeholder="Password"
+                                       IsPassword="True"
+                                       PlaceholderColor="#8FA2B5"
+                                       BackgroundColor="#F5FAFF"
+                                       TextColor="#18324E" />
+
+                                <Entry x:Name="SignupConfirmPasswordEntry"
+                                       Placeholder="Confirm password"
+                                       IsPassword="True"
+                                       PlaceholderColor="#8FA2B5"
+                                       BackgroundColor="#F5FAFF"
+                                       TextColor="#18324E" />
+
+                                <Button Text="Create Account And Continue"
+                                        BackgroundColor="#1DA1F2"
+                                        TextColor="White"
+                                        CornerRadius="14"
+                                        HeightRequest="50"
+                                        Clicked="OnCreateAndContinueClicked" />
+
+                                <Button Text="Back"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#4D708F"
+                                        Clicked="OnBackToChoicesClicked" />
+                            </VerticalStackLayout>
+                        </ScrollView>
+
+                        <Label x:Name="AccountFlowStatusLabel"
+                               IsVisible="False"
+                               FontSize="13"
+                               TextColor="#C83A4A"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>

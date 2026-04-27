@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.PerilousPathGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#102752"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="14,18,14,20">
+        <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,10">
+            <Label Text="&#x23F8;"
+                   FontSize="30"
+                   TextColor="White"
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPauseTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label x:Name="RoundLabel"
+                   Grid.Column="1"
+                   Text="1/12"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   TextColor="#E8A215"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Label x:Name="ScoreLabel"
+                   Grid.Column="2"
+                   Text="Score 0"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   TextColor="#E8A215"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Border StrokeShape="RoundRectangle 18"
+                    BackgroundColor="#0D1F45"
+                    StrokeThickness="0"
+                    Padding="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Grid x:Name="BoardGrid"
+                      RowSpacing="3"
+                      ColumnSpacing="3"
+                      WidthRequest="320"
+                      HeightRequest="320" />
+            </Border>
+
+            <Frame x:Name="RoundResultBadge"
+                   IsVisible="False"
+                   BackgroundColor="#66000000"
+                   CornerRadius="35"
+                   WidthRequest="70"
+                   HeightRequest="70"
+                   Padding="0"
+                   HasShadow="False"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Label x:Name="RoundResultLabel"
+                       Text="✓"
+                       FontSize="42"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+        </Grid>
+
+        <Label x:Name="StatusLabel"
+               Grid.Row="2"
+               Text="Memorize the dangerous tiles."
+               FontSize="18"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               Margin="0,16,0,0" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Peak.FilterChip"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Grid ColumnDefinitions="Auto,Auto"
+          HorizontalOptions="End">
+
+        <Border BackgroundColor="#2F2F2F"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 6"
+                Padding="12,8"
+                VerticalOptions="Center">
+            <Label x:Name="ChipText"
+                   Text="1 week"
+                   TextColor="White"
+                   FontSize="16" />
+        </Border>
+
+        <Border Grid.Column="1"
+                WidthRequest="44"
+                HeightRequest="44"
+                BackgroundColor="White"
+                Stroke="#E7E7E7"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 22"
+                Margin="10,0,0,0">
+            <Grid>
+                <Image x:Name="IconImage"
+                       Source="icon_calendar.svg"
+                       WidthRequest="18"
+                       HeightRequest="18"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="True" />
+                <Label x:Name="IconTextLabel"
+                       Text="∞"
+                       FontSize="20"
+                       TextColor="#666666"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       IsVisible="False" />
+            </Grid>
+        </Border>
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnTapped" />
+        </Grid.GestureRecognizers>
+    </Grid>
+</ContentView>

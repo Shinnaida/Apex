@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.AgePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+    Padding="24">
+
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="18">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Center">
+            <!-- Replace with your image if you want -->
+            <Image Source="age_icon.png"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Enter your age"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#1DA1F2"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Our training programs are catered to your age and your preferences."
+                   FontSize="14"
+                   TextColor="#888"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Form -->
+        <VerticalStackLayout Grid.Row="1" Spacing="10">
+            <Label Text="Age *"
+                   FontSize="14"
+                   TextColor="#888"/>
+
+            <!-- Looks like the screenshot (underline style) -->
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="8">
+                <Picker x:Name="AgePicker"
+                        Title="Select"
+                        SelectedIndexChanged="OnAgeChanged"/>
+
+                <BoxView Grid.Row="1"
+                         HeightRequest="1"
+                         BackgroundColor="#333"
+                         Opacity="0.35"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- Continue Button -->
+        <Button x:Name="ContinueButton"
+                Grid.Row="2"
+                Text="Continue"
+                HeightRequest="64"
+                CornerRadius="32"
+                BackgroundColor="#1DA1F2"
+                TextColor="White"
+                FontSize="18"
+                Clicked="OnContinueClicked"
+                IsEnabled="False"
+                Opacity="0.4"/>
+    </Grid>
+</ContentPage>

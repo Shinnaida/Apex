@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <linearGradient id="qbcBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#47d7ff"/>
+      <stop offset="60%" stop-color="#2e8cff"/>
+      <stop offset="100%" stop-color="#2356d7"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfff66"/>
+      <stop offset="100%" stop-color="#9de42d"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="150" cy="112" r="86" fill="url(#qbcBg)" stroke="#ffffff" stroke-width="10"/>
+  <path d="M116 61c-21 0-38 17-38 38 0 8 2 15 7 22 9 13 13 20 13 29v8h28v-13c0-8-4-16-12-27-4-5-6-11-6-18 0-11 8-20 18-20 11 0 18 8 18 19v59h29v-59c0-11 8-19 18-19 10 0 18 9 18 20 0 7-2 13-6 18-8 11-12 19-12 27v13h28v-8c0-9 4-16 13-29 5-7 7-14 7-22 0-21-17-38-38-38-14 0-27 6-36 17-10-11-22-17-37-17z" fill="#ffffff"/>
+  <circle cx="161" cy="129" r="43" fill="#ffffff" opacity="0.98"/>
+  <circle cx="161" cy="129" r="33" fill="#dff5ff"/>
+  <path d="m145 129 11 12 23-26" fill="none" stroke="url(#checkGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
+
+  <g fill="#ffffff" opacity="0.95">
+    <circle cx="45" cy="63" r="5"/>
+    <circle cx="254" cy="74" r="6"/>
+    <circle cx="71" cy="37" r="5"/>
+    <circle cx="225" cy="38" r="5"/>
+    <path d="M37 101h24" stroke="#ffd85a" stroke-width="7" stroke-linecap="round"/>
+    <path d="M50 89v24" stroke="#ffd85a" stroke-width="7" stroke-linecap="round"/>
+    <path d="M240 97h20" stroke="#61d6ff" stroke-width="6" stroke-linecap="round"/>
+    <path d="M250 87v20" stroke="#61d6ff" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(37 184)">
+    <rect x="0" y="0" width="226" height="72" rx="18" fill="#124aaf"/>
+    <text x="113" y="29" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" text-anchor="middle" fill="#ffffff">QUICK BRAIN</text>
+    <text x="113" y="61" font-family="Arial, Helvetica, sans-serif" font-size="37" font-weight="900" text-anchor="middle" fill="#ffe35d">CHECK</text>
+  </g>
+</svg>

@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.TurtleTrafficGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0D73F2" Offset="0" />
+            <GradientStop Color="#063D8C" Offset="1" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Top HUD -->
+        <Grid Grid.Row="0" Padding="18,18,18,10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+            <Frame Grid.Column="0"
+                   WidthRequest="44"
+                   HeightRequest="44"
+                   CornerRadius="22"
+                   BackgroundColor="#135CCF"
+                   Padding="0"
+                   HasShadow="False"
+                   HorizontalOptions="Start">
+                <Label Text="||"
+                       FontSize="20"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPauseTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="2"
+                                 HorizontalOptions="Center">
+                <Label Text="Turtle Traffic"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+                <Label x:Name="TimerLabel"
+                       Text="01:45"
+                       FontSize="16"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="4" VerticalOptions="Center" HorizontalOptions="End">
+                <Label x:Name="ScoreLabel"
+                       Text="0"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+                <Label Grid.Column="1"
+                       Text="pts"
+                       FontSize="14"
+                       TextColor="#DDE8FF"
+                       VerticalTextAlignment="End"/>
+            </Grid>
+        </Grid>
+
+        <!-- Game Area -->
+        <Grid Grid.Row="1" Padding="18,0,18,20">
+            <Frame CornerRadius="26"
+                   BackgroundColor="#124FAF"
+                   HasShadow="False"
+                   Padding="0">
+
+                <AbsoluteLayout x:Name="GameArea"
+                                BackgroundColor="Transparent"
+                                SizeChanged="OnGameAreaSizeChanged">
+
+                    <!-- Water layers -->
+                    <BoxView AbsoluteLayout.LayoutBounds="0,0,1,0.28"
+                             AbsoluteLayout.LayoutFlags="All"
+                             Color="#1A7BE8"
+                             Opacity="0.45"/>
+                    <BoxView AbsoluteLayout.LayoutBounds="0,1,1,0.30"
+                             AbsoluteLayout.LayoutFlags="All"
+                             Color="#0C3C86"
+                             Opacity="0.65"/>
+
+                    <!-- Tap hint -->
+                    <Frame x:Name="TapHint"
+                           AbsoluteLayout.LayoutBounds="0.5,0.82,120,40"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           CornerRadius="20"
+                           BackgroundColor="#FFFFFF20"
+                           HasShadow="False"
+                           Padding="10,6"
+                           IsVisible="True">
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="Tap"
+                                   FontSize="16"
+                                   TextColor="White"/>
+                            <Label Text="🤚"
+                                   FontSize="18"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <!-- Player -->
+                    <Frame x:Name="Player"
+                           WidthRequest="54"
+                           HeightRequest="54"
+                           CornerRadius="27"
+                           BackgroundColor="#7EE081"
+                           HasShadow="False"
+                           Padding="0"
+                           AbsoluteLayout.LayoutBounds="0.15,0.5,54,54"
+                           AbsoluteLayout.LayoutFlags="PositionProportional">
+                        <Label Text="🐢"
+                               FontSize="30"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+
+                    <AbsoluteLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGameAreaTapped" NumberOfTapsRequired="1"/>
+                    </AbsoluteLayout.GestureRecognizers>
+
+                </AbsoluteLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Countdown Overlay -->
+        <Grid x:Name="CountdownOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#CC0A2E6C"
+              IsVisible="False"
+              >
+            <VerticalStackLayout Spacing="12"
+                                  HorizontalOptions="Center"
+                                  VerticalOptions="Center">
+                <Label Text="GET READY"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+                <Label x:Name="CountdownLabel"
+                       Text="3"
+                       FontSize="46"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Pause Overlay -->
+        <Grid x:Name="PauseOverlay"
+              Grid.RowSpan="10"
+              IsVisible="False"
+              BackgroundColor="#99000000"
+              >
+            <Frame CornerRadius="20"
+                   BackgroundColor="White"
+                   HasShadow="False"
+                   Padding="20"
+                   WidthRequest="260"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Paused"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#222"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Text="Resume"
+                            Clicked="OnResumeClicked"
+                            BackgroundColor="#0D73F2"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HeightRequest="50"/>
+                    <Button Text="Quit"
+                            Clicked="OnQuitClicked"
+                            BackgroundColor="#E11D48"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HeightRequest="50"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Game Over Overlay -->
+        <Grid x:Name="GameOverOverlay"
+              Grid.RowSpan="10"
+              IsVisible="False"
+              BackgroundColor="#99000000"
+              >
+            <Frame CornerRadius="24"
+                   BackgroundColor="White"
+                   HasShadow="False"
+                   Padding="24"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="280">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Game Over"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#222"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Label x:Name="FinalScoreLabel"
+                           Text="Score: 0"
+                           FontSize="18"
+                           TextColor="#444"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Button Text="PLAY AGAIN"
+                            Clicked="OnPlayAgainClicked"
+                            BackgroundColor="#0D73F2"
+                            TextColor="White"
+                            CornerRadius="24"
+                            HeightRequest="54"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+    </Grid>
+</ContentPage>
+

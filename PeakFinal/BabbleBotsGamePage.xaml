@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.BabbleBotsGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#493A67"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*,Auto,Auto,Auto">
+            <Grid BackgroundColor="#241E31"
+                  HeightRequest="58"
+                  Padding="10"
+                  ColumnDefinitions="Auto,*,Auto,Auto">
+                <Border WidthRequest="42"
+                        HeightRequest="42"
+                        BackgroundColor="#FFF8FB"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        VerticalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000"
+                                Offset="0,8"
+                                Opacity="0.18"
+                                Radius="14" />
+                    </Border.Shadow>
+                    <Grid Padding="12,10"
+                          ColumnDefinitions="Auto,Auto"
+                          ColumnSpacing="5">
+                        <BoxView Grid.Column="0"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Column="1"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPauseClicked" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+
+                <Label x:Name="TimerLabel"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#F4C72E"
+                       Text="01:30" />
+
+                <BoxView Grid.Column="2"
+                         WidthRequest="1"
+                         HeightRequest="26"
+                         Color="#51476A"
+                         VerticalOptions="Center"
+                         Margin="12,0" />
+
+                <HorizontalStackLayout Grid.Column="3"
+                                       Spacing="6"
+                                       VerticalOptions="Center">
+                    <Label Text="Score"
+                           FontSize="16"
+                           TextColor="#D5D2DD" />
+                    <Label x:Name="ScoreLabel"
+                           Text="0"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#F4C72E" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Padding="16,12,16,0"
+                  RowDefinitions="Auto,Auto,*,Auto">
+                <Grid x:Name="BubbleStage"
+                      Grid.Row="0"
+                      ColumnDefinitions="*,*"
+                      MinimumHeightRequest="150">
+                    <VerticalStackLayout x:Name="LeftBubbleStack"
+                                         Spacing="10"
+                                         HorizontalOptions="Start"
+                                         VerticalOptions="Start" />
+
+                    <VerticalStackLayout x:Name="RightBubbleStack"
+                                         Grid.Column="1"
+                                         Spacing="10"
+                                         HorizontalOptions="End"
+                                         VerticalOptions="Start" />
+                </Grid>
+
+                <Frame x:Name="SeedWordBubble"
+                       Grid.Row="1"
+                       Margin="8,0,0,14"
+                       Padding="16,10"
+                       CornerRadius="14"
+                       BackgroundColor="#F3D0B8"
+                       HorizontalOptions="Start"
+                       HasShadow="False">
+                    <Label x:Name="SeedWordLabel"
+                           Text="TIRES"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#3B2F57" />
+                </Frame>
+
+                <Grid Grid.Row="2"
+                      ColumnDefinitions="*,*"
+                      Padding="0,0,0,8">
+                    <VerticalStackLayout VerticalOptions="End" Spacing="0">
+                        <Grid WidthRequest="118"
+                              HeightRequest="180"
+                              HorizontalOptions="Center"
+                              RowDefinitions="70,18,92">
+                            <Frame BackgroundColor="#F0A72E"
+                                   HasShadow="False"
+                                   CornerRadius="20"
+                                   Padding="0" />
+                            <Grid Padding="20,18,20,18">
+                                <BoxView WidthRequest="16" HeightRequest="16" CornerRadius="8" Color="White" HorizontalOptions="Start" VerticalOptions="Start" />
+                                <BoxView WidthRequest="16" HeightRequest="16" CornerRadius="8" Color="White" HorizontalOptions="End" VerticalOptions="Start" />
+                                <BoxView WidthRequest="18" HeightRequest="8" CornerRadius="2" Color="#4B3C61" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,8" />
+                            </Grid>
+                            <BoxView Grid.Row="1" HeightRequest="14" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" Color="#8A8794" />
+                            <Frame Grid.Row="2"
+                                   BackgroundColor="#E51652"
+                                   HasShadow="False"
+                                   CornerRadius="14"
+                                   Padding="0" />
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="End" Spacing="0">
+                        <Grid WidthRequest="118"
+                              HeightRequest="180"
+                              HorizontalOptions="Center"
+                              RowDefinitions="70,18,92">
+                            <Frame BackgroundColor="#59C2F7"
+                                   HasShadow="False"
+                                   CornerRadius="20"
+                                   Padding="0" />
+                            <Grid Padding="20,18,20,18">
+                                <BoxView WidthRequest="16" HeightRequest="16" CornerRadius="8" Color="White" HorizontalOptions="Start" VerticalOptions="Start" />
+                                <BoxView WidthRequest="16" HeightRequest="16" CornerRadius="8" Color="White" HorizontalOptions="End" VerticalOptions="Start" />
+                                <BoxView WidthRequest="18" HeightRequest="8" CornerRadius="2" Color="#4B3C61" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,8" />
+                            </Grid>
+                            <BoxView Grid.Row="1" HeightRequest="14" WidthRequest="86" HorizontalOptions="Center" VerticalOptions="Center" Color="#8A8794" />
+                            <Frame Grid.Row="2"
+                                   BackgroundColor="#B36A4C"
+                                   HasShadow="False"
+                                   CornerRadius="14"
+                                   Padding="0" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Frame x:Name="ComboFrame"
+                       Grid.Row="3"
+                       CornerRadius="26"
+                       WidthRequest="64"
+                       HeightRequest="64"
+                       Padding="0"
+                       BackgroundColor="White"
+                       BorderColor="#8C89F4"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       HasShadow="False">
+                    <Label x:Name="ComboLabel"
+                           Text="x1"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#4C43D7"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+            </Grid>
+
+            <Frame Grid.Row="2"
+                   x:Name="CurrentWordFrame"
+                   Margin="16,0,16,10"
+                   CornerRadius="12"
+                   Padding="14,10"
+                   BackgroundColor="#5C4B7B"
+                   BorderColor="#72628F"
+                   HasShadow="False">
+                <Label x:Name="CurrentWordLabel"
+                       Text="-"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center" />
+            </Frame>
+
+            <Grid Grid.Row="3"
+                  Padding="16,0,16,10"
+                  RowDefinitions="Auto,Auto"
+                  RowSpacing="8">
+                <Grid x:Name="LetterGrid"
+                      ColumnDefinitions="*,*,*,*,*,*"
+                      ColumnSpacing="6">
+                    <Button x:Name="LetterButton0" Grid.Column="0" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                    <Button x:Name="LetterButton1" Grid.Column="1" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                    <Button x:Name="LetterButton2" Grid.Column="2" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                    <Button x:Name="LetterButton3" Grid.Column="3" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                    <Button x:Name="LetterButton4" Grid.Column="4" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                    <Button x:Name="LetterButton5" Grid.Column="5" Clicked="OnLetterClicked" BackgroundColor="#9B77B1" TextColor="White" FontAttributes="Bold" FontSize="24" CornerRadius="4" HeightRequest="64" />
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="80,*,80"
+                      ColumnSpacing="8">
+                    <Button Grid.Column="0"
+                            Text="&#x21BB;"
+                            BackgroundColor="#B8B8C2"
+                            TextColor="White"
+                            FontSize="28"
+                            CornerRadius="4"
+                            HeightRequest="64"
+                            Clicked="OnShuffleClicked" />
+                    <Button x:Name="SubmitButton"
+                            Grid.Column="1"
+                            Text="SUBMIT"
+                            BackgroundColor="#3B3349"
+                            TextColor="#8B86A0"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            CornerRadius="4"
+                            HeightRequest="64"
+                            Clicked="OnSubmitClicked" />
+                    <Button Grid.Column="2"
+                            Text="&#x232B;"
+                            BackgroundColor="#B8B8C2"
+                            TextColor="White"
+                            FontSize="26"
+                            CornerRadius="4"
+                            HeightRequest="64"
+                            Clicked="OnDeleteClicked" />
+                </Grid>
+            </Grid>
+
+            <Frame Grid.Row="4"
+                   Margin="16,0,16,20"
+                   Padding="16,14"
+                   BackgroundColor="White"
+                   CornerRadius="20"
+                   HasShadow="False">
+                <Label x:Name="HintLabel"
+                       Text="Create words of 3 letters or more by tapping the letters and pressing Submit."
+                       FontSize="17"
+                       TextColor="#535353" />
+            </Frame>
+        </Grid>
+
+        <AbsoluteLayout x:Name="ConfettiHost"
+                        InputTransparent="True"
+                        ZIndex="5" />
+
+        <Grid x:Name="ResultOverlay"
+              BackgroundColor="#B3241E31"
+              IsVisible="False"
+              ZIndex="10">
+            <Frame Margin="28"
+                   Padding="24"
+                   CornerRadius="28"
+                   BackgroundColor="White"
+                   HasShadow="False"
+                   VerticalOptions="Center">
+                <VerticalStackLayout Spacing="18">
+                    <Label Text="BABBLED COMPLETE"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#7E77F4"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="ResultScoreLabel"
+                           Text="0"
+                           FontSize="44"
+                           FontAttributes="Bold"
+                           TextColor="#2B2B38"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="ResultBestLabel"
+                           Text="Best 0"
+                           FontSize="18"
+                           TextColor="#6A6880"
+                           HorizontalOptions="Center" />
+                    <Button Text="PLAY AGAIN"
+                            HeightRequest="56"
+                            CornerRadius="28"
+                            BackgroundColor="#6A58F1"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            Clicked="OnPlayAgainClicked" />
+                    <Button Text="DONE"
+                            HeightRequest="56"
+                            CornerRadius="28"
+                            BackgroundColor="#EFEFFD"
+                            TextColor="#5D57D8"
+                            FontAttributes="Bold"
+                            Clicked="OnDoneClicked" />
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>

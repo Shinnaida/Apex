@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.MePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    x:Name="MePageRoot"
+    BackgroundColor="#F8FBFF"
+    Shell.NavBarIsVisible="False"
+    Padding="0">
+
+    <ContentPage.Resources>
+        <Style x:Key="SectionCardStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Stroke" Value="#E6EEF8" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 26" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
+
+        <Style x:Key="SectionTitleStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextColor" Value="#22324A" />
+        </Style>
+
+        <Style x:Key="SectionSubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="TextColor" Value="#6E7C93" />
+        </Style>
+
+        <Style x:Key="StatCardStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            <Setter Property="Stroke" Value="#E6EEF8" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+
+        <Style x:Key="BadgeTileStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#F8FBFF" />
+            <Setter Property="Stroke" Value="#E6EEF8" />
+            <Setter Property="StrokeThickness" Value="1" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView x:Name="RootScroll">
+            <VerticalStackLayout Padding="20,18,20,28" Spacing="18">
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border
+                        HeightRequest="44"
+                        WidthRequest="44"
+                        BackgroundColor="White"
+                        Stroke="#D9EEFF"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        VerticalOptions="Center">
+                        <Border.Shadow>
+                            <Shadow Brush="#100D3B66" Offset="0,8" Opacity="0.16" Radius="16" />
+                        </Border.Shadow>
+                        <Image
+                            Source="apex_logo.png"
+                            Margin="8"
+                            Aspect="AspectFit" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="22"
+                            Text="Apex"
+                            TextColor="#22324A" />
+                        <Label
+                            FontSize="12"
+                            Text="Mindful game profile"
+                            TextColor="#6E7C93" />
+                    </VerticalStackLayout>
+
+                    <Border
+                        x:Name="SettingsButton"
+                        Grid.Column="2"
+                        BackgroundColor="White"
+                        Padding="12"
+                        Stroke="#E6EEF8"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 18"
+                        VerticalOptions="Center">
+                        <Border.Shadow>
+                            <Shadow Brush="#120D3B66" Offset="0,8" Opacity="0.16" Radius="16" />
+                        </Border.Shadow>
+                        <Label
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="&#x2699;"
+                            TextColor="#7387D8"
+                            VerticalOptions="Center" />
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+
+                <Border
+                    x:Name="SettingsPanel"
+                    Style="{StaticResource SectionCardStyle}"
+                    IsVisible="False"
+                    Opacity="0">
+                    <Border.Shadow>
+                        <Shadow Brush="#120D3B66" Offset="0,10" Opacity="0.14" Radius="22" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="18">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="20" Text="&#x1F50A;" TextColor="#78AEE8" VerticalOptions="Center" />
+                            <Label Grid.Column="1" FontSize="16" Text="Interface Sounds" TextColor="#22324A" VerticalOptions="Center" />
+                            <Switch Grid.Column="2" x:Name="SoundsSwitch" IsToggled="True" OnColor="#A9D6FF" ThumbColor="White" />
+                        </Grid>
+
+                        <BoxView BackgroundColor="#EEF4FB" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="20" Text="&#x1F4D6;" TextColor="#8F9EFF" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label FontSize="16" Text="Larger text" TextColor="#22324A" />
+                                <Label FontSize="12" Text="Increase text size for easier reading." TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" x:Name="LargeTextSwitch" IsToggled="False" OnColor="#A9D6FF" ThumbColor="White" Toggled="OnLargeTextToggled" VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView BackgroundColor="#EEF4FB" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="20" Text="&#x1F3A8;" TextColor="#8F9EFF" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label FontSize="16" Text="Color-safe charts" TextColor="#22324A" />
+                                <Label FontSize="12" Text="Use a palette designed for color vision differences." TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" x:Name="ColorBlindSwitch" IsToggled="False" OnColor="#CDBDFF" ThumbColor="White" Toggled="OnColorSafeChartsToggled" VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView BackgroundColor="#EEF4FB" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="20" Text="&#x25D0;" TextColor="#78AEE8" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label FontSize="16" Text="Stronger contrast" TextColor="#22324A" />
+                                <Label FontSize="12" Text="Boost contrast for text and key UI elements." TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" x:Name="HighContrastSwitch" IsToggled="False" OnColor="#A9D6FF" ThumbColor="White" Toggled="OnHighContrastToggled" VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView BackgroundColor="#EEF4FB" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="20" Text="&#x1F310;" TextColor="#8F9EFF" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label FontSize="16" Text="Language games" TextColor="#22324A" />
+                                <Label FontSize="12" Text="Hide language-heavy games if they are not a fit right now." TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" x:Name="LanguageGamesSwitch" IsToggled="False" OnColor="#CDBDFF" ThumbColor="White" VerticalOptions="Center" />
+                        </Grid>
+
+                        <BoxView BackgroundColor="#EEF4FB" HeightRequest="1" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Image Source="fingerprint_blue.svg" WidthRequest="22" HeightRequest="22" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label FontSize="16" Text="Fingerprint login" TextColor="#22324A" />
+                                <Label x:Name="FingerprintStatusLabel" FontSize="12" Text="Not enabled" TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+                            <Button
+                                Grid.Column="2"
+                                x:Name="FingerprintActionButton"
+                                BackgroundColor="#EEF6FF"
+                                Clicked="OnFingerprintActionClicked"
+                                CornerRadius="14"
+                                FontAttributes="Bold"
+                                Padding="16,10"
+                                Text="Enable"
+                                TextColor="#4F86C6" />
+                        </Grid>
+
+                        <Button
+                            BackgroundColor="#FFF1F5"
+                            Clicked="OnLogoutClicked"
+                            CornerRadius="16"
+                            FontAttributes="Bold"
+                            Padding="0,14"
+                            Text="Log Out"
+                            TextColor="#D45B80" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Style="{StaticResource SectionCardStyle}"
+                    Padding="0"
+                    StrokeThickness="0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                            <GradientStop Color="#F9FCFF" Offset="0.0" />
+                            <GradientStop Color="#E6F4FF" Offset="0.55" />
+                            <GradientStop Color="#F1EDFF" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Shadow>
+                        <Shadow Brush="#150D3B66" Offset="0,14" Opacity="0.16" Radius="28" />
+                    </Border.Shadow>
+
+                    <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Frame
+                                x:Name="AvatarFrame"
+                                HeightRequest="88"
+                                WidthRequest="88"
+                                BackgroundColor="White"
+                                BorderColor="#E4EEFA"
+                                CornerRadius="44"
+                                HasShadow="False"
+                                IsClippedToBounds="True"
+                                Padding="0"
+                                VerticalOptions="Center">
+                                <Grid>
+                                    <Image x:Name="AvatarImage" Aspect="AspectFill" IsVisible="False" />
+                                    <Label
+                                        x:Name="AvatarEmojiLabel"
+                                        FontSize="40"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center"
+                                        Text="&#x1FAE3;"
+                                        TextColor="#22324A"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarTapped" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="8">
+                                    <Border
+                                        BackgroundColor="#FFFFFF"
+                                        Padding="10,5"
+                                        Stroke="#D8E8FA"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 14">
+                                        <Label FontAttributes="Bold" FontSize="11" Text="LEVEL 12" TextColor="#6B73D9" />
+                                    </Border>
+
+                                    <Border
+                                        BackgroundColor="#FFFFFF"
+                                        Padding="10,5"
+                                        Stroke="#D8E8FA"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 14">
+                                        <Label FontAttributes="Bold" FontSize="11" Text="7 DAY STREAK" TextColor="#4C95D8" />
+                                    </Border>
+                                </HorizontalStackLayout>
+
+                                <Label
+                                    x:Name="ProfileTitleLabel"
+                                    FontAttributes="Bold"
+                                    FontSize="28"
+                                    Text="Alex Carter"
+                                    TextColor="#22324A" />
+
+                                <Label
+                                    x:Name="TopCardSubtitle"
+                                    FontSize="14"
+                                    Text="Brain Explorer"
+                                    TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+
+                            <Border
+                                x:Name="RankBadgeBorder"
+                                Grid.Column="2"
+                                BackgroundColor="#FFFFFF"
+                                Padding="10,8"
+                                Stroke="#D8E8FA"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18"
+                                VerticalOptions="Start">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnRankBadgeTapped" />
+                                </Border.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
+                                    <Image
+                                        x:Name="RankBadgeIcon"
+                                        Source="rank_basecamp.svg"
+                                        WidthRequest="16"
+                                        HeightRequest="16"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        x:Name="RankBadgeWordLabel"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="10"
+                                        Text="RANK"
+                                        TextColor="#6E7C93"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        x:Name="RankBadgeLabel"
+                                        Grid.Column="2"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        Text="Basecamp"
+                                        TextColor="#22324A"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="6">
+                                <Label FontAttributes="Bold" FontSize="13" Text="XP Progress" TextColor="#4E6480" />
+                                <ProgressBar Progress="0.8625" ProgressColor="#9FCBFF" HeightRequest="10" BackgroundColor="#EAF2FC" />
+                            </VerticalStackLayout>
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="13"
+                                Text="3,450 / 4,000 XP"
+                                TextColor="#5F74A5"
+                                VerticalOptions="End" />
+                        </Grid>
+
+                        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Border BackgroundColor="#FFFFFFAA" Padding="14" Stroke="#E2ECF9" StrokeThickness="1" StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label FontSize="12" Text="Today&apos;s energy" TextColor="#6E7C93" />
+                                    <Label FontAttributes="Bold" FontSize="18" Text="Sharp and focused" TextColor="#22324A" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="1" BackgroundColor="#FFFFFFAA" Padding="14" Stroke="#E2ECF9" StrokeThickness="1" StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label FontSize="12" Text="Best streak" TextColor="#6E7C93" />
+                                    <Label FontAttributes="Bold" FontSize="18" Text="14 days" TextColor="#22324A" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowDefinitions="Auto,Auto" RowSpacing="12">
+                    <Border Style="{StaticResource StatCardStyle}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontSize="22" Text="&#x25CE;" TextColor="#7DAEE8" />
+                            <Label FontSize="12" Text="Accuracy" TextColor="#6E7C93" />
+                            <Label FontAttributes="Bold" FontSize="22" Text="91%" TextColor="#22324A" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontSize="22" Text="&#x1F3AE;" TextColor="#9787F6" />
+                            <Label FontSize="12" Text="Games Played" TextColor="#6E7C93" />
+                            <Label FontAttributes="Bold" FontSize="22" Text="124" TextColor="#22324A" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Row="1" Style="{StaticResource StatCardStyle}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontSize="22" Text="&#x25C9;" TextColor="#7DAEE8" />
+                            <Label FontSize="12" Text="Focus" TextColor="#6E7C93" />
+                            <Label FontAttributes="Bold" FontSize="22" Text="82%" TextColor="#22324A" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontSize="22" Text="&#x23F1;" TextColor="#9787F6" />
+                            <Label FontSize="12" Text="Training Time" TextColor="#6E7C93" />
+                            <Label FontAttributes="Bold" FontSize="22" Text="4h 32m" TextColor="#22324A" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <Border.Shadow>
+                        <Shadow Brush="#100D3B66" Offset="0,10" Opacity="0.12" Radius="20" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                            <Label FontSize="18" Text="&#x1F9E0;" TextColor="#7DAEE8" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Style="{StaticResource SectionTitleStyle}" Text="Mind Profile" />
+                                <Label Style="{StaticResource SectionSubtitleStyle}" Text="Your strongest mental lanes today." />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="14">
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="14" Text="Memory" TextColor="#22324A" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="86%" TextColor="#6B73D9" />
+                                </Grid>
+                                <ProgressBar Progress="0.86" ProgressColor="#A9D6FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="14" Text="Focus" TextColor="#22324A" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="82%" TextColor="#7A8FF1" />
+                                </Grid>
+                                <ProgressBar Progress="0.82" ProgressColor="#B8C7FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="14" Text="Logic" TextColor="#22324A" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="78%" TextColor="#7DAEE8" />
+                                </Grid>
+                                <ProgressBar Progress="0.78" ProgressColor="#9FD8F8" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="14" Text="Speed" TextColor="#22324A" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="74%" TextColor="#8A96F1" />
+                                </Grid>
+                                <ProgressBar Progress="0.74" ProgressColor="#CDBDFF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="14" Text="Problem Solving" TextColor="#22324A" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="85%" TextColor="#6B73D9" />
+                                </Grid>
+                                <ProgressBar Progress="0.85" ProgressColor="#B5D3FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <Border.Shadow>
+                        <Shadow Brush="#100D3B66" Offset="0,10" Opacity="0.12" Radius="20" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="18" Text="&#x1F3C6;" TextColor="#9787F6" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Style="{StaticResource SectionTitleStyle}" Text="Achievements" />
+                                <Label x:Name="AchievementsStatusLabel" Style="{StaticResource SectionSubtitleStyle}" Text="Tap to load your badges" />
+                            </VerticalStackLayout>
+                            <Button
+                                Grid.Column="2"
+                                BackgroundColor="#F3EEFF"
+                                Clicked="OnAchievementsClicked"
+                                CornerRadius="14"
+                                FontAttributes="Bold"
+                                Padding="16,10"
+                                Text="View Achievements"
+                                TextColor="#7A69E8" />
+                        </Grid>
+
+                        <VerticalStackLayout x:Name="AchievementsSection"
+                                             IsVisible="False"
+                                             Spacing="12">
+                            <Border x:Name="AchievementsLoadingCard"
+                                    IsVisible="False"
+                                    Padding="14,12"
+                                    BackgroundColor="#F4F9FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <HorizontalStackLayout Spacing="10">
+                                    <ActivityIndicator x:Name="AchievementsLoadingIndicator"
+                                                       IsVisible="False"
+                                                       IsRunning="False"
+                                                       Color="#4FA7F5"
+                                                       WidthRequest="20"
+                                                       HeightRequest="20"
+                                                       VerticalOptions="Center" />
+                                    <Label Text="Loading achievements..."
+                                           FontSize="13"
+                                           TextColor="#6E7C93"
+                                           VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <CollectionView x:Name="AchievementsBadgesView"
+                                            IsVisible="False"
+                                            HeightRequest="270"
+                                            ItemsSource="{Binding Source={x:Reference MePageRoot}, Path=AchievementBadges}"
+                                            SelectionMode="None">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="2"
+                                                     Orientation="Vertical"
+                                                     HorizontalItemSpacing="10"
+                                                     VerticalItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:AchievementItem">
+                                        <Border Style="{StaticResource BadgeTileStyle}"
+                                                BackgroundColor="#F8FBFF">
+                                            <Grid ColumnDefinitions="Auto,*"
+                                                  ColumnSpacing="10">
+                                                <Border HeightRequest="46"
+                                                        WidthRequest="46"
+                                                        BackgroundColor="#EAF4FF"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 15">
+                                                    <Image Source="{Binding IconSource}"
+                                                           WidthRequest="22"
+                                                           HeightRequest="22"
+                                                           Aspect="AspectFit"
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center" />
+                                                </Border>
+                                                <VerticalStackLayout Grid.Column="1"
+                                                                     Spacing="3"
+                                                                     VerticalOptions="Center">
+                                                    <Label Text="{Binding Title}"
+                                                           FontAttributes="Bold"
+                                                           FontSize="13"
+                                                           LineBreakMode="TailTruncation"
+                                                           MaxLines="2"
+                                                           TextColor="#22324A" />
+                                                    <Label Text="{Binding ProgressText}"
+                                                           FontSize="11"
+                                                           TextColor="#6E7C93" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource SectionCardStyle}">
+                    <Border.Shadow>
+                        <Shadow Brush="#100D3B66" Offset="0,10" Opacity="0.12" Radius="20" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="16">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <Label FontSize="18" Text="&#x1F3AF;" TextColor="#7DAEE8" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Style="{StaticResource SectionTitleStyle}" Text="Game History" />
+                            <Label x:Name="GameHistorySummaryLabel"
+                                   Style="{StaticResource SectionSubtitleStyle}"
+                                   Text="Load your recent sessions when you need them" />
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2"
+                                BackgroundColor="#EAF5FF"
+                                Clicked="OnHistoryClicked"
+                                CornerRadius="14"
+                                FontAttributes="Bold"
+                                Padding="16,10"
+                                Text="View History"
+                                TextColor="#4FA7F5" />
+                    </Grid>
+
+                    <VerticalStackLayout x:Name="GameHistorySection"
+                                         IsVisible="False"
+                                         Spacing="12">
+                        <Border x:Name="GameHistoryLoadingCard"
+                                IsVisible="False"
+                                Padding="14,12"
+                                BackgroundColor="#F4F9FF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 18">
+                            <HorizontalStackLayout Spacing="10">
+                                <ActivityIndicator x:Name="GameHistoryLoadingIndicator"
+                                                   IsVisible="False"
+                                                   IsRunning="False"
+                                                   Color="#4FA7F5"
+                                                   WidthRequest="20"
+                                                   HeightRequest="20"
+                                                   VerticalOptions="Center" />
+                                <Label Text="Loading history..."
+                                       FontSize="13"
+                                       TextColor="#6E7C93"
+                                       VerticalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <CollectionView x:Name="GameHistoryView"
+                                        IsVisible="False"
+                                        HeightRequest="360"
+                                        ItemsSource="{Binding Source={x:Reference MePageRoot}, Path=GameHistoryEntries}"
+                                        SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:GameHistoryEntryViewModel">
+                                    <Border Padding="14"
+                                            BackgroundColor="#F8FBFF"
+                                            Stroke="#E6EEF8"
+                                            StrokeThickness="1"
+                                            StrokeShape="RoundRectangle 20">
+                                        <Grid ColumnDefinitions="Auto,*,Auto"
+                                              ColumnSpacing="12">
+                                            <Border WidthRequest="48"
+                                                    HeightRequest="48"
+                                                    BackgroundColor="{Binding AccentFill}"
+                                                    StrokeThickness="0"
+                                                    StrokeShape="RoundRectangle 16">
+                                                <Label Text="{Binding Glyph}"
+                                                       FontSize="18"
+                                                       HorizontalTextAlignment="Center"
+                                                       VerticalTextAlignment="Center"
+                                                       TextColor="{Binding AccentText}" />
+                                            </Border>
+                                            <VerticalStackLayout Grid.Column="1"
+                                                                 Spacing="2"
+                                                                 VerticalOptions="Center">
+                                                <Label Text="{Binding Title}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="14"
+                                                       TextColor="#22324A" />
+                                                <Label Text="{Binding Subtitle}"
+                                                       FontSize="12"
+                                                       TextColor="#6E7C93" />
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Grid.Column="2"
+                                                                 Spacing="2"
+                                                                 VerticalOptions="Center"
+                                                                 HorizontalOptions="End">
+                                                <Label Text="{Binding ScoreText}"
+                                                       FontAttributes="Bold"
+                                                       FontSize="15"
+                                                       HorizontalTextAlignment="End"
+                                                       TextColor="#4A86C5" />
+                                                <Label Text="{Binding PlayedText}"
+                                                       FontSize="11"
+                                                       HorizontalTextAlignment="End"
+                                                       TextColor="#8BA1B6" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource SectionCardStyle}" BackgroundColor="#FFFFFF">
+                    <Border.Shadow>
+                        <Shadow Brush="#100D3B66" Offset="0,10" Opacity="0.12" Radius="20" />
+                    </Border.Shadow>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="6">
+                            <Label FontAttributes="Bold" FontSize="18" Text="Today" TextColor="#22324A" />
+                            <Label FontSize="13" Text="Today&apos;s Brain Status" TextColor="#6E7C93" />
+                            <Label FontAttributes="Bold" FontSize="28" Text="Sharp and focused" TextColor="#22324A" />
+                            <Label FontSize="13" Text="1 challenge left today" TextColor="#7A8FF1" />
+                        </VerticalStackLayout>
+
+                        <Border
+                            Grid.Column="1"
+                            HeightRequest="74"
+                            WidthRequest="74"
+                            BackgroundColor="#F1EDFF"
+                            Stroke="#E2DAFF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 24"
+                            VerticalOptions="Center">
+                            <Label FontSize="32" HorizontalOptions="Center" Text="&#x2726;" TextColor="#7A8FF1" VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid x:Name="AvatarPickerOverlay" IsVisible="False" Opacity="0">
+            <Border Opacity="0.84" StrokeThickness="0">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#C3F0F8FF" Offset="0.0" />
+                        <GradientStop Color="#B7DDF9FF" Offset="0.48" />
+                        <GradientStop Color="#A8BDEBDB" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAvatarBackdropTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Grid Padding="18,220,18,0" VerticalOptions="Start">
+                <Frame
+                    x:Name="AvatarPickerSheet"
+                    BackgroundColor="#FCFEFF"
+                    CornerRadius="24"
+                    HasShadow="True"
+                    Padding="18"
+                    TranslationY="-80">
+                    <Frame.Shadow>
+                        <Shadow Brush="#4A5D7E40" Offset="0,18" Opacity="1" Radius="36" />
+                    </Frame.Shadow>
+                    <VerticalStackLayout Spacing="14">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Spacing="2">
+                                <Label FontAttributes="Bold" FontSize="18" Text="Choose Avatar" TextColor="#22324A" />
+                                <Label FontSize="12" Text="Pick something playful or upload your photo." TextColor="#6E7C93" />
+                            </VerticalStackLayout>
+
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="x"
+                                TextColor="#7A8FF1">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnCloseAvatarPickerTapped" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <Button Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F5F9FF" CornerRadius="16" Text="&#x1FAE3;" />
+                            <Button Grid.Column="1" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F7F4FF" CornerRadius="16" Text="&#x1F644;" />
+                            <Button Grid.Column="2" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F5F9FF" CornerRadius="16" Text="&#x1F62E;&#x200D;&#x1F4A8;" />
+                            <Button Grid.Column="3" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F7F4FF" CornerRadius="16" Text="&#x1F9E0;" />
+
+                            <Button Grid.Row="1" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F7F4FF" CornerRadius="16" Text="&#x1F680;" />
+                            <Button Grid.Row="1" Grid.Column="1" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F5F9FF" CornerRadius="16" Text="&#x1F42F;" />
+                            <Button Grid.Row="1" Grid.Column="2" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F7F4FF" CornerRadius="16" Text="&#x1F98A;" />
+                            <Button Grid.Row="1" Grid.Column="3" Clicked="OnEmojiAvatarClicked" FontSize="28" BackgroundColor="#F5F9FF" CornerRadius="16" Text="&#x1F43C;" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button
+                                BackgroundColor="#EEF6FF"
+                                Clicked="OnPickPhotoClicked"
+                                CornerRadius="16"
+                                Padding="0,14"
+                                Text="Photo Library"
+                                TextColor="#4F86C6" />
+                            <Button
+                                Grid.Column="1"
+                                BackgroundColor="#CDBDFF"
+                                Clicked="OnTakePhotoClicked"
+                                CornerRadius="16"
+                                Padding="0,14"
+                                Text="Camera"
+                                TextColor="White" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

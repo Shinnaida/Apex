@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.GamesStatsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F4F4F6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid BackgroundColor="#10A7E6"
+              Padding="18,32,18,14"
+              RowDefinitions="Auto,Auto">
+            <Label Text="YOUR PERFORMANCE"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   CharacterSpacing="1.1" />
+
+            <Grid Grid.Row="1"
+                  Margin="0,18,0,0"
+                  ColumnDefinitions="*,*,*,*"
+                  RowDefinitions="Auto,4">
+                <Label Grid.Column="0"
+                       Text="BRAIN"
+                       TextColor="#F2FFFFFF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBrainTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="1"
+                       Text="OVER TIME"
+                       TextColor="#F2FFFFFF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOverTimeTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="2"
+                       Text="GAMES"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGamesTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="3"
+                       Text="RANKINGS"
+                       TextColor="#F2FFFFFF"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLeaderboardsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView Grid.Row="1"
+                         Grid.Column="2"
+                         HeightRequest="3"
+                         Margin="10,0"
+                         BackgroundColor="White"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="End" />
+            </Grid>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,18,18,28"
+                                 Spacing="18">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="YOUR PLAY-BY-PLAY"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#565862"
+                           CharacterSpacing="0.8" />
+                    <Label Text="Your Peak Game Score for each individual game you've played"
+                           FontSize="14"
+                           TextColor="#9A9DA5" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="GamesSectionsHost"
+                                     Spacing="18" />
+
+                <Border x:Name="EmptyStateCard"
+                        IsVisible="False"
+                        BackgroundColor="White"
+                        Stroke="#E8E8ED"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="18">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="No played games yet"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#50535A" />
+                        <Label Text="Complete a game and your play-by-play scores will appear here."
+                               FontSize="14"
+                               TextColor="#8E929A" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

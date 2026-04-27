@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WordHuntGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    BackgroundColor="#4A3B63"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <Grid BackgroundColor="#221C2F"
+                  HeightRequest="56"
+                  Padding="10"
+                  ColumnDefinitions="Auto,*,Auto">
+                <Border WidthRequest="42"
+                        HeightRequest="42"
+                        BackgroundColor="#FFF8FB"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        VerticalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000"
+                                Offset="0,8"
+                                Opacity="0.18"
+                                Radius="14" />
+                    </Border.Shadow>
+                    <Grid Padding="12,10"
+                          ColumnDefinitions="Auto,Auto"
+                          ColumnSpacing="5">
+                        <BoxView Grid.Column="0"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Column="1"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPauseClicked" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+
+                <Label x:Name="TimerLabel"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFD700"
+                       Text="01:30" />
+
+                <HorizontalStackLayout Grid.Column="2"
+                                       Spacing="6"
+                                       VerticalOptions="Center">
+                    <Label Text="Score"
+                           FontSize="16"
+                           TextColor="#CCCCCC" />
+                    <Label x:Name="ScoreLabel"
+                           Text="0"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#FFD700" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Grid.Row="1"
+                                 Padding="18,14,18,8"
+                                 Spacing="8">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Label Text="Bonus"
+                           FontSize="14"
+                           TextColor="#C9C2D9" />
+                    <Grid Grid.Column="1"
+                          x:Name="BonusTrack"
+                          HeightRequest="18"
+                          Margin="12,0"
+                          BackgroundColor="#2D223F"
+                          SizeChanged="OnTrackSizeChanged">
+                        <Border x:Name="BonusFill"
+                                BackgroundColor="#FFD000"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 9"
+                                HorizontalOptions="Start"
+                                WidthRequest="0" />
+                    </Grid>
+                    <Label x:Name="BonusValueLabel"
+                           Grid.Column="2"
+                           Text="5000"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="#DDD3EE" />
+                </Grid>
+
+                <Grid x:Name="ProgressTrack"
+                      HeightRequest="16"
+                      BackgroundColor="#2D223F"
+                      SizeChanged="OnTrackSizeChanged">
+                    <Border x:Name="ProgressFill"
+                            BackgroundColor="#44A9FF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            HorizontalOptions="Start"
+                            WidthRequest="0" />
+                </Grid>
+
+                <Label x:Name="HintLabel"
+                       FontSize="13"
+                       TextColor="#D6D0E5"
+                       Text="Find every hidden word in the board." />
+            </VerticalStackLayout>
+
+            <CollectionView Grid.Row="2"
+                            ItemsSource="{Binding Cells}"
+                            SelectionMode="None"
+                            Margin="18,6,18,12"
+                            HeightRequest="340">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="7"
+                                     Orientation="Vertical"
+                                     HorizontalItemSpacing="4"
+                                     VerticalItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:WordHuntCellViewModel">
+                        <Border Padding="0"
+                                BackgroundColor="{Binding BackgroundHex}"
+                                Stroke="#00000000"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 14">
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerPressed="OnCellPointerPressed"
+                                                          PointerEntered="OnCellPointerEntered"
+                                                          PointerReleased="OnCellPointerReleased" />
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding Letter}"
+                                   FontSize="28"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="{Binding TextHex}"
+                                   WidthRequest="42"
+                                   HeightRequest="42" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView Grid.Row="3"
+                            ItemsSource="{Binding TargetWords}"
+                            SelectionMode="None"
+                            Margin="18,0,18,8"
+                            HeightRequest="184">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="2"
+                                     Orientation="Vertical"
+                                     HorizontalItemSpacing="18"
+                                     VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:WordHuntTargetWordViewModel">
+                        <Label Text="{Binding Word}"
+                               FontSize="22"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{Binding TextHex}"
+                               Opacity="{Binding Opacity}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border Grid.Row="4"
+                    Margin="18,0,18,18"
+                    Padding="18,14"
+                    BackgroundColor="#F9F7FD"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22">
+                <Label Text="Slide through neighboring letters to trace a word, just like Word Fresh."
+                       FontSize="14"
+                       TextColor="#5E5677" />
+            </Border>
+        </Grid>
+
+        <Grid x:Name="ResultOverlay"
+              IsVisible="False"
+              BackgroundColor="#CC241B35"
+              Padding="26">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 Spacing="18">
+                <Border BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28"
+                        Padding="24">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Word Hunt Complete"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#3B3157" />
+                        <Label x:Name="ResultScoreLabel"
+                               Text="0"
+                               FontSize="46"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#4C43DA" />
+                        <Label x:Name="ResultBestLabel"
+                               Text="Best 0"
+                               FontSize="16"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#726A8F" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Play Again"
+                        HeightRequest="58"
+                        CornerRadius="29"
+                        BackgroundColor="White"
+                        TextColor="#4C43DA"
+                        FontAttributes="Bold"
+                        Clicked="OnPlayAgainClicked" />
+
+                <Button Text="Done"
+                        HeightRequest="58"
+                        CornerRadius="29"
+                        BackgroundColor="#4C43DA"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="OnDoneClicked" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <AbsoluteLayout x:Name="ConfettiHost"
+                        InputTransparent="True" />
+    </Grid>
+</ContentPage>

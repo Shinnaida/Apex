@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WordHuntPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#4B4AE8"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="*,Auto">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20,18,20,30" Spacing="18">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Text="&#x2039;"
+                               FontSize="28"
+                               TextColor="White"
+                               VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBackTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,170" Margin="0,10,0,0">
+                        <VerticalStackLayout Grid.Column="0" Spacing="8">
+                            <Label Text="Word Hunt"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+
+                            <Label Text="Language"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+
+                            <BoxView HeightRequest="2"
+                                     WidthRequest="180"
+                                     HorizontalOptions="Start"
+                                     Color="#D7D2FF" />
+
+                            <Grid ColumnDefinitions="40,*" Margin="0,10,0,0">
+                                <Frame WidthRequest="32"
+                                       HeightRequest="32"
+                                       CornerRadius="16"
+                                       Padding="0"
+                                       BackgroundColor="Transparent"
+                                       BorderColor="#D7D2FF"
+                                       HasShadow="False"
+                                       VerticalOptions="Start">
+                                    <Label Text="&#x2605;"
+                                           FontSize="16"
+                                           TextColor="White"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="0">
+                                    <Label Text="Best Rank"
+                                           FontSize="14"
+                                           TextColor="#E8E3FF" />
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label Text="Beginner"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="White" />
+                                        <Label Text="i"
+                                               FontSize="16"
+                                               TextColor="White" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Column="1"
+                              WidthRequest="170"
+                              HeightRequest="170"
+                              HorizontalOptions="End"
+                              VerticalOptions="Start">
+                            <Frame CornerRadius="85"
+                                   BackgroundColor="#5D5AF0"
+                                   HasShadow="False"
+                                   Padding="0">
+                                <Grid>
+                                    <Image Source="word_hunt_icon.svg"
+                                           WidthRequest="130"
+                                           HeightRequest="130"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+
+                    <Frame CornerRadius="18"
+                           BackgroundColor="White"
+                           HasShadow="False"
+                           Padding="20,16">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label Text="&#x1F3C6;"
+                                   FontSize="22"
+                                   TextColor="#7A72F8"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="BEST SCORE"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#7A72F8"
+                                   VerticalOptions="Center"
+                                   Margin="12,0,0,0" />
+                            <Label x:Name="BestScoreValueLabel"
+                                   Grid.Column="2"
+                                   Text="0"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="#333333"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+
+                    <Button Text="HOW TO PLAY"
+                            BackgroundColor="#2034B5"
+                            TextColor="White"
+                            CornerRadius="14"
+                            HeightRequest="56"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnHowToPlayClicked" />
+
+                    <Frame CornerRadius="20"
+                           BackgroundColor="White"
+                           HasShadow="False"
+                           Padding="18,18,18,20"
+                           Margin="0,10,0,0">
+                        <VerticalStackLayout Spacing="16">
+                            <Label Text="Challenge"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#7A72F8" />
+                            <BoxView HeightRequest="1"
+                                     Color="#D9D9D9" />
+                            <Label Text="Score above 4230 to rank up to Novice"
+                                   FontSize="16"
+                                   TextColor="#444444" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame CornerRadius="20"
+                           BackgroundColor="White"
+                           HasShadow="False"
+                           Padding="18,18,18,20">
+                        <VerticalStackLayout Spacing="16">
+                            <Label Text="Skills"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#7A72F8" />
+                            <BoxView HeightRequest="1"
+                                     Color="#D9D9D9" />
+                            <Frame CornerRadius="12"
+                                   BackgroundColor="#F6F6F6"
+                                   HasShadow="False"
+                                   Padding="14,10">
+                                <Label Text="Word Fluency"
+                                       FontSize="16"
+                                       TextColor="#333333" />
+                            </Frame>
+                            <Frame CornerRadius="12"
+                                   BackgroundColor="#F6F6F6"
+                                   HasShadow="False"
+                                   Padding="14,10">
+                                <Label Text="Vocabulary"
+                                       FontSize="16"
+                                       TextColor="#333333" />
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Grid Grid.Row="1"
+                  Padding="20,10,20,24"
+                  BackgroundColor="#4B4AE8">
+                <Button Text="PLAY"
+                        HeightRequest="64"
+                        CornerRadius="32"
+                        BackgroundColor="White"
+                        TextColor="#7A72F8"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        Clicked="OnPlayClicked" />
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="HowToPlayOverlay"
+              IsVisible="False"
+              Opacity="0"
+              ZIndex="10">
+            <BoxView BackgroundColor="#80000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Grid VerticalOptions="End"
+                  Padding="12,0,12,20">
+                <Frame x:Name="HowToPlayPanel"
+                       CornerRadius="28"
+                       BackgroundColor="White"
+                       HasShadow="False"
+                       Padding="20"
+                       TranslationY="500">
+                    <VerticalStackLayout Spacing="16">
+                        <BoxView HeightRequest="5"
+                                 WidthRequest="46"
+                                 Color="#D0D0D0"
+                                 HorizontalOptions="Center" />
+
+                        <Label Text="How to Play"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#222"
+                               HorizontalOptions="Center" />
+
+                        <Label Text="Search the grid and trace hidden words before time runs out. Build momentum by finding words quickly and clearing every list."
+                               FontSize="16"
+                               TextColor="#555" />
+
+                        <Label Text="&#x2022; Tap letters in a straight line&#10;&#x2022; Find every target word in the board&#10;&#x2022; Clear the whole puzzle for a bonus"
+                               FontSize="16"
+                               TextColor="#444" />
+
+                        <Button Text="Got it"
+                                HeightRequest="54"
+                                CornerRadius="27"
+                                BackgroundColor="#4B4AE8"
+                                TextColor="White"
+                                Clicked="OnCloseHowToPlayClicked" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.AllGamesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Peak"
+    BackgroundColor="#EEF4FB"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid Padding="20,22,20,18">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#2ED0FF" Offset="0" />
+                    <GradientStop Color="#3D8CFF" Offset="0.55" />
+                    <GradientStop Color="#6F58FF" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <VerticalStackLayout Spacing="16">
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="ALL GAMES"
+                               FontSize="26"
+                               FontAttributes="Bold"
+                               CharacterSpacing="0.8"
+                               TextColor="White" />
+                        <Label Text="Unlock the next games you want and build your own training path."
+                               FontSize="13"
+                               TextColor="#E8F5FF" />
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="1"
+                            Padding="12,10"
+                            BackgroundColor="#1EFFFFFF"
+                            Stroke="#35FFFFFF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20"
+                            VerticalOptions="Center">
+                        <HorizontalStackLayout Spacing="8">
+                            <Image Source="rainbow_puzzle_icon.svg"
+                                   WidthRequest="24"
+                                   HeightRequest="24"
+                                   Aspect="AspectFit" />
+                            <VerticalStackLayout Spacing="0">
+                                <Label Text="Apex Points"
+                                       FontSize="11"
+                                       FontAttributes="Bold"
+                                       TextColor="#DDF6FF" />
+                                <Label x:Name="ApexPointsLabel"
+                                       Text="0"
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+
+        <CollectionView Grid.Row="1"
+                        x:Name="SectionsView"
+                        ItemsSource="{Binding VisibleSections}"
+                        SelectionMode="None"
+                        Margin="14,12,14,18"
+                        ItemSizingStrategy="MeasureFirstItem"
+                        VerticalScrollBarVisibility="Never">
+            <CollectionView.Header>
+                <VerticalStackLayout Spacing="12"
+                                     Margin="0,0,0,8">
+                    <Border Padding="16"
+                            BackgroundColor="White"
+                            Stroke="#E5EDF7"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <Border.Shadow>
+                            <Shadow Brush="#120D2948"
+                                    Offset="0,8"
+                                    Opacity="0.12"
+                                    Radius="16" />
+                        </Border.Shadow>
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="12">
+                            <Border WidthRequest="48"
+                                    HeightRequest="48"
+                                    BackgroundColor="#EEF6FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16">
+                                <Image Source="rainbow_puzzle_icon.svg"
+                                       WidthRequest="28"
+                                       HeightRequest="28"
+                                       Aspect="AspectFit"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1"
+                                                 Spacing="4">
+                                <Label Text="Unlock with points"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="#17314C" />
+                                <Label Text="Locked games stay visible. Choose what to unlock next with Apex Points earned from play, daily tasks, and weekly goals."
+                                       FontSize="12"
+                                       LineBreakMode="WordWrap"
+                                       TextColor="#6B7F94" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:GamesSectionViewModel">
+                    <Border Margin="0,0,0,12"
+                            Padding="14,12"
+                            BackgroundColor="{Binding SectionBackground}"
+                            Stroke="{Binding SectionStroke}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <Border.Shadow>
+                            <Shadow Brush="#110D2B45"
+                                    Offset="0,6"
+                                    Opacity="0.09"
+                                    Radius="12" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="12">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  ColumnSpacing="8">
+                                <VerticalStackLayout Spacing="2">
+                                    <VerticalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnSectionTapped" />
+                                    </VerticalStackLayout.GestureRecognizers>
+                                    <Label Text="{Binding Title}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding AccentColor}" />
+                                    <Label Text="{Binding Subtitle}"
+                                           FontSize="11"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="1"
+                                           TextColor="#85A0B5" />
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="1"
+                                                       Spacing="4"
+                                                       VerticalOptions="Center">
+                                    <Label Text="•"
+                                           FontSize="12"
+                                           TextColor="{Binding AccentColor}" />
+                                    <Label Text="{Binding CountText}"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding AccentColor}" />
+                                </HorizontalStackLayout>
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding Games}"
+                                            HorizontalScrollBarVisibility="Never"
+                                            ItemsUpdatingScrollMode="KeepScrollOffset"
+                                            SelectionMode="None"
+                                            ItemSizingStrategy="MeasureFirstItem">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"
+                                                       ItemSpacing="12" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:GameTileViewModel">
+                                        <VerticalStackLayout WidthRequest="96"
+                                                             Spacing="8">
+                                            <Grid HeightRequest="88">
+                                                <Border WidthRequest="80"
+                                                        HeightRequest="80"
+                                                        Opacity="{Binding CardOpacity}"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"
+                                                        BackgroundColor="{Binding AccentDeepColor}"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 40">
+                                                    <Border.Shadow>
+                                                        <Shadow Brush="{Binding ShadowBrush}"
+                                                                Offset="0,10"
+                                                                Opacity="0.30"
+                                                                Radius="16" />
+                                                    </Border.Shadow>
+                                                    <Border.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnGameTapped" />
+                                                    </Border.GestureRecognizers>
+
+                                                    <Grid>
+                                                        <Image Source="{Binding IconSource}"
+                                                               IsVisible="{Binding HasIcon}"
+                                                               WidthRequest="58"
+                                                               HeightRequest="58"
+                                                               Opacity="{Binding IconOpacity}"
+                                                               Aspect="AspectFit"
+                                                               HorizontalOptions="Center"
+                                                               VerticalOptions="Center" />
+
+                                                        <Label Text="{Binding Glyph}"
+                                                               FontSize="30"
+                                                               HorizontalTextAlignment="Center"
+                                                               VerticalTextAlignment="Center"
+                                                               TextColor="{Binding ForegroundColor}"
+                                                               IsVisible="{Binding HasGlyph}" />
+
+                                                        <Border IsVisible="{Binding IsLocked}"
+                                                                WidthRequest="80"
+                                                                HeightRequest="80"
+                                                                BackgroundColor="#B3A9B1BC"
+                                                                StrokeThickness="0"
+                                                                StrokeShape="RoundRectangle 40"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center">
+                                                            <Image Source="ach_focus_lock.svg"
+                                                                   WidthRequest="28"
+                                                                   HeightRequest="28"
+                                                                   Opacity="0.95"
+                                                                   Aspect="AspectFit"
+                                                                   HorizontalOptions="Center"
+                                                                   VerticalOptions="Center" />
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+
+                                                <Border WidthRequest="28"
+                                                        HeightRequest="28"
+                                                        BackgroundColor="{Binding BadgeBackgroundColor}"
+                                                        Stroke="{Binding BadgeStrokeColor}"
+                                                        StrokeThickness="2"
+                                                        StrokeShape="RoundRectangle 10"
+                                                        HorizontalOptions="End"
+                                                        VerticalOptions="Start"
+                                                        Margin="0,0,4,0">
+                                                    <Grid>
+                                                        <Image Source="ach_focus_lock.svg"
+                                                               IsVisible="{Binding IsLocked}"
+                                                               WidthRequest="14"
+                                                               HeightRequest="14"
+                                                               Aspect="AspectFit"
+                                                               HorizontalOptions="Center"
+                                                               VerticalOptions="Center" />
+                                                        <Label Text="{Binding BadgeText}"
+                                                               FontSize="9"
+                                                               FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center"
+                                                               VerticalTextAlignment="Center"
+                                                               TextColor="{Binding BadgeGlyphColor}"
+                                                               IsVisible="{Binding IsUnlocked}" />
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+
+                                            <VerticalStackLayout Spacing="2">
+                                                <Label Text="{Binding Title}"
+                                                       FontSize="12"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Center"
+                                                       LineBreakMode="WordWrap"
+                                                       MaxLines="2"
+                                                       TextColor="#21384F" />
+                                                <Label Text="{Binding Meta}"
+                                                       FontSize="10"
+                                                       HorizontalTextAlignment="Center"
+                                                       LineBreakMode="TailTruncation"
+                                                       MaxLines="2"
+                                                       TextColor="#8BA1B6" />
+                                            </VerticalStackLayout>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

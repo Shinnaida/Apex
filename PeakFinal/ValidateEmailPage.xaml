@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.ValidateEmailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource PageBackground}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid Padding="20,66,20,22">
+            <Grid.Background>
+                <StaticResource Key="BrandHeroBrush" />
+            </Grid.Background>
+
+            <Border WidthRequest="180"
+                    HeightRequest="180"
+                    BackgroundColor="#18FFFFFF"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 90"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,-44,-42,0" />
+
+            <VerticalStackLayout Spacing="16">
+                <Image HeightRequest="22"
+                       Source="icon_back.png"
+                       WidthRequest="22">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBackTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Border Padding="16"
+                        BackgroundColor="#16FFFFFF"
+                        Stroke="#2DFFFFFF"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 24">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Almost there"
+                               Style="{StaticResource TitleLabelStyle}"
+                               TextColor="White" />
+                        <Label Text="Verify your email so purchases, reports, and account recovery stay protected."
+                               FontSize="15"
+                               TextColor="#EAF3FF"
+                               LineHeight="1.25" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18,0,18,26"
+                                 Spacing="16">
+                <Border Padding="22"
+                        Margin="0,-18,0,0"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.Shadow>
+                        <Shadow Brush="#160B2748"
+                                Offset="0,10"
+                                Opacity="0.18"
+                                Radius="18" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Email address"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Use a Gmail address so OTP delivery and restore options work smoothly."
+                                   Style="{StaticResource SubtitleLabelStyle}" />
+                        </VerticalStackLayout>
+
+                        <Border Style="{StaticResource FieldShellStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Gmail"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource BrandPrimary}" />
+                                <Entry x:Name="EmailEntry"
+                                       Keyboard="Email"
+                                       Placeholder="you@gmail.com"
+                                       PlaceholderColor="#93A2B4"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       BackgroundColor="Transparent"
+                                       TextChanged="OnEmailChanged" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border Padding="14"
+                                BackgroundColor="#F7FAFE"
+                                Stroke="#E2EAF3"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18">
+                            <Grid ColumnDefinitions="Auto,*"
+                                  ColumnSpacing="12">
+                                <CheckBox x:Name="ReportsCheckBox"
+                                          IsChecked="True"
+                                          VerticalOptions="Center" />
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="2">
+                                    <Label Text="Get reports and updates"
+                                           FontSize="15"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource TextPrimary}" />
+                                    <Label Text="Receive performance summaries and important account notices."
+                                           FontSize="12"
+                                           TextColor="{StaticResource TextSecondary}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+
+                        <Label x:Name="ErrorLabel"
+                               FontSize="12"
+                               IsVisible="False"
+                               TextColor="{StaticResource DangerColor}" />
+
+                        <Button x:Name="SubmitButton"
+                                Text="Continue to verification"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                IsEnabled="False"
+                                Opacity="0.45"
+                                Clicked="OnSubmitClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="18"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 22">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Why this matters"
+                               FontSize="17"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource TextPrimary}" />
+                        <Label Text="OTP verification helps secure purchases, keeps your progress linked to your email, and makes account recovery easier."
+                               Style="{StaticResource SubtitleLabelStyle}" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

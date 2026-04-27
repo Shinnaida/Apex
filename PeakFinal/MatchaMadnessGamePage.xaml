@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.MatchaMadnessGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#123C34"
+    Padding="{OnPlatform Android='0,22,0,0', iOS='0,42,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*"
+          Padding="10,8,10,12">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="8">
+            <Border WidthRequest="38"
+                    HeightRequest="38"
+                    BackgroundColor="#F4F7F8"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 4">
+                <Label Text="&#x23F8;"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#293236"
+                       VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPauseTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+
+            <HorizontalStackLayout Grid.Column="1"
+                                   HorizontalOptions="Center"
+                                   Spacing="7"
+                                   VerticalOptions="Center">
+                <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                    <BoxView x:Name="Dot1" WidthRequest="7" HeightRequest="7" CornerRadius="3.5" Color="#4C5F5C" />
+                    <BoxView x:Name="Dot2" WidthRequest="7" HeightRequest="7" CornerRadius="3.5" Color="#4C5F5C" />
+                    <BoxView x:Name="Dot3" WidthRequest="7" HeightRequest="7" CornerRadius="3.5" Color="#4C5F5C" />
+                    <BoxView x:Name="Dot4" WidthRequest="7" HeightRequest="7" CornerRadius="3.5" Color="#4C5F5C" />
+                    <BoxView x:Name="Dot5" WidthRequest="7" HeightRequest="7" CornerRadius="3.5" Color="#4C5F5C" />
+                </HorizontalStackLayout>
+
+                <Label x:Name="MultiplierLabel"
+                       FontAttributes="Bold"
+                       FontSize="14"
+                       Text="x1"
+                       TextColor="#E6D77C"
+                       VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Column="2"
+                                   HorizontalOptions="End"
+                                   Spacing="5"
+                                   VerticalOptions="Center">
+                <Label FontSize="16"
+                       Text="Score"
+                       TextColor="#E6EAEC" />
+                <Label x:Name="ScoreLabel"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       Text="0"
+                       TextColor="#FFFFFF" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              ColumnDefinitions="Auto,*,Auto"
+              ColumnSpacing="8"
+              Margin="0,8,0,10">
+            <Label FontSize="13"
+                   Text="Bonus"
+                   TextColor="#C8CCCF"
+                   VerticalTextAlignment="Center" />
+
+            <Border Grid.Column="1"
+                    BackgroundColor="#283B39"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8"
+                    HeightRequest="14"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+                <Grid x:Name="BonusTrack">
+                    <Border x:Name="BonusFill"
+                            BackgroundColor="#F6D42A"
+                            HorizontalOptions="Start"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            WidthRequest="0" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="BonusLabel"
+                   Grid.Column="2"
+                   FontSize="14"
+                   Text="1000"
+                   TextColor="#D5D9DB"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <BoxView BackgroundColor="#163F38" />
+
+            <Grid x:Name="BoardBackdrop"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center"
+                  WidthRequest="308"
+                  HeightRequest="412">
+                <Border BackgroundColor="#7EB0C2"
+                        Padding="4"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8">
+                    <Grid x:Name="BoardGrid"
+                          ColumnDefinitions="*,*,*"
+                          RowDefinitions="*,*,*,*"
+                          ColumnSpacing="4"
+                          RowSpacing="4" />
+                </Border>
+            </Grid>
+
+            <Grid x:Name="CountdownOverlay"
+                  Grid.RowSpan="10"
+                  BackgroundColor="#F8FFFFFF"
+                  IsVisible="False"
+                  ZIndex="20">
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     Spacing="8"
+                                     VerticalOptions="Center">
+                    <ActivityIndicator x:Name="LoadingSpinner"
+                                       Color="#54D96A"
+                                       HeightRequest="36"
+                                       IsRunning="False"
+                                       WidthRequest="36" />
+                    <Label x:Name="CountdownValueLabel"
+                           FontAttributes="Bold"
+                           FontSize="54"
+                           HorizontalTextAlignment="Center"
+                           Text="3"
+                           TextColor="#54D96A" />
+                    <Label FontSize="28"
+                           HorizontalTextAlignment="Center"
+                           Text="GET READY"
+                           TextColor="#767676" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid x:Name="PauseOverlay"
+                  Grid.RowSpan="10"
+                  BackgroundColor="#88000000"
+                  IsVisible="False"
+                  ZIndex="21">
+                <Border BackgroundColor="White"
+                        HorizontalOptions="Center"
+                        Padding="22,20"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 22"
+                        VerticalOptions="Center"
+                        WidthRequest="282">
+                    <VerticalStackLayout Spacing="14">
+                        <Label FontAttributes="Bold"
+                               FontSize="26"
+                               HorizontalTextAlignment="Center"
+                               Text="Paused"
+                               TextColor="#203632" />
+                        <Button BackgroundColor="#4CD35E"
+                                Clicked="OnResumeClicked"
+                                CornerRadius="24"
+                                HeightRequest="50"
+                                Text="Resume"
+                                TextColor="White" />
+                        <Button BackgroundColor="#EEF1F2"
+                                Clicked="OnQuitClicked"
+                                CornerRadius="24"
+                                HeightRequest="50"
+                                Text="Quit"
+                                TextColor="#31433F" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="ResultOverlay"
+                  Grid.RowSpan="10"
+                  BackgroundColor="#F8FFFFFF"
+                  IsVisible="False"
+                  ZIndex="22">
+                <AbsoluteLayout x:Name="ConfettiLayer"
+                                InputTransparent="True" />
+
+                <VerticalStackLayout HorizontalOptions="Center"
+                                     Spacing="16"
+                                     VerticalOptions="Center">
+                    <Label FontSize="62"
+                           HorizontalTextAlignment="Center"
+                           Text="&#x1F3C6;"
+                           TextColor="#F0A617" />
+
+                    <Border Padding="0"
+                            Stroke="#EFE7EC"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1"
+                            WidthRequest="300">
+                        <VerticalStackLayout Padding="18,12,18,16"
+                                             Spacing="8">
+                            <Border x:Name="BestBadge"
+                                    BackgroundColor="#F0A617"
+                                    HorizontalOptions="Center"
+                                    Padding="14,4"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8">
+                                <Label x:Name="BestBadgeTextLabel"
+                                       FontAttributes="Bold"
+                                       FontSize="15"
+                                       Text="NEW BEST SCORE"
+                                       TextColor="White" />
+                            </Border>
+
+                            <Label x:Name="ResultScoreLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="52"
+                                   HorizontalTextAlignment="Center"
+                                   Text="0"
+                                   TextColor="#54D96A" />
+                            <Label FontSize="17"
+                                   HorizontalTextAlignment="Center"
+                                   Text="Your score"
+                                   TextColor="#666666" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Button BackgroundColor="#4CD35E"
+                            Clicked="OnContinueClicked"
+                            CornerRadius="26"
+                            HeightRequest="54"
+                            Text="CONTINUE"
+                            TextColor="White"
+                            WidthRequest="260" />
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

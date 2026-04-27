@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.ComingSoonPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Padding="20"
+    BackgroundColor="White">
+
+    <VerticalStackLayout VerticalOptions="Center" Spacing="14">
+        <Label x:Name="TitleLabel"
+               Text="Coming Soon"
+               FontSize="30"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"/>
+
+        <Label Text="This game category isn’t ready yet."
+               FontSize="16"
+               TextColor="Gray"
+               HorizontalTextAlignment="Center"/>
+    </VerticalStackLayout>
+</ContentPage>

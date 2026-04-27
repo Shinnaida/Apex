@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.IQResultsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F3F7FC"
+    Padding="18,24,18,24"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Spacing="16">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Session complete"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="#61C35A" />
+                    <Label Text="Your result"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#16314B" />
+                    <Label x:Name="SummaryLabel"
+                           Text="Here is your weighted breakdown."
+                           FontSize="14"
+                           TextColor="#678099" />
+                </VerticalStackLayout>
+
+                <Border Padding="20"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Peak score"
+                               FontSize="15"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#6FCF67" />
+                        <Label x:Name="OverallScoreLabel"
+                               Text="0/1000"
+                               FontSize="44"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#1E2732" />
+
+                        <ProgressBar x:Name="OverallBar"
+                                     Progress="0"
+                                     HeightRequest="10"
+                                     ProgressColor="#55D36C"
+                                     BackgroundColor="#E3EDF7" />
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                            <Border Padding="14"
+                                    BackgroundColor="#F6FAFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="New best score"
+                                           FontSize="12"
+                                           TextColor="#8099AC" />
+                                    <Label x:Name="BestScoreCalloutLabel"
+                                           Text="0"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="1"
+                                    Padding="14"
+                                    BackgroundColor="#F6FAFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Current rank"
+                                           FontSize="12"
+                                           TextColor="#8099AC" />
+                                    <Label x:Name="RankCalloutLabel"
+                                           Text="Basecamp"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="18"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Session details"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#16314B" />
+
+                        <Grid ColumnDefinitions="*,*,*"
+                              ColumnSpacing="10">
+                            <Border Padding="12"
+                                    BackgroundColor="#F6FAFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Correct"
+                                           FontSize="12"
+                                           TextColor="#8099AC" />
+                                    <Label x:Name="CorrectCountLabel"
+                                           Text="0"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="1"
+                                    Padding="12"
+                                    BackgroundColor="#F6FAFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Weighted"
+                                           FontSize="12"
+                                           TextColor="#8099AC" />
+                                    <Label x:Name="RawPointsLabel"
+                                           Text="0"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border Grid.Column="2"
+                                    Padding="12"
+                                    BackgroundColor="#F6FAFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 16">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Time"
+                                           FontSize="12"
+                                           TextColor="#8099AC" />
+                                    <Label x:Name="TimeUsedLabel"
+                                           Text="0:00"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#16314B" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="18"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Category balance"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#16314B" />
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="Math &amp; Logic" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="LogicScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="LogicBar" HeightRequest="8" ProgressColor="#2D75F0" BackgroundColor="#E8EEF6" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="Language" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="VerbalScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="VerbalBar" HeightRequest="8" ProgressColor="#7A55F3" BackgroundColor="#E8EEF6" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="Patterns" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="AbstractScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="AbstractBar" HeightRequest="8" ProgressColor="#EF5A8C" BackgroundColor="#E8EEF6" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="Visual" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="SpatialScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="SpatialBar" HeightRequest="8" ProgressColor="#FF9E2C" BackgroundColor="#E8EEF6" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="Science" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="ScienceScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="ScienceBar" HeightRequest="8" ProgressColor="#1EBB8D" BackgroundColor="#E8EEF6" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="6">
+                            <Label Text="PH History" FontSize="15" FontAttributes="Bold" TextColor="#16314B" />
+                            <Label x:Name="HistoryScore" Grid.Column="1" HorizontalTextAlignment="End" FontSize="15" TextColor="#69849A" />
+                            <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" x:Name="HistoryBar" HeightRequest="8" ProgressColor="#50637A" BackgroundColor="#E8EEF6" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12">
+                    <Button x:Name="BackButton"
+                            Text="BACK TO TESTS"
+                            CornerRadius="28"
+                            HeightRequest="58"
+                            BackgroundColor="#FFFFFF"
+                            BorderColor="#D2DCE8"
+                            BorderWidth="1"
+                            TextColor="#16314B"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnBackToTestsClicked" />
+
+                    <Button x:Name="PlayAgainButton"
+                            Grid.Column="1"
+                            Text="PLAY AGAIN"
+                            CornerRadius="28"
+                            HeightRequest="58"
+                            BackgroundColor="#58D95E"
+                            TextColor="White"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            Clicked="OnPlayAgainClicked" />
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <AbsoluteLayout x:Name="ConfettiHost"
+                        InputTransparent="True"
+                        ZIndex="20" />
+    </Grid>
+</ContentPage>

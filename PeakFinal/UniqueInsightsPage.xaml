@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.UniqueInsightsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#FF3E70"
+    Padding="{OnPlatform Android='0,24,0,0', iOS='0,44,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0"
+              BackgroundColor="#F13266"
+              ColumnDefinitions="Auto,*"
+              Padding="14,8,14,12">
+            <Label FontSize="28"
+                   Text="&#x2190;"
+                   TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Grid.Column="1"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   HorizontalTextAlignment="Center"
+                   Text="PERFORMANCE INSIGHTS"
+                   TextColor="White"
+                   VerticalTextAlignment="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="14,12,14,18"
+                                 Spacing="12">
+                <HorizontalStackLayout Spacing="8">
+                    <Label FontAttributes="Bold"
+                           FontSize="18"
+                           Text="Score evolution"
+                           TextColor="#FFF2F6" />
+                    <Label FontSize="18"
+                           Text="&#x21E7;"
+                           TextColor="#FFF2F6"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <Grid HeightRequest="176"
+                      IsClippedToBounds="True">
+                    <BoxView Color="#FFFFFF"
+                             CornerRadius="16"
+                             Opacity="0.12" />
+
+                    <Grid x:Name="ChartPlot"
+                          Margin="12,12,12,24"
+                          IsClippedToBounds="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <BoxView Grid.Row="1"
+                                 Color="#FFC2D2"
+                                 HeightRequest="1"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Row="2"
+                                 Color="#FFC2D2"
+                                 HeightRequest="1"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Row="3"
+                                 Color="#FFC2D2"
+                                 HeightRequest="1"
+                                 VerticalOptions="Center" />
+
+                        <BoxView x:Name="RankUpGuide"
+                                 Grid.Row="1"
+                                 Color="#FFF3F7"
+                                 HeightRequest="1"
+                                 Opacity="0.8"
+                                 VerticalOptions="Center" />
+
+                        <BoxView x:Name="TrendLine"
+                                 AnchorX="0"
+                                 AnchorY="0.5"
+                                 Color="White"
+                                 HeightRequest="3"
+                                 HorizontalOptions="Start"
+                                 Rotation="-16"
+                                 VerticalOptions="End"
+                                 WidthRequest="248" />
+
+                        <Border x:Name="EndPoint"
+                                BackgroundColor="White"
+                                HeightRequest="12"
+                                HorizontalOptions="End"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 6"
+                                VerticalOptions="Start"
+                                WidthRequest="12" />
+
+                        <Border x:Name="ScorePill"
+                                BackgroundColor="White"
+                                HorizontalOptions="End"
+                                Padding="8,4"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 6"
+                                VerticalOptions="Center">
+                            <Label x:Name="ScorePillLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   Text="0"
+                                   TextColor="#F03B68" />
+                        </Border>
+                    </Grid>
+
+                    <Label x:Name="RankUpLabel"
+                           FontSize="13"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,32"
+                           Text="Rank up: 1860"
+                           TextColor="#FFE5EC"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12">
+                    <Border BackgroundColor="#FFFFFF"
+                            Padding="14,16"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label FontSize="13"
+                                   Text="Boards solved"
+                                   TextColor="#8A5360" />
+                            <Label x:Name="SolvedValueLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="28"
+                                   Text="0"
+                                   TextColor="#F03B68" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            BackgroundColor="#FFFFFF"
+                            Padding="14,16"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label FontSize="13"
+                                   Text="Fastest find"
+                                   TextColor="#8A5360" />
+                            <Label x:Name="FastestValueLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="28"
+                                   Text="0 ms"
+                                   TextColor="#F03B68" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border BackgroundColor="White"
+                        Padding="14,10"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 18">
+                    <Label x:Name="InsightBubbleLabel"
+                           FontSize="16"
+                           Text="Sharp eyes."
+                           TextColor="#5D5D5D" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="2"
+              Padding="14,8,14,12">
+            <Grid>
+                <Button BackgroundColor="White"
+                        Clicked="OnReplayClicked"
+                        CornerRadius="28"
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HeightRequest="56"
+                        Text="REPLAY"
+                        TextColor="#F03B68" />
+                <Border BackgroundColor="#FF6D92"
+                        HeightRequest="36"
+                        HorizontalOptions="End"
+                        Margin="0,0,8,0"
+                        Padding="0"
+                        Stroke="#FFC2D2"
+                        StrokeShape="RoundRectangle 18"
+                        StrokeThickness="1"
+                        VerticalOptions="Center"
+                        WidthRequest="36">
+                    <Label FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           Text="&#x21BB;"
+                           TextColor="White"
+                           VerticalTextAlignment="Center" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.MemoryGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Memory Game"
+    BackgroundColor="#F4F7FB"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
+
+        <!-- HUD -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,*,*" ColumnSpacing="10">
+            <Border WidthRequest="42"
+                    HeightRequest="42"
+                    BackgroundColor="#FFF8FB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 16"
+                    VerticalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="#20000000"
+                            Offset="0,8"
+                            Opacity="0.18"
+                            Radius="14" />
+                </Border.Shadow>
+                <Grid Padding="12,10"
+                      ColumnDefinitions="Auto,Auto"
+                      ColumnSpacing="5">
+                    <BoxView Grid.Column="0"
+                             BackgroundColor="#5D1839"
+                             CornerRadius="2.5"
+                             WidthRequest="4"
+                             HeightRequest="16"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+                    <BoxView Grid.Column="1"
+                             BackgroundColor="#5D1839"
+                             CornerRadius="2.5"
+                             WidthRequest="4"
+                             HeightRequest="16"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPauseClicked" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Border>
+
+            <Label x:Name="MovesLabel"
+                   Grid.Column="1"
+                   Text="Moves: 0"
+                   FontSize="18"
+                   VerticalOptions="Center"
+                   Margin="10,0,0,0" />
+
+            <Label x:Name="MatchesLabel"
+                   Grid.Column="2"
+                   Text="Matches: 0/8"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Label x:Name="TimeLabel"
+                   Grid.Column="3"
+                   Text="Time: 0s"
+                   FontSize="18"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Controls -->
+        <HorizontalStackLayout Grid.Row="1" Spacing="12">
+            <Button Text="New Game" Clicked="OnNewGameClicked"/>
+            <Label x:Name="StatusLabel" Text="" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <!-- Board -->
+        <Grid x:Name="BoardGrid"
+              Grid.Row="2"
+              RowDefinitions="*,*,*,*"
+              ColumnDefinitions="*,*,*,*"
+              RowSpacing="10"
+              ColumnSpacing="10" />
+    </Grid>
+</ContentPage>

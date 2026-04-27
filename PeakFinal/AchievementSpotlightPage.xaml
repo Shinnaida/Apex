@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.AchievementSpotlightPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F6F4FF"
+    Title="Achievement">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,24,20,28"
+                             Spacing="18">
+            <Border x:Name="HeroCard"
+                    BackgroundColor="#6F63E5"
+                    Padding="20"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28">
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="10">
+                        <Border x:Name="AchievementCategoryChip"
+                                BackgroundColor="#4D42B8"
+                                Padding="12,6"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 16">
+                            <Label x:Name="AchievementCategoryLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="11"
+                                   Text="Category"
+                                   TextColor="White" />
+                        </Border>
+
+                        <Border x:Name="AchievementStatusChip"
+                                BackgroundColor="#FFFFFF26"
+                                Padding="12,6"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 16">
+                            <Label x:Name="AchievementHeroStatusLabel"
+                                   FontAttributes="Bold"
+                                   FontSize="11"
+                                   Text="UNLOCKED"
+                                   TextColor="White" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <Image x:Name="AchievementIconImage"
+                           HeightRequest="82"
+                           HorizontalOptions="Start"
+                           WidthRequest="82" />
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label x:Name="AchievementTitleLabel"
+                               FontAttributes="Bold"
+                               FontSize="28"
+                               Text="Achievement"
+                               TextColor="White" />
+                        <Label x:Name="AchievementSubtitleLabel"
+                               FontSize="14"
+                               Text="Part of your collection"
+                               TextColor="#F1EEFF" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Padding="18"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22">
+                <VerticalStackLayout Spacing="8">
+                    <Label FontAttributes="Bold"
+                           FontSize="16"
+                           Text="What this badge means"
+                           TextColor="#2F2A4A" />
+                    <Label x:Name="AchievementDescriptionLabel"
+                           FontSize="14"
+                           LineHeight="1.2"
+                           Text="Description"
+                           TextColor="#645F84" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="White"
+                    Padding="18"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22">
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label FontAttributes="Bold"
+                               FontSize="16"
+                               Text="Progress"
+                               TextColor="#2F2A4A" />
+                        <Label x:Name="AchievementProgressLabel"
+                               Grid.Column="1"
+                               FontAttributes="Bold"
+                               FontSize="13"
+                               Text="Unlocked"
+                               TextColor="#6F63E5" />
+                    </Grid>
+
+                    <ProgressBar x:Name="AchievementProgressBar"
+                                 HeightRequest="10"
+                                 Progress="0.5"
+                                 ProgressColor="#6F63E5" />
+
+                    <Label x:Name="AchievementStatusLabel"
+                           FontSize="13"
+                           Text="Keep going."
+                           TextColor="#7F799B" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

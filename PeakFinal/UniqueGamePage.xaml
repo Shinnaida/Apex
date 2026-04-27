@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.UniqueGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#441427"
+    Padding="{OnPlatform Android='0,20,0,0', iOS='0,42,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <Grid Grid.Row="0"
+              BackgroundColor="#57192E"
+              ColumnDefinitions="Auto,*,Auto,Auto"
+              ColumnSpacing="10"
+              HeightRequest="52"
+              Padding="14,0">
+            <Border WidthRequest="30"
+                    HeightRequest="30"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 4"
+                    VerticalOptions="Center">
+                <Label FontAttributes="Bold"
+                       FontSize="18"
+                       HorizontalTextAlignment="Center"
+                       Text="&#x23F8;"
+                       TextColor="#2B2B2B"
+                       VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPauseTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+
+            <Label x:Name="TimerLabel"
+                   Grid.Column="1"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"
+                   Text="00:45"
+                   TextColor="#FFD45A"
+                   VerticalTextAlignment="Center" />
+
+            <Border x:Name="StreakBadge"
+                    Grid.Column="2"
+                    BackgroundColor="#8E2546"
+                    Padding="10,4"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    VerticalOptions="Center">
+                <Label x:Name="StreakLabel"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       Text="Streak 0"
+                       TextColor="White" />
+            </Border>
+
+            <VerticalStackLayout Grid.Column="3"
+                                 HorizontalOptions="End"
+                                 Spacing="0"
+                                 VerticalOptions="Center">
+                <Label FontSize="12"
+                       HorizontalTextAlignment="End"
+                       Text="Score"
+                       TextColor="#FFD7E2" />
+                <Label x:Name="ScoreLabel"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       HorizontalTextAlignment="End"
+                       Text="0"
+                       TextColor="#FFD45A" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Border Grid.Row="1"
+                BackgroundColor="#602037"
+                Margin="14,12,14,0"
+                Padding="14,12"
+                Stroke="#8F3354"
+                StrokeShape="RoundRectangle 20"
+                StrokeThickness="1.5">
+            <Grid ColumnDefinitions="Auto,*,Auto"
+                  ColumnSpacing="12">
+                <Border BackgroundColor="#FF5A85"
+                        HeightRequest="48"
+                        Padding="0"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        WidthRequest="48"
+                        VerticalOptions="Center">
+                    <Label FontAttributes="Bold"
+                           FontSize="22"
+                           HorizontalTextAlignment="Center"
+                           Text="&#x2715;"
+                           TextColor="White"
+                           VerticalTextAlignment="Center" />
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="2"
+                                     VerticalOptions="Center">
+                    <Label x:Name="ObjectiveCaptionLabel"
+                           FontAttributes="Bold"
+                           FontSize="12"
+                           Text="ONE SHAPE DOES NOT MATCH"
+                           TextColor="#FFD2DE" />
+                    <Label x:Name="TargetPromptLabel"
+                           FontAttributes="Bold"
+                           FontSize="20"
+                           Text="Tap the unique shape"
+                           TextColor="White" />
+                </VerticalStackLayout>
+
+                <Border Grid.Column="2"
+                        BackgroundColor="#7B2943"
+                        Padding="10,6"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 14"
+                        VerticalOptions="Start">
+                    <Label x:Name="StageLabel"
+                           FontAttributes="Bold"
+                           FontSize="12"
+                           Text="LEVEL 1"
+                           TextColor="#FFE8EF" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2"
+              Margin="14,12,14,0">
+            <Border x:Name="BoardShell"
+                    BackgroundColor="#5E2036"
+                    MinimumHeightRequest="420"
+                    Padding="0"
+                    Stroke="#8F3354"
+                    StrokeShape="RoundRectangle 28"
+                    StrokeThickness="1.5">
+                <Grid>
+                    <BoxView Margin="28,22,0,0"
+                             BackgroundColor="#88A5363D"
+                             CornerRadius="999"
+                             HeightRequest="124"
+                             HorizontalOptions="Start"
+                             Opacity="0.18"
+                             VerticalOptions="Start"
+                             WidthRequest="124" />
+
+                    <BoxView Margin="0,0,26,34"
+                             BackgroundColor="#88FF7AA0"
+                             CornerRadius="999"
+                             HeightRequest="148"
+                             HorizontalOptions="End"
+                             Opacity="0.16"
+                             VerticalOptions="End"
+                             WidthRequest="148" />
+
+                    <AbsoluteLayout x:Name="PuzzleField"
+                                    Margin="18" />
+                </Grid>
+            </Border>
+
+            <Label x:Name="ScoreDeltaLabel"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0"
+                   Opacity="0"
+                   Text="+120"
+                   TextColor="White"
+                   VerticalOptions="Start" />
+        </Grid>
+
+        <Border Grid.Row="3"
+                x:Name="HintBorder"
+                Margin="14,12,14,14"
+                BackgroundColor="#5A1D32"
+                Padding="16,10"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 18">
+            <Label x:Name="HintLabel"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"
+                   Text="Find the one shape that changes."
+                   TextColor="#FFDDE7" />
+        </Border>
+
+        <Grid x:Name="CountdownOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#F9F5F7"
+              IsVisible="False"
+              ZIndex="20">
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="10"
+                                 VerticalOptions="Center">
+                <ActivityIndicator x:Name="LoadingSpinner"
+                                   Color="#FF4E79"
+                                   HeightRequest="36"
+                                   IsRunning="False"
+                                   WidthRequest="36" />
+                <Label x:Name="CountdownCaptionLabel"
+                       FontAttributes="Bold"
+                       FontSize="26"
+                       HorizontalTextAlignment="Center"
+                       Text="GET READY"
+                       TextColor="#D62E5B" />
+                <Label x:Name="CountdownValueLabel"
+                       FontAttributes="Bold"
+                       FontSize="58"
+                       HorizontalTextAlignment="Center"
+                       Text="3"
+                       TextColor="#FF4E79" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Grid x:Name="PauseOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#99000000"
+              IsVisible="False"
+              ZIndex="21">
+            <Border BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    Padding="22,20"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22"
+                    VerticalOptions="Center"
+                    WidthRequest="286">
+                <VerticalStackLayout Spacing="14">
+                    <Label FontAttributes="Bold"
+                           FontSize="26"
+                           HorizontalTextAlignment="Center"
+                           Text="Paused"
+                           TextColor="#3A2630" />
+                    <Button BackgroundColor="#FF4E79"
+                            Clicked="OnResumeClicked"
+                            CornerRadius="24"
+                            HeightRequest="50"
+                            Text="Resume"
+                            TextColor="White" />
+                    <Button BackgroundColor="#EEF1F2"
+                            Clicked="OnQuitClicked"
+                            CornerRadius="24"
+                            HeightRequest="50"
+                            Text="Quit"
+                            TextColor="#31433F" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="ResultOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#F8F5F7"
+              IsVisible="False"
+              ZIndex="22">
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="18"
+                                 VerticalOptions="Center">
+                <Label FontSize="68"
+                       HorizontalTextAlignment="Center"
+                       Text="&#x1F3C6;"
+                       TextColor="#FF5A85" />
+
+                <Border BackgroundColor="White"
+                        Padding="20,18"
+                        Stroke="#ECD8DE"
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="1"
+                        WidthRequest="320">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="ResultBadgeLabel"
+                               FontAttributes="Bold"
+                               FontSize="15"
+                               HorizontalTextAlignment="Center"
+                               Text="NEW BEST SCORE"
+                               TextColor="#FF5A85" />
+                        <Label x:Name="ResultScoreLabel"
+                               FontAttributes="Bold"
+                               FontSize="52"
+                               HorizontalTextAlignment="Center"
+                               Text="0"
+                               TextColor="#2E2E2E" />
+
+                        <Grid ColumnDefinitions="*,*"
+                              ColumnSpacing="10">
+                            <Border BackgroundColor="#FFF2F6"
+                                    Padding="12,10"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label FontSize="12"
+                                           Text="Best"
+                                           TextColor="#A35A6E" />
+                                    <Label x:Name="ResultBestLabel"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           Text="0"
+                                           TextColor="#FF4E79" />
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border Grid.Column="1"
+                                    BackgroundColor="#FFF2F6"
+                                    Padding="12,10"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 14">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label FontSize="12"
+                                           Text="Rank"
+                                           TextColor="#A35A6E" />
+                                    <Label x:Name="ResultRankLabel"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           Text="Novice"
+                                           TextColor="#FF4E79" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button BackgroundColor="#FF4E79"
+                        Clicked="OnContinueClicked"
+                        CornerRadius="26"
+                        HeightRequest="56"
+                        Text="CONTINUE"
+                        TextColor="White"
+                        WidthRequest="320" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

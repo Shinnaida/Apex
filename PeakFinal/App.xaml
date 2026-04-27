@@ -1,0 +1,119 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PeakGame"
+             x:Class="Peak.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="BrandPrimary">#1A6EE8</Color>
+            <Color x:Key="BrandPrimaryDark">#124DA8</Color>
+            <Color x:Key="BrandSecondary">#7B61FF</Color>
+            <Color x:Key="PageBackground">#F4F7FB</Color>
+            <Color x:Key="SurfaceColor">#FFFFFF</Color>
+            <Color x:Key="SurfaceMuted">#F7FAFE</Color>
+            <Color x:Key="TextPrimary">#16314B</Color>
+            <Color x:Key="TextSecondary">#72859A</Color>
+            <Color x:Key="SuccessColor">#21B66F</Color>
+            <Color x:Key="WarningColor">#F59E0B</Color>
+            <Color x:Key="DangerColor">#D84B63</Color>
+            <Color x:Key="LineColor">#E1E9F2</Color>
+
+            <LinearGradientBrush x:Key="BrandHeroBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#1A6EE8" Offset="0.0" />
+                <GradientStop Color="#4E6CF4" Offset="0.55" />
+                <GradientStop Color="#7B61FF" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style x:Key="SubtitleLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="LineHeight" Value="1.2" />
+                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+            </Style>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource BrandPrimary}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="22" />
+                <Setter Property="HeightRequest" Value="54" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#EEF4FB" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="CornerRadius" Value="22" />
+                <Setter Property="HeightRequest" Value="52" />
+                <Setter Property="BorderColor" Value="{StaticResource LineColor}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <Style x:Key="FieldShellStyle" TargetType="Border">
+                <Setter Property="Padding" Value="6,4" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SurfaceMuted}" />
+                <Setter Property="Stroke" Value="{StaticResource LineColor}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="18" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PremiumCardBorderStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource SurfaceColor}" />
+                <Setter Property="Stroke" Value="{StaticResource LineColor}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Padding" Value="18" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="24" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="#140B2036"
+                                Offset="0,10"
+                                Opacity="0.14"
+                                Radius="20" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SoftPanelBorderStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource SurfaceMuted}" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="Padding" Value="14" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="18" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="HeroChipBorderStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#18FFFFFF" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="Padding" Value="12,6" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="16" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

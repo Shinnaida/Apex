@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.SquareNumbersGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#1E4D43"
+    Padding="{OnPlatform Android='0,18,0,0', iOS='0,42,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,Auto,*"
+              Padding="0,0,0,14">
+            <Grid Grid.Row="0"
+                  HeightRequest="44"
+                  BackgroundColor="#162E29"
+                  ColumnDefinitions="Auto,*,Auto,Auto"
+                  ColumnSpacing="10"
+                  Padding="12,0">
+                <Border WidthRequest="28"
+                        HeightRequest="28"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 2"
+                        VerticalOptions="Center">
+                    <Label Text="&#x23F8;"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="#202020"
+                           VerticalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPauseTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Label x:Name="TimerLabel"
+                       Grid.Column="1"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       Text="01:06"
+                       TextColor="#D9BA59"
+                       VerticalTextAlignment="Center" />
+
+                <Label Grid.Column="2"
+                       FontSize="13"
+                       Margin="0,0,2,0"
+                       Text="Score"
+                       TextColor="#DCDCDC"
+                       VerticalTextAlignment="Center" />
+
+                <Label x:Name="ScoreLabel"
+                       Grid.Column="3"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="End"
+                       Text="0"
+                       TextColor="#D9BA59"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Margin="0,28,0,0"
+                  Padding="0,0,0,6">
+                <Border x:Name="TargetCard"
+                        BackgroundColor="#112B26"
+                        HorizontalOptions="Center"
+                        Padding="18,12"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 6"
+                        WidthRequest="350">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Target"
+                               FontSize="16"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#8F9A97" />
+                        <Label x:Name="TargetValueLabel"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               Text="8"
+                               TextColor="#2EE178" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <AbsoluteLayout x:Name="TileArena"
+                            Grid.Row="2"
+                            Margin="0,12,0,0" />
+        </Grid>
+
+        <Label x:Name="ScoreDeltaLabel"
+               Margin="0,48,18,0"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="End"
+               Opacity="0"
+               Text="+745"
+               TextColor="White"
+               VerticalOptions="Start" />
+
+        <Grid x:Name="FeedbackOverlay"
+              InputTransparent="True"
+              IsVisible="False"
+              ZIndex="8">
+            <Border WidthRequest="118"
+                    HeightRequest="118"
+                    BackgroundColor="#AACFCFCF"
+                    HorizontalOptions="Center"
+                    Padding="12"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 59"
+                    VerticalOptions="Center">
+                <Border x:Name="FeedbackBadge"
+                        BackgroundColor="#16B55F"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 48">
+                    <Label x:Name="FeedbackIconLabel"
+                           FontSize="52"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           Text="&#x2713;"
+                           TextColor="White"
+                           VerticalTextAlignment="Center" />
+                </Border>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="CountdownOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#FAF9FF"
+              IsVisible="False"
+              ZIndex="9">
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="8"
+                                 VerticalOptions="Center">
+                <ActivityIndicator x:Name="LoadingSpinner"
+                                   Color="#6AE084"
+                                   HeightRequest="36"
+                                   IsRunning="False"
+                                   WidthRequest="36" />
+                <Label x:Name="CountdownValueLabel"
+                       FontSize="54"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       Text=""
+                       TextColor="#6AE084" />
+                <Label x:Name="CountdownCaptionLabel"
+                       FontSize="20"
+                       HorizontalTextAlignment="Center"
+                       Text=""
+                       TextColor="#6A6A6A" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <Grid x:Name="PauseOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#88000000"
+              IsVisible="False"
+              ZIndex="10">
+            <Border BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    Padding="22,20"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22"
+                    VerticalOptions="Center"
+                    WidthRequest="282">
+                <VerticalStackLayout Spacing="14">
+                    <Label FontAttributes="Bold"
+                           FontSize="26"
+                           HorizontalTextAlignment="Center"
+                           Text="Paused"
+                           TextColor="#203622" />
+                    <Button BackgroundColor="#35C857"
+                            Clicked="OnResumeClicked"
+                            CornerRadius="24"
+                            HeightRequest="50"
+                            Text="Resume"
+                            TextColor="White" />
+                    <Button BackgroundColor="#EEF1F2"
+                            Clicked="OnQuitClicked"
+                            CornerRadius="24"
+                            HeightRequest="50"
+                            Text="Quit"
+                            TextColor="#31433F" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="ResultOverlay"
+              Grid.RowSpan="10"
+              BackgroundColor="#FBFBFF"
+              IsVisible="False"
+              ZIndex="11">
+            <AbsoluteLayout x:Name="ConfettiLayer"
+                            InputTransparent="True" />
+
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="18"
+                                 VerticalOptions="Center">
+                <Label Text="Your score"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#72DA84" />
+
+                <Border BackgroundColor="White"
+                        Padding="0"
+                        Stroke="#D8D8E3"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="1"
+                        WidthRequest="334">
+                    <VerticalStackLayout Spacing="0">
+                        <VerticalStackLayout Padding="18,18,18,16"
+                                             Spacing="4">
+                            <Label x:Name="ResultScoreLabel"
+                                   FontSize="54"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   Text="9240"
+                                   TextColor="#303030" />
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="1"
+                                 Color="#E6E6EE" />
+
+                        <Grid Padding="18,16,18,18"
+                              RowDefinitions="Auto,Auto"
+                              RowSpacing="16">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label Text="&#x1F3C6;"
+                                       FontSize="28"
+                                       VerticalTextAlignment="Center" />
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Margin="12,0,0,0"
+                                                     Spacing="0">
+                                    <Label x:Name="BestBadgeTextLabel"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           Text="New best score"
+                                           TextColor="#72DA84" />
+                                    <Label x:Name="BestScoreValueLabel"
+                                           FontSize="18"
+                                           Text="9240"
+                                           TextColor="#333333" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <Grid Grid.Row="1"
+                                  ColumnDefinitions="Auto,*">
+                                <Label Text="&#x1F6E1;"
+                                       FontSize="28"
+                                       VerticalTextAlignment="Center" />
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Margin="12,0,0,0"
+                                                     Spacing="0">
+                                    <Label x:Name="RankUpLabel"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           Text="Rank up"
+                                           TextColor="#72DA84" />
+                                    <Label x:Name="RankValueLabel"
+                                           FontSize="18"
+                                           Text="Novice"
+                                           TextColor="#333333" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button BackgroundColor="#3FD055"
+                        Clicked="OnContinueClicked"
+                        CornerRadius="24"
+                        HeightRequest="56"
+                        Text="CONTINUE"
+                        TextColor="White"
+                        WidthRequest="332" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

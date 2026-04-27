@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.TestYourselfPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#EEF4FB"
+    Padding="18,20,18,14"
+    Title="">
+
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="18">
+        <VerticalStackLayout Grid.Row="0" Spacing="6">
+            <Label Text="Assessment"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   CharacterSpacing="1.2"
+                   TextColor="#5E7B99" />
+
+            <Label Text="Test Yourself"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   TextColor="#10223E" />
+
+            <Label x:Name="SubtitleLabel"
+                   Text="A balanced challenge is ready."
+                   FontSize="15"
+                   LineHeight="1.2"
+                   TextColor="#64748B" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16">
+                <Border Padding="0"
+                        BackgroundColor="Transparent"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 28">
+                    <Border.Shadow>
+                        <Shadow Brush="#16315A89"
+                                Offset="0,12"
+                                Opacity="0.18"
+                                Radius="22" />
+                    </Border.Shadow>
+
+                    <Grid HeightRequest="248"
+                          Padding="22">
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop x:Name="HeroGradientStart" Color="#315EF8" Offset="0" />
+                                <GradientStop x:Name="HeroGradientEnd" Color="#14A3D9" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Border WidthRequest="190"
+                                HeightRequest="190"
+                                BackgroundColor="#16FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 95"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                TranslationX="48"
+                                TranslationY="-34" />
+
+                        <Border WidthRequest="86"
+                                HeightRequest="86"
+                                BackgroundColor="#14FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 43"
+                                HorizontalOptions="End"
+                                VerticalOptions="End"
+                                TranslationX="18"
+                                TranslationY="20" />
+
+                        <Grid ColumnDefinitions="*,Auto"
+                              ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="12"
+                                                 VerticalOptions="Center">
+                                <Border HorizontalOptions="Start"
+                                        BackgroundColor="#1AFFFFFF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 16"
+                                        Padding="10,6">
+                                    <Label Text="GENERAL KNOWLEDGE"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           CharacterSpacing="1.1"
+                                           TextColor="#F2FAFF" />
+                                </Border>
+
+                                <Label x:Name="ModeTitleLabel"
+                                       Text="General IQ Challenge"
+                                       FontSize="28"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="WordWrap"
+                                       TextColor="White" />
+
+                                <Label x:Name="ModeDescriptionLabel"
+                                       Text="18 mixed questions with weighted scoring."
+                                       FontSize="14"
+                                       LineHeight="1.15"
+                                       TextColor="#EAF4FF" />
+
+                                <HorizontalStackLayout Spacing="8">
+                                    <Border StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 18"
+                                            BackgroundColor="#1BFFFFFF"
+                                            Padding="10,6">
+                                        <Label x:Name="QuestionCountLabel"
+                                               Text="18 questions"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="White" />
+                                    </Border>
+
+                                    <Border StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 18"
+                                            BackgroundColor="#1BFFFFFF"
+                                            Padding="10,6">
+                                        <Label x:Name="TimeLimitLabel"
+                                               Text="5 minutes"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="White" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Grid Grid.Column="1"
+                                  WidthRequest="132"
+                                  HeightRequest="132"
+                                  VerticalOptions="Center">
+                                <Border BackgroundColor="#18FFFFFF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 34" />
+                                <Image x:Name="HeroImage"
+                                       HeightRequest="132"
+                                       WidthRequest="132"
+                                       Aspect="AspectFit"
+                                       Margin="2"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12">
+                    <Border Grid.Column="0"
+                            Padding="16"
+                            BackgroundColor="White"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22">
+                        <Border.Shadow>
+                            <Shadow Brush="#120E2A45"
+                                    Offset="0,8"
+                                    Opacity="0.14"
+                                    Radius="18" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Pace"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#64748B" />
+                            <Label Text="Fast but friendly"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#12314D" />
+                            <Label Text="Questions are randomized each run so every attempt feels fresh."
+                                   FontSize="13"
+                                   LineHeight="1.15"
+                                   TextColor="#718198" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Padding="16"
+                            BackgroundColor="White"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22">
+                        <Border.Shadow>
+                            <Shadow Brush="#120E2A45"
+                                    Offset="0,8"
+                                    Opacity="0.14"
+                                    Radius="18" />
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Scoring"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#64748B" />
+                            <Label Text="Weighted fairly"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#12314D" />
+                            <Label Text="Harder questions are worth more, so every correct answer matters."
+                                   FontSize="13"
+                                   LineHeight="1.15"
+                                   TextColor="#718198" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24"
+                        BackgroundColor="White"
+                        Padding="18">
+                    <Border.Shadow>
+                        <Shadow Brush="#120E2A45"
+                                Offset="0,8"
+                                Opacity="0.14"
+                                Radius="18" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Categories included"
+                                   FontSize="19"
+                                   FontAttributes="Bold"
+                                   TextColor="#10223E" />
+
+                            <Label Text="A broad mix of reasoning, language, science, and history to keep the challenge balanced."
+                                   FontSize="14"
+                                   LineHeight="1.15"
+                                   TextColor="#64748B" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*,*"
+                              RowDefinitions="Auto,Auto"
+                              ColumnSpacing="8"
+                              RowSpacing="8">
+                            <Border Grid.Row="0" Grid.Column="0"
+                                    BackgroundColor="#EDF3FF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="Math &amp; Logic"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#315EF8" />
+                            </Border>
+
+                            <Border Grid.Row="0" Grid.Column="1"
+                                    BackgroundColor="#F4EDFF"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="Language"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#7C3AED" />
+                            </Border>
+
+                            <Border Grid.Row="0" Grid.Column="2"
+                                    BackgroundColor="#FFE9F4"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="Patterns"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#DB2777" />
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="0"
+                                    BackgroundColor="#FFF1E8"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="Visual"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#EA580C" />
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="1"
+                                    BackgroundColor="#E6FBF6"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="Science"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#0F766E" />
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="2"
+                                    BackgroundColor="#E8EEF5"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="10,8">
+                                <Label Text="PH History"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#334155" />
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 24"
+                        BackgroundColor="#F8FBFF"
+                        Padding="18">
+                    <Border.Shadow>
+                        <Shadow Brush="#100E2A45"
+                                Offset="0,6"
+                                Opacity="0.1"
+                                Radius="14" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Fair scoring"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#10223E" />
+
+                        <Label Text="Easy questions give 80 points, medium gives 120, and hard gives 170. Your final score is scaled from the full weighted total, so unfinished questions count as missed opportunities without breaking the balance."
+                               FontSize="14"
+                               LineHeight="1.2"
+                               TextColor="#5F6F85" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="2"
+                BackgroundColor="Transparent"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 30">
+            <Border.Shadow>
+                <Shadow Brush="#22315EF8"
+                        Offset="0,12"
+                        Opacity="0.18"
+                        Radius="18" />
+            </Border.Shadow>
+            <Button x:Name="BeginButton"
+                    Text="Start 5-minute test"
+                    CornerRadius="28"
+                    HeightRequest="58"
+                    BackgroundColor="#315EF8"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Clicked="OnBeginClicked"
+                    Margin="0,0,0,6" />
+        </Border>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="86" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#39C8FF"/>
+      <stop offset="1" stop-color="#0A6FE0"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="0" y1="18" x2="0" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1276DA"/>
+      <stop offset="1" stop-color="#0C5FC6"/>
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="18" fill="url(#bg)"/>
+  <rect x="20" y="14" width="6" height="52" rx="3" fill="url(#rail)"/>
+  <rect x="45" y="14" width="6" height="52" rx="3" fill="url(#rail)"/>
+  <rect x="70" y="14" width="6" height="52" rx="3" fill="url(#rail)"/>
+  <circle cx="23" cy="74" r="5" fill="#5AE2F8"/>
+  <circle cx="48" cy="74" r="5" fill="#5AE2F8"/>
+  <circle cx="73" cy="74" r="5" fill="#5AE2F8"/>
+  <rect x="14" y="22" width="18" height="18" rx="4" fill="white"/>
+  <rect x="39" y="34" width="18" height="18" rx="4" fill="white"/>
+  <rect x="64" y="18" width="18" height="18" rx="4" fill="white"/>
+</svg>

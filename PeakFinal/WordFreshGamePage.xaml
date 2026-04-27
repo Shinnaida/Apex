@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.WordFreshGamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#3B2F57"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+            <Grid BackgroundColor="#221C2F"
+                  HeightRequest="56"
+                  Padding="10"
+                  ColumnDefinitions="Auto,*,Auto">
+                <Border WidthRequest="42"
+                        HeightRequest="42"
+                        BackgroundColor="#FFF8FB"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        VerticalOptions="Center">
+                    <Border.Shadow>
+                        <Shadow Brush="#20000000"
+                                Offset="0,8"
+                                Opacity="0.18"
+                                Radius="14" />
+                    </Border.Shadow>
+                    <Grid Padding="12,10"
+                          ColumnDefinitions="Auto,Auto"
+                          ColumnSpacing="5">
+                        <BoxView Grid.Column="0"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <BoxView Grid.Column="1"
+                                 BackgroundColor="#5D1839"
+                                 CornerRadius="2.5"
+                                 WidthRequest="4"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPauseClicked" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Border>
+
+                <Label x:Name="TimerLabel"
+                       Grid.Column="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFD700"
+                       Text="01:30" />
+
+                <HorizontalStackLayout Grid.Column="2"
+                                       Spacing="6"
+                                       VerticalOptions="Center">
+                    <Label Text="Score"
+                           FontSize="16"
+                           TextColor="#CCCCCC" />
+
+                    <Label x:Name="ScoreLabel"
+                           Text="0"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#FFD700" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Grid.Row="1"
+                                 Spacing="4"
+                                 Padding="0,20,0,8"
+                                 HorizontalOptions="Center">
+                <Label Text="Find Words"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+
+                <Label Text="Swipe letters to form words"
+                       FontSize="16"
+                       TextColor="#C8C8C8" />
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="2"
+                   x:Name="AnswerBoxFrame"
+                   HasShadow="False"
+                   CornerRadius="10"
+                   BorderColor="#1E1A28"
+                   BackgroundColor="#2B233D"
+                   Margin="32,8,32,14"
+                   Padding="16,12">
+                <Label x:Name="CurrentAnswerLabel"
+                       Text=""
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center" />
+            </Frame>
+
+            <Grid Grid.Row="3" Padding="20,10">
+                <GraphicsView x:Name="BoardView"
+                              HeightRequest="420"
+                              WidthRequest="340"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center" />
+            </Grid>
+
+            <Grid Grid.Row="4"
+                  Padding="16,10,16,18"
+                  ColumnDefinitions="*,*"
+                  ColumnSpacing="10">
+                <Button Text="CLEAR"
+                        BackgroundColor="#4B3AA6"
+                        TextColor="White"
+                        HeightRequest="52"
+                        CornerRadius="14"
+                        Clicked="OnClearClicked" />
+
+                <Button Grid.Column="1"
+                        Text="SKIP"
+                        BackgroundColor="#FF2957"
+                        TextColor="White"
+                        HeightRequest="52"
+                        CornerRadius="14"
+                        Clicked="OnSkipClicked" />
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay" BackgroundColor="#E63B2F57" IsVisible="False">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
+                <ActivityIndicator IsRunning="True" Color="#FFD700" WidthRequest="60" HeightRequest="60" />
+                <Label Text="Preparing Game..." TextColor="White" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

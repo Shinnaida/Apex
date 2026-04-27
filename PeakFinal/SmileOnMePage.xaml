@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.SmileOnMePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#B65AF6"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid RowDefinitions="*,Auto">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20,18,20,30" Spacing="18">
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            Text="BACK"
+                            TextColor="White"
+                            VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBackTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,170" Margin="0,10,0,0">
+                        <VerticalStackLayout Grid.Column="0" Spacing="8">
+                            <Label
+                                Text="Smile On Me"
+                                FontSize="28"
+                                FontAttributes="Bold"
+                                TextColor="White" />
+
+                            <Label
+                                Text="Emotion"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="White" />
+
+                            <BoxView
+                                HeightRequest="2"
+                                WidthRequest="180"
+                                HorizontalOptions="Start"
+                                Color="#E6D7FF" />
+
+                            <Grid ColumnDefinitions="40,*" Margin="0,10,0,0">
+                                <Frame
+                                    WidthRequest="32"
+                                    HeightRequest="32"
+                                    CornerRadius="16"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    BorderColor="#E6D7FF"
+                                    HasShadow="False"
+                                    VerticalOptions="Start">
+                                    <Label
+                                        Text="*"
+                                        FontSize="16"
+                                        TextColor="White"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="0">
+                                    <Label
+                                        Text="Best Rank"
+                                        FontSize="14"
+                                        TextColor="#F2E9FF" />
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label
+                                            Text="Heart Reader"
+                                            FontSize="20"
+                                            FontAttributes="Bold"
+                                            TextColor="White" />
+                                        <Label
+                                            Text="i"
+                                            FontSize="16"
+                                            TextColor="White" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Grid
+                            Grid.Column="1"
+                            WidthRequest="170"
+                            HeightRequest="170"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start">
+                            <Frame
+                                CornerRadius="85"
+                                BackgroundColor="#C56AF8"
+                                HasShadow="False"
+                                Padding="0">
+                                <Grid Padding="18" RowSpacing="8" ColumnSpacing="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        BackgroundColor="#F4E8FF"
+                                        HasShadow="False"
+                                        CornerRadius="18"
+                                        Padding="0">
+                                        <Label
+                                            Text=":)"
+                                            FontSize="30"
+                                            FontAttributes="Bold"
+                                            TextColor="#9747E5"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+
+                                    <Frame
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        BackgroundColor="#D9BEFF"
+                                        HasShadow="False"
+                                        CornerRadius="18"
+                                        Padding="0">
+                                        <Label
+                                            Text=":D"
+                                            FontSize="30"
+                                            FontAttributes="Bold"
+                                            TextColor="White"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+
+                                    <Frame
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        BackgroundColor="#E9D7FF"
+                                        HasShadow="False"
+                                        CornerRadius="18"
+                                        Padding="0">
+                                        <Label
+                                            Text="^_^"
+                                            FontSize="24"
+                                            FontAttributes="Bold"
+                                            TextColor="#9747E5"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+
+                                    <Frame
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        BackgroundColor="#F7F0FF"
+                                        HasShadow="False"
+                                        CornerRadius="18"
+                                        Padding="0">
+                                        <Label
+                                            Text="♥"
+                                            FontSize="24"
+                                            FontAttributes="Bold"
+                                            TextColor="#9747E5"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+
+                    <Frame
+                        CornerRadius="18"
+                        BackgroundColor="White"
+                        HasShadow="False"
+                        Padding="20,16">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label
+                                Text="T"
+                                FontSize="22"
+                                TextColor="#9747E5"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Text="BEST SCORE"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#9747E5"
+                                VerticalOptions="Center"
+                                Margin="12,0,0,0" />
+                            <Label
+                                x:Name="BestScoreValueLabel"
+                                Grid.Column="2"
+                                Text="0"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="#333333"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+
+                    <Grid ColumnDefinitions="*">
+                        <Button
+                            Grid.Column="0"
+                            Text="HOW TO PLAY"
+                            BackgroundColor="#7D34CB"
+                            TextColor="White"
+                            CornerRadius="14"
+                            HeightRequest="56"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="OnHowToPlayClicked" />
+                    </Grid>
+
+                    <Frame
+                        CornerRadius="20"
+                        BackgroundColor="White"
+                        HasShadow="False"
+                        Padding="18,18,18,20"
+                        Margin="0,10,0,0">
+                        <VerticalStackLayout Spacing="16">
+                            <Label
+                                Text="Challenge"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#9747E5" />
+
+                            <BoxView HeightRequest="1" Color="#D9D9D9" />
+
+                            <Label
+                                Text="Spot the warmest and most encouraging emotional signal before time runs out."
+                                FontSize="16"
+                                TextColor="#444444" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame
+                        CornerRadius="20"
+                        BackgroundColor="White"
+                        HasShadow="False"
+                        Padding="18,18,18,20">
+                        <VerticalStackLayout Spacing="16">
+                            <Label
+                                Text="Skills"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#9747E5" />
+
+                            <BoxView HeightRequest="1" Color="#D9D9D9" />
+
+                            <Frame CornerRadius="12" BackgroundColor="#F8F3FF" HasShadow="False" Padding="14,10">
+                                <Label Text="Emotion Reading" FontSize="16" TextColor="#333333" />
+                            </Frame>
+
+                            <Frame CornerRadius="12" BackgroundColor="#F8F3FF" HasShadow="False" Padding="14,10">
+                                <Label Text="Empathy" FontSize="16" TextColor="#333333" />
+                            </Frame>
+
+                            <Frame CornerRadius="12" BackgroundColor="#F8F3FF" HasShadow="False" Padding="14,10">
+                                <Label Text="Positive Signal Recognition" FontSize="16" TextColor="#333333" />
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Grid Grid.Row="1" Padding="20,10,20,24" BackgroundColor="#B65AF6">
+                <Button
+                    Text="PLAY"
+                    HeightRequest="64"
+                    CornerRadius="32"
+                    BackgroundColor="White"
+                    TextColor="#9747E5"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    Clicked="OnPlayClicked" />
+            </Grid>
+        </Grid>
+
+        <Grid
+            x:Name="HowToPlayOverlay"
+            IsVisible="False"
+            Opacity="0"
+            ZIndex="10">
+
+            <BoxView BackgroundColor="#80000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Grid VerticalOptions="End" Padding="12,0,12,20">
+                <Frame
+                    x:Name="HowToPlayPanel"
+                    CornerRadius="28"
+                    BackgroundColor="White"
+                    HasShadow="False"
+                    Padding="20"
+                    TranslationY="500">
+
+                    <VerticalStackLayout Spacing="16">
+                        <BoxView
+                            HeightRequest="5"
+                            WidthRequest="46"
+                            Color="#D0D0D0"
+                            HorizontalOptions="Center" />
+
+                        <Label
+                            Text="How to Play"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="#222"
+                            HorizontalOptions="Center" />
+
+                        <Label
+                            Text="Read each emotional situation and choose the warmest, kindest, or most encouraging expression before the timer ends."
+                            FontSize="16"
+                            TextColor="#555" />
+
+                        <Label
+                            Text="- Tap the face or response that feels most positive&#10;- Watch the timer and answer quickly&#10;- Build your score across every round"
+                            FontSize="16"
+                            TextColor="#444" />
+
+                        <Button
+                            Text="Got it"
+                            HeightRequest="54"
+                            CornerRadius="27"
+                            BackgroundColor="#B65AF6"
+                            TextColor="White"
+                            Clicked="OnCloseHowToPlayClicked" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

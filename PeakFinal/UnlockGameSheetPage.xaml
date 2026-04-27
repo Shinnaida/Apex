@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.UnlockGameSheetPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#00000000"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Border BackgroundColor="#B3121C31"
+                StrokeThickness="0">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnBackdropTapped" />
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Grid Padding="24"
+              VerticalOptions="Center">
+            <Border x:Name="SheetCard"
+                    Padding="0"
+                    BackgroundColor="#F8FBFF"
+                    Stroke="#D9E7F6"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 34"
+                    TranslationY="26"
+                    Scale="0.96"
+                    MaximumWidthRequest="430"
+                    HorizontalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="#42071834"
+                            Offset="0,22"
+                            Opacity="0.34"
+                            Radius="36" />
+                </Border.Shadow>
+
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="0">
+                    <Grid Padding="24,24,24,18">
+                        <Grid.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#3A77FF" Offset="0" />
+                                <GradientStop Color="#6B55FF" Offset="0.58" />
+                                <GradientStop Color="#32C7F5" Offset="1" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <Border WidthRequest="190"
+                                HeightRequest="190"
+                                BackgroundColor="#18FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 95"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                TranslationX="40"
+                                TranslationY="-56" />
+
+                        <VerticalStackLayout Spacing="14"
+                                             HorizontalOptions="Center"
+                                             VerticalOptions="Center">
+                            <Border x:Name="IconShell"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    BackgroundColor="#F4F9FF"
+                                    Stroke="#34FFFFFF"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 32"
+                                    HorizontalOptions="Center">
+                                <Grid>
+                                    <Image x:Name="GameIconImage"
+                                           WidthRequest="68"
+                                           HeightRequest="68"
+                                           Aspect="AspectFit"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+
+                                    <Border WidthRequest="38"
+                                            HeightRequest="38"
+                                            BackgroundColor="#B3FFFFFF"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 19"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                        <Label Text="🔒"
+                                               FontSize="22"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center"
+                                               TextColor="#495B74" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <VerticalStackLayout Spacing="5"
+                                                 HorizontalOptions="Center">
+                                <Label Text="Unlock Game"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       CharacterSpacing="1.2"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#EAF5FF" />
+                                <Label x:Name="GameTitleLabel"
+                                       FontSize="30"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White" />
+                                <Label x:Name="RequirementLabel"
+                                       FontSize="14"
+                                       LineBreakMode="WordWrap"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="#E5F3FF" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <VerticalStackLayout Grid.Row="1"
+                                         Padding="22,18,22,0"
+                                         Spacing="16">
+                        <Border x:Name="BalanceCard"
+                                Padding="16"
+                                BackgroundColor="White"
+                                Stroke="#E1EAF4"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 24">
+                            <Grid ColumnDefinitions="*,*"
+                                  ColumnSpacing="14">
+                                <Border Padding="12"
+                                        BackgroundColor="#F5F9FF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 20">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Text="Unlock cost"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="#7690AB" />
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Image Source="rainbow_puzzle_icon.svg"
+                                                   WidthRequest="22"
+                                                   HeightRequest="22"
+                                                   Aspect="AspectFit" />
+                                            <Label x:Name="CostLabel"
+                                                   FontSize="25"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#1475E4" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <Border Grid.Column="1"
+                                        Padding="12"
+                                        BackgroundColor="#F5F9FF"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 20">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Text="Your balance"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="#7690AB" />
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Image Source="rainbow_puzzle_icon.svg"
+                                                   WidthRequest="22"
+                                                   HeightRequest="22"
+                                                   Aspect="AspectFit" />
+                                            <Label x:Name="BalanceLabel"
+                                                   FontSize="25"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#18344F" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="HintCard"
+                                Padding="15"
+                                BackgroundColor="#EEF7FF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 20">
+                            <Label x:Name="UnlockHintLabel"
+                                   FontSize="14"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="#4E6A84" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Grid Grid.Row="2"
+                          Padding="22,18,22,22"
+                          ColumnDefinitions="*,*"
+                          ColumnSpacing="12">
+                        <Button Grid.Column="0"
+                                Text="Not now"
+                                Clicked="OnCloseClicked"
+                                BackgroundColor="#EEF4FB"
+                                BorderColor="#DCE7F2"
+                                BorderWidth="1"
+                                TextColor="#31475E"
+                                HeightRequest="56"
+                                CornerRadius="24"
+                                FontSize="16"
+                                FontAttributes="Bold" />
+
+                        <Button Grid.Column="1"
+                                x:Name="UnlockButton"
+                                Text="Unlock now"
+                                Clicked="OnUnlockClicked"
+                                BackgroundColor="#2279F2"
+                                TextColor="White"
+                                HeightRequest="56"
+                                CornerRadius="24"
+                                FontSize="16"
+                                FontAttributes="Bold" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

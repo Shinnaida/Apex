@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="apexBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#46C0FF"/>
+      <stop offset="55%" stop-color="#1D9AF7"/>
+      <stop offset="100%" stop-color="#147BE9"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="108" fill="url(#apexBg)"/>
+  <rect x="42" y="42" width="428" height="428" rx="90" fill="none" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="12"/>
+
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M153 192c0-22 16-40 38-44 8-26 31-44 60-44 24 0 46 13 57 34 8-10 20-16 34-16 24 0 43 19 43 43 20 3 35 21 35 42 0 14-6 27-16 35"
+          stroke-width="14"/>
+    <path d="M188 247c0-13 10-24 23-27 3-19 19-33 39-33 12 0 23 5 30 14"
+          stroke-width="11"/>
+    <path d="M322 200c7-9 18-13 30-13 20 0 36 14 39 33 13 3 22 14 22 27"
+          stroke-width="11"/>
+    <circle cx="221" cy="192" r="9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="197" cy="247" r="9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="309" cy="192" r="9" fill="#FFFFFF" stroke="none"/>
+    <circle cx="333" cy="247" r="9" fill="#FFFFFF" stroke="none"/>
+  </g>
+
+  <path d="M265 125L143 349H203L265 229L327 349H387L265 125Z" fill="#FFFFFF"/>
+  <path d="M265 240L212 349H246L265 309L284 349H318L265 240Z" fill="url(#apexBg)"/>
+  <path d="M265 275L233 349H252L265 323L278 349H297L265 275Z" fill="#FFFFFF"/>
+</svg>

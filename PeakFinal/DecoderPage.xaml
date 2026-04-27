@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Peak.DecoderPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Padding="{OnPlatform Android='0,26,0,0', iOS='0,44,0,0'}"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+            <GradientStop Color="#FF315E" Offset="0" />
+            <GradientStop Color="#FF5A7E" Offset="0.55" />
+            <GradientStop Color="#E33D66" Offset="1" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <Grid RowDefinitions="*,Auto">
+            <ScrollView Grid.Row="0">
+                <VerticalStackLayout Padding="20,18,20,24" Spacing="16">
+                    <Label FontSize="28"
+                           Text="&#x2190;"
+                           TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Grid ColumnDefinitions="*,188" Margin="0,8,0,0">
+                        <VerticalStackLayout Spacing="8">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label FontAttributes="Bold"
+                                       FontSize="28"
+                                       Text="Decoder"
+                                       TextColor="White" />
+                                <Label Margin="0,3,0,0"
+                                       FontSize="24"
+                                       Text="&#x2328;"
+                                       TextColor="White" />
+                            </HorizontalStackLayout>
+
+                            <Label FontAttributes="Bold"
+                                   FontSize="16"
+                                   Text="Focus"
+                                   TextColor="White" />
+
+                            <Border HorizontalOptions="Start"
+                                    Stroke="#FFD7E2"
+                                    StrokeDashArray="2,4"
+                                    StrokeShape="RoundRectangle 1"
+                                    StrokeThickness="2"
+                                    WidthRequest="190" />
+
+                            <Grid ColumnDefinitions="42,*,Auto" Margin="0,8,0,0">
+                                <Border WidthRequest="32"
+                                        HeightRequest="32"
+                                        BackgroundColor="Transparent"
+                                        Padding="0"
+                                        Stroke="#FFD7E2"
+                                        StrokeShape="RoundRectangle 16"
+                                        StrokeThickness="1.5"
+                                        VerticalOptions="Start">
+                                    <Label FontSize="15"
+                                           HorizontalTextAlignment="Center"
+                                           Text="&#x2726;"
+                                           TextColor="White"
+                                           VerticalTextAlignment="Center" />
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="0">
+                                    <Label FontSize="14"
+                                           Text="Best Rank"
+                                           TextColor="#FFE6EC" />
+                                    <Label x:Name="BestRankLabel"
+                                           FontAttributes="Bold"
+                                           FontSize="20"
+                                           Text="Beginner"
+                                           TextColor="White" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <Border Grid.Column="1"
+                                Padding="16"
+                                BackgroundColor="#BE153D5B"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 34"
+                                HorizontalOptions="End">
+                            <VerticalStackLayout Spacing="12">
+                                <Label FontAttributes="Bold"
+                                       FontSize="14"
+                                       Text="Cipher card"
+                                       TextColor="#FFE4EC" />
+
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                                    <Border Grid.Row="0" Grid.Column="0" Padding="10,8" BackgroundColor="#33FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                        <Label FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" Text="Q -> B" TextColor="White" />
+                                    </Border>
+                                    <Border Grid.Row="0" Grid.Column="1" Padding="10,8" BackgroundColor="#33FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                        <Label FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" Text="M -> E" TextColor="White" />
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.Column="0" Padding="10,8" BackgroundColor="#33FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                        <Label FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" Text="T -> A" TextColor="White" />
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.Column="1" Padding="10,8" BackgroundColor="#33FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                                        <Label FontAttributes="Bold" FontSize="16" HorizontalTextAlignment="Center" Text="L -> K" TextColor="White" />
+                                    </Border>
+                                    <Border Grid.Row="2" Grid.ColumnSpan="2" Padding="10,10" BackgroundColor="#FFF0F5" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                                        <Label FontAttributes="Bold" FontSize="24" HorizontalTextAlignment="Center" Text="QMTL" TextColor="#9A2345" />
+                                    </Border>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border BackgroundColor="White"
+                            Padding="20,16"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 18">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Label FontSize="22"
+                                   Text="&#x1F3C6;"
+                                   TextColor="#FF4D79"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Margin="12,0,0,0"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   Text="BEST SCORE"
+                                   TextColor="#FF4D79"
+                                   VerticalOptions="Center" />
+                            <Label x:Name="BestScoreLabel"
+                                   Grid.Column="2"
+                                   FontAttributes="Bold"
+                                   FontSize="24"
+                                   Text="0"
+                                   TextColor="#333333"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Grid HeightRequest="56">
+                        <Button BackgroundColor="#C40739"
+                                Clicked="OnHowToPlayClicked"
+                                CornerRadius="14"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HeightRequest="56"
+                                Padding="54,0,0,0"
+                                Text="HOW TO PLAY"
+                                TextColor="White" />
+                        <Border WidthRequest="34"
+                                HeightRequest="34"
+                                Margin="10,0,0,0"
+                                BackgroundColor="White"
+                                Padding="0"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 17"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center">
+                            <Label FontSize="16"
+                                   HorizontalTextAlignment="Center"
+                                   Text="&#x2630;"
+                                   TextColor="#C40739"
+                                   VerticalTextAlignment="Center" />
+                        </Border>
+                    </Grid>
+
+                    <Border Margin="0,8,0,0"
+                            BackgroundColor="White"
+                            Padding="18,18,18,20"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Spacing="16">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Label FontSize="24"
+                                       Text="&#x21E7;"
+                                       TextColor="#FF4D79"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Margin="10,0,0,0"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       Text="Challenge"
+                                       TextColor="#FF4D79"
+                                       VerticalOptions="Center" />
+                            </Grid>
+
+                            <Border Stroke="#CFCFCF"
+                                    StrokeDashArray="4,4"
+                                    StrokeShape="RoundRectangle 1"
+                                    StrokeThickness="1" />
+
+                            <Label x:Name="ChallengeLabel"
+                                   FontSize="16"
+                                   Text="Score above 1400 to rank up to Novice"
+                                   TextColor="#444444" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border BackgroundColor="#6A2948"
+                            Margin="0,8,0,0"
+                            Padding="18"
+                            Stroke="#8E5D78"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Spacing="8">
+                            <Label FontAttributes="Bold"
+                                   FontSize="18"
+                                   Text="Sharpen your focus"
+                                   TextColor="White" />
+                            <Label FontSize="15"
+                                   Text="Decode each card fast. Every card gets its own 20-second clock, and pressure rises once the timer bar goes red."
+                                   TextColor="#FCECF3" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <Border Grid.Row="1"
+                    Margin="20,0,20,22"
+                    BackgroundColor="#D90A38"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28">
+                <Button BackgroundColor="Transparent"
+                        Clicked="OnPlayClicked"
+                        CornerRadius="28"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HeightRequest="58"
+                        Text="Play Decoder"
+                        TextColor="White" />
+            </Border>
+        </Grid>
+
+        <Grid x:Name="HowToPlayOverlay"
+              BackgroundColor="#80000000"
+              IsVisible="False"
+              Opacity="0"
+              ZIndex="20">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Border x:Name="HowToPlayPanel"
+                    HorizontalOptions="Fill"
+                    Margin="18,0,18,20"
+                    Padding="22"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 26"
+                    TranslationY="500"
+                    VerticalOptions="End">
+                <VerticalStackLayout Spacing="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label FontAttributes="Bold"
+                               FontSize="24"
+                               Text="How to play"
+                               TextColor="#222222" />
+                        <Label Grid.Column="1"
+                               FontSize="22"
+                               Text="&#x2715;"
+                               TextColor="#777777">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCloseHowToPlayClicked" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <Label FontSize="15"
+                           Text="Use the cipher key to decode the hidden word on each card." />
+                    <Label FontSize="15"
+                           Text="Each card has its own 20-second timer. Answer before it hits zero or the round is marked wrong." />
+                    <Label FontSize="15"
+                           Text="The timer bar turns red at 10 seconds to warn you the card is about to expire." />
+                    <Label FontSize="15"
+                           Text="Keep your streak alive to stack points and finish with your best score." />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

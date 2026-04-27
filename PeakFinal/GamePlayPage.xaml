@@ -1,0 +1,111 @@
+<ContentPage
+    x:Class="Peak.GamePlayPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+    Padding="18">
+
+    <!-- CHANGE HERE: row 3 becomes * -->
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="14">
+
+        <!-- Top progress -->
+        <Grid Grid.Row="0" RowDefinitions="Auto,Auto" RowSpacing="10">
+            <ProgressBar x:Name="TopProgressBar"
+                         HeightRequest="10"
+                         Progress="0"
+                         BackgroundColor="#EDEDED"
+                         ProgressColor="#1DA1F2" />
+
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                <Label x:Name="CategoryChip"
+                       Text="Category"
+                       FontSize="13"
+                       TextColor="White"
+                       Padding="10,5"
+                       BackgroundColor="#1DA1F2"
+                       VerticalOptions="Center" />
+
+                <Label x:Name="CounterLabel"
+                       Grid.Column="2"
+                       Text="1/10"
+                       FontSize="14"
+                       TextColor="#666"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+
+        <!-- Prompt -->
+        <Label Grid.Row="1"
+               x:Name="PromptLabel"
+               Text="Question"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#333"
+               HorizontalTextAlignment="Center"
+               Margin="0,100,0,0"/>
+
+        <!-- Optional image -->
+        <Image Grid.Row="2"
+               x:Name="QuestionImage"
+               IsVisible="False"
+               Aspect="AspectFit"
+               HeightRequest="260"
+               HorizontalOptions="Center" />
+
+        <!-- Answers (now expands to fill space) -->
+        <Grid Grid.Row="3"
+              ColumnDefinitions="*,*"
+              RowDefinitions="Auto,Auto"
+              ColumnSpacing="12"
+              RowSpacing="12"
+              Margin="0,40,0,0">
+            <!-- optional: keeps answers closer to bottom -->
+
+            <!-- your option buttons unchanged -->
+            <Button x:Name="Opt0" Grid.Row="0" Grid.Column="0" Clicked="OnOptionClicked"
+                    CornerRadius="22" HeightRequest="58" BackgroundColor="#F3F3F3"
+                    TextColor="#333" FontSize="18" />
+
+            <Button x:Name="Opt1" Grid.Row="0" Grid.Column="1" Clicked="OnOptionClicked"
+                    CornerRadius="22" HeightRequest="58" BackgroundColor="#F3F3F3"
+                    TextColor="#333" FontSize="18" />
+
+            <Button x:Name="Opt2" Grid.Row="1" Grid.Column="0" Clicked="OnOptionClicked"
+                    CornerRadius="22" HeightRequest="58" BackgroundColor="#F3F3F3"
+                    TextColor="#333" FontSize="18" />
+
+            <Button x:Name="Opt3" Grid.Row="1" Grid.Column="1" Clicked="OnOptionClicked"
+                    CornerRadius="22" HeightRequest="58" BackgroundColor="#F3F3F3"
+                    TextColor="#333" FontSize="18" />
+        </Grid>
+
+        <!-- Explanation + Next stays at bottom -->
+        <VerticalStackLayout Grid.Row="4" Spacing="4">
+            <Frame x:Name="ExplanationCard"
+                   IsVisible="False"
+                   CornerRadius="16"
+                   HasShadow="False"
+                   BorderColor="#EEEEEE"
+                   BackgroundColor="White"
+                   Padding="14">
+                <Label x:Name="ExplanationLabel"
+                       Text="Explanation"
+                       FontSize="15"
+                       TextColor="#666" />
+            </Frame>
+
+            <!-- <Button x:Name="NextButton"
+                    Text="Next"
+                    IsEnabled="False"
+                    Clicked="OnNextClicked"
+                    CornerRadius="28"
+                    HeightRequest="58"
+                    BackgroundColor="#1DA1F2"
+                    TextColor="White"
+                    FontSize="18"
+                    Margin="10"/> -->
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

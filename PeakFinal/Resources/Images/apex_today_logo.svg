@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="apexBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ab6ff"/>
+      <stop offset="100%" stop-color="#1d8ff0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="20" y="20" width="216" height="216" rx="42" fill="url(#apexBg)" stroke="#1284df" stroke-width="6"/>
+  <rect x="28" y="28" width="200" height="200" rx="34" fill="none" stroke="#e9fbff" stroke-width="5"/>
+
+  <path d="M56 92 102 72l14 12 17-22 21 17 15-11 31 24-26-6-21-18-18 22-12-11-18 14z" fill="#ffffff"/>
+
+  <path d="M54 182 68 108h34c18 0 27 7 27 21 0 9-4 16-11 20 7 4 10 10 8 20-3 17-16 25-37 25zm24-46h15c6 0 10-3 11-8 1-5-3-8-10-8H82zm-5 30h16c6 0 10-3 11-8 1-5-3-8-10-8H76zm47 16 11-74h31c20 0 30 8 30 24 0 10-5 18-14 22 8 4 11 11 9 20-3 16-17 24-39 24zm25-46h12c7 0 11-3 12-9 1-6-3-9-10-9h-11zm-5 30h14c7 0 11-3 12-8 1-6-3-9-11-9h-12zm39 16 19-38-9-36h25l4 21 13-21h27l-28 35 10 39h-26l-4-22-14 22z" fill="#ffffff"/>
+</svg>
