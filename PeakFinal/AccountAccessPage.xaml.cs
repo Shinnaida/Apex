@@ -1,12 +1,22 @@
 namespace Peak;
 
+public enum AccountAccessStartMode
+{
+    Auto,
+    Login,
+    Signup
+}
+
 public partial class AccountAccessPage : ContentPage
 {
+    readonly AccountAccessStartMode _startMode;
     bool _showingLogin = true;
 
-    public AccountAccessPage()
+    public AccountAccessPage(AccountAccessStartMode startMode = AccountAccessStartMode.Auto)
     {
         InitializeComponent();
+        _startMode = startMode;
+        _showingLogin = ResolveInitialTab(startMode);
 
         var lastUsername = LocalAccountStore.GetLastActiveUsername();
         RecentAccountLabel.Text = string.IsNullOrWhiteSpace(lastUsername) ? "Saved account" : lastUsername;
@@ -68,8 +78,11 @@ public partial class AccountAccessPage : ContentPage
         }
 
         var syncResult = await App.RefreshSignedInCloudStateAsync();
+        var savedPendingSummary = TryApplyPendingIqSummary();
         await ShowSyncDebugStatusAsync(
-            successMessage: $"Welcome back, {username}. Online sync succeeded. Loading your account...",
+            successMessage: savedPendingSummary
+                ? $"Welcome back, {username}. Your IQ summary was saved. Loading your account..."
+                : $"Welcome back, {username}. Online sync succeeded. Loading your account...",
             failurePrefix: "Signed in locally, but online sync failed.",
             syncResult);
         await Task.Delay(240);
@@ -110,8 +123,11 @@ public partial class AccountAccessPage : ContentPage
         LoginUsernameEntry.Text = username;
         LoginPasswordEntry.Text = string.Empty;
         var syncResult = await App.RefreshSignedInCloudStateAsync();
+        var savedPendingSummary = TryApplyPendingIqSummary();
         await ShowSyncDebugStatusAsync(
-            successMessage: $"Welcome back, {username}. Online sync succeeded. Loading your account...",
+            successMessage: savedPendingSummary
+                ? $"Welcome back, {username}. Your IQ summary was saved. Loading your account..."
+                : $"Welcome back, {username}. Online sync succeeded. Loading your account...",
             failurePrefix: "Signed in locally, but online sync failed.",
             syncResult);
         await Task.Delay(220);
@@ -138,8 +154,11 @@ public partial class AccountAccessPage : ContentPage
         SignupConfirmPasswordEntry.Text = string.Empty;
 
         var syncResult = await App.RefreshSignedInCloudStateAsync(isNewAccount: true);
+        var savedPendingSummary = TryApplyPendingIqSummary();
         await ShowSyncDebugStatusAsync(
-            successMessage: $"Account created for {username}. Online sync succeeded. Loading your account...",
+            successMessage: savedPendingSummary
+                ? $"Account created for {username}. Your IQ summary was saved. Loading your account..."
+                : $"Account created for {username}. Online sync succeeded. Loading your account...",
             failurePrefix: "Account created locally, but online sync failed.",
             syncResult);
         await Task.Delay(240);
@@ -164,17 +183,46 @@ public partial class AccountAccessPage : ContentPage
 
         if (_showingLogin)
         {
-            HeroTitleLabel.Text = "Welcome Back";
-            HeroSubtitleLabel.Text = "Your progress is saved on this device. Sign in and jump right back in.";
+            HeroTitleLabel.Text = PendingIqSummaryService.HasPendingSummary ? "Save your result" : "Welcome Back";
+            HeroSubtitleLabel.Text = PendingIqSummaryService.HasPendingSummary
+                ? "Sign in to attach your finished IQ summary, score, and stats to your profile."
+                : "Your progress is saved on this device. Sign in and jump right back in.";
             RecentAccountCard.IsVisible = true;
             _ = RefreshBiometricLoginButtonAsync();
             return;
         }
 
-        HeroTitleLabel.Text = "Join us";
-        HeroSubtitleLabel.Text = "Create a fresh account and start building your brain training routine today.";
+        HeroTitleLabel.Text = PendingIqSummaryService.HasPendingSummary ? "Create your account" : "Join us";
+        HeroSubtitleLabel.Text = PendingIqSummaryService.HasPendingSummary
+            ? "Sign up to keep this finished IQ summary, score, and brain stats on your new profile."
+            : "Create a fresh account and start building your brain training routine today.";
         RecentAccountCard.IsVisible = false;
         BiometricPanel.IsVisible = false;
+    }
+
+    static bool ResolveInitialTab(AccountAccessStartMode startMode)
+    {
+        return startMode switch
+        {
+            AccountAccessStartMode.Login => true,
+            AccountAccessStartMode.Signup => false,
+            _ => LocalAccountStore.HasAccount
+        };
+    }
+
+    static bool TryApplyPendingIqSummary()
+    {
+        if (!LocalAccountStore.IsSignedIn || !PendingIqSummaryService.TryTake(out var summary))
+        {
+            return false;
+        }
+
+        BrainScoreService.RecordIqSnapshot(
+            memory: summary.Memory,
+            problemSolving: summary.ProblemSolving,
+            language: summary.Language,
+            focus: summary.Focus);
+        return true;
     }
 
     async Task RefreshBiometricLoginButtonAsync()

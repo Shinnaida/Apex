@@ -194,31 +194,51 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Grid ColumnDefinitions="*,*"
-                      ColumnSpacing="12">
-                    <Button x:Name="BackButton"
-                            Text="BACK TO TESTS"
-                            CornerRadius="28"
-                            HeightRequest="58"
-                            BackgroundColor="#FFFFFF"
-                            BorderColor="#D2DCE8"
-                            BorderWidth="1"
-                            TextColor="#16314B"
-                            FontSize="16"
-                            FontAttributes="Bold"
-                            Clicked="OnBackToTestsClicked" />
+                <VerticalStackLayout Spacing="10">
+                    <Border x:Name="GuestPromptCard"
+                            IsVisible="False"
+                            Padding="16"
+                            BackgroundColor="#EAF3FF"
+                            Stroke="#C8DCF9"
+                            StrokeShape="RoundRectangle 18">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Save this result"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#16314B" />
+                            <Label x:Name="GuestPromptLabel"
+                                   Text="Log in or sign up to keep this IQ summary, score, and stats on your profile."
+                                   FontSize="13"
+                                   TextColor="#5F7690" />
+                        </VerticalStackLayout>
+                    </Border>
 
-                    <Button x:Name="PlayAgainButton"
-                            Grid.Column="1"
-                            Text="PLAY AGAIN"
-                            CornerRadius="28"
-                            HeightRequest="58"
-                            BackgroundColor="#58D95E"
-                            TextColor="White"
-                            FontSize="18"
-                            FontAttributes="Bold"
-                            Clicked="OnPlayAgainClicked" />
-                </Grid>
+                    <Grid ColumnDefinitions="*,*"
+                          ColumnSpacing="12">
+                        <Button x:Name="BackButton"
+                                Text="BACK TO TESTS"
+                                CornerRadius="28"
+                                HeightRequest="58"
+                                BackgroundColor="#FFFFFF"
+                                BorderColor="#D2DCE8"
+                                BorderWidth="1"
+                                TextColor="#16314B"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Clicked="OnBackToTestsClicked" />
+
+                        <Button x:Name="PlayAgainButton"
+                                Grid.Column="1"
+                                Text="PLAY AGAIN"
+                                CornerRadius="28"
+                                HeightRequest="58"
+                                BackgroundColor="#58D95E"
+                                TextColor="White"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                Clicked="OnPlayAgainClicked" />
+                    </Grid>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
 

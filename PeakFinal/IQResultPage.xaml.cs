@@ -3,6 +3,8 @@ namespace Peak;
 public partial class IQResultsPage : ContentPage
 {
     readonly IQSession _session;
+    readonly bool _requiresAccountPrompt;
+    bool _hasLoaded;
     bool _scoresRecorded;
     int _peakScore;
 
@@ -10,11 +12,41 @@ public partial class IQResultsPage : ContentPage
     {
         InitializeComponent();
         _session = session;
-
-        LoadResults();
+        _requiresAccountPrompt = !LocalAccountStore.IsSignedIn;
+        ApplyActionState();
     }
 
-    async void LoadResults()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_hasLoaded)
+        {
+            return;
+        }
+
+        _hasLoaded = true;
+        await LoadResultsAsync();
+    }
+
+    void ApplyActionState()
+    {
+        if (!_requiresAccountPrompt)
+        {
+            GuestPromptCard.IsVisible = false;
+            BackButton.Text = "BACK TO TESTS";
+            PlayAgainButton.Text = "PLAY AGAIN";
+            PlayAgainButton.BackgroundColor = Color.FromArgb("#58D95E");
+            return;
+        }
+
+        GuestPromptCard.IsVisible = true;
+        BackButton.Text = "LOG IN";
+        PlayAgainButton.Text = "SIGN UP";
+        PlayAgainButton.BackgroundColor = Color.FromArgb("#2D75F0");
+    }
+
+    async Task LoadResultsAsync()
     {
         OverallBar.Progress = 0;
         LogicBar.Progress = 0;
@@ -36,6 +68,12 @@ public partial class IQResultsPage : ContentPage
         BestScoreCalloutLabel.Text = _peakScore.ToString();
         RankCalloutLabel.Text = rankInfo.Name;
 
+        if (_requiresAccountPrompt)
+        {
+            SummaryLabel.Text = "Your score summary is ready. Log in or sign up next to keep this result on your profile.";
+            GuestPromptLabel.Text = $"Keep {_peakScore}/1000, {_session.CorrectCount}/{_session.Questions.Count} correct, and your updated brain stats.";
+        }
+
         await OverallBar.ProgressTo(overallPercent, 650, Easing.CubicOut);
 
         await SetCategoryRowAsync(IQCategory.LogicMath, LogicScore, LogicBar);
@@ -55,6 +93,19 @@ public partial class IQResultsPage : ContentPage
             _scoresRecorded = true;
         }
 
+        if (_requiresAccountPrompt)
+        {
+            PendingIqSummaryService.Store(new PendingIqSummary(
+                TestTitle: _session.Definition.Title,
+                PeakScore: _peakScore,
+                CorrectCount: _session.CorrectCount,
+                QuestionCount: _session.Questions.Count,
+                Memory: _session.GetMemoryNormalized(),
+                ProblemSolving: _session.GetProblemSolvingNormalized(),
+                Language: _session.GetLanguageNormalized(),
+                Focus: _session.GetFocusNormalized()));
+        }
+
         await CelebrationService.RunConfettiAsync(ConfettiHost);
     }
 
@@ -68,12 +119,26 @@ public partial class IQResultsPage : ContentPage
     async void OnBackToTestsClicked(object sender, EventArgs e)
     {
         await InteractionEffects.AnimateTapAsync(BackButton);
+
+        if (_requiresAccountPrompt)
+        {
+            await PageTransitionService.PushAsync(Navigation, new AccountAccessPage(AccountAccessStartMode.Login));
+            return;
+        }
+
         await PageTransitionService.GoToAsync("//tests");
     }
 
     async void OnPlayAgainClicked(object sender, EventArgs e)
     {
         await InteractionEffects.AnimateTapAsync(PlayAgainButton);
+
+        if (_requiresAccountPrompt)
+        {
+            await PageTransitionService.PushAsync(Navigation, new AccountAccessPage(AccountAccessStartMode.Signup));
+            return;
+        }
+
         await PageTransitionService.PushAsync(Navigation, () => new IQGamePage(IQSession.Create(_session.Definition)));
     }
 }
