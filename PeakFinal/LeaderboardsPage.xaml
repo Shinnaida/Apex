@@ -152,8 +152,7 @@
                             BackgroundColor="White"
                             Stroke="#DED8FF"
                             StrokeThickness="1"
-                            StrokeShape="RoundRectangle 18"
-                            Shadow="{OnPlatform WinUI='0,6,20,#110F2E5A', Android='0,6,20,#110F2E5A'}">
+                            StrokeShape="RoundRectangle 18">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnScopeTriggerTapped" />
                         </Border.GestureRecognizers>
