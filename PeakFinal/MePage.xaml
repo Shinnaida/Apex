@@ -248,7 +248,7 @@
                                         Stroke="#D8E8FA"
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 14">
-                                        <Label FontAttributes="Bold" FontSize="11" Text="LEVEL 12" TextColor="#6B73D9" />
+                                        <Label x:Name="LevelChipLabel" FontAttributes="Bold" FontSize="11" Text="BASECAMP" TextColor="#6B73D9" />
                                     </Border>
 
                                     <Border
@@ -257,7 +257,7 @@
                                         Stroke="#D8E8FA"
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 14">
-                                        <Label FontAttributes="Bold" FontSize="11" Text="7 DAY STREAK" TextColor="#4C95D8" />
+                                        <Label x:Name="StreakChipLabel" FontAttributes="Bold" FontSize="11" Text="0 DAY STREAK" TextColor="#4C95D8" />
                                     </Border>
                                 </HorizontalStackLayout>
 
@@ -317,14 +317,15 @@
 
                         <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
                             <VerticalStackLayout Spacing="6">
-                                <Label FontAttributes="Bold" FontSize="13" Text="XP Progress" TextColor="#4E6480" />
-                                <ProgressBar Progress="0.8625" ProgressColor="#9FCBFF" HeightRequest="10" BackgroundColor="#EAF2FC" />
+                                <Label x:Name="ProgressSectionLabel" FontAttributes="Bold" FontSize="13" Text="Rank Progress" TextColor="#4E6480" />
+                                <ProgressBar x:Name="ProgressSummaryBar" Progress="0" ProgressColor="#9FCBFF" HeightRequest="10" BackgroundColor="#EAF2FC" />
                             </VerticalStackLayout>
                             <Label
                                 Grid.Column="1"
+                                x:Name="ProgressValueLabel"
                                 FontAttributes="Bold"
                                 FontSize="13"
-                                Text="3,450 / 4,000 XP"
+                                Text="No saved stats yet"
                                 TextColor="#5F74A5"
                                 VerticalOptions="End" />
                         </Grid>
@@ -333,13 +334,13 @@
                             <Border BackgroundColor="#FFFFFFAA" Padding="14" Stroke="#E2ECF9" StrokeThickness="1" StrokeShape="RoundRectangle 18">
                                 <VerticalStackLayout Spacing="4">
                                     <Label FontSize="12" Text="Today&apos;s energy" TextColor="#6E7C93" />
-                                    <Label FontAttributes="Bold" FontSize="18" Text="Sharp and focused" TextColor="#22324A" />
+                                    <Label x:Name="EnergyStatusLabel" FontAttributes="Bold" FontSize="18" Text="Ready to begin" TextColor="#22324A" />
                                 </VerticalStackLayout>
                             </Border>
                             <Border Grid.Column="1" BackgroundColor="#FFFFFFAA" Padding="14" Stroke="#E2ECF9" StrokeThickness="1" StrokeShape="RoundRectangle 18">
                                 <VerticalStackLayout Spacing="4">
-                                    <Label FontSize="12" Text="Best streak" TextColor="#6E7C93" />
-                                    <Label FontAttributes="Bold" FontSize="18" Text="14 days" TextColor="#22324A" />
+                                    <Label FontSize="12" Text="Current streak" TextColor="#6E7C93" />
+                                    <Label x:Name="CurrentStreakValueLabel" FontAttributes="Bold" FontSize="18" Text="0 days" TextColor="#22324A" />
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>
@@ -350,16 +351,16 @@
                     <Border Style="{StaticResource StatCardStyle}">
                         <VerticalStackLayout Spacing="8">
                             <Label FontSize="22" Text="&#x25CE;" TextColor="#7DAEE8" />
-                            <Label FontSize="12" Text="Accuracy" TextColor="#6E7C93" />
-                            <Label FontAttributes="Bold" FontSize="22" Text="91%" TextColor="#22324A" />
+                            <Label FontSize="12" Text="Best Peak" TextColor="#6E7C93" />
+                            <Label x:Name="AccuracyValueLabel" FontAttributes="Bold" FontSize="22" Text="--" TextColor="#22324A" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Column="1" Style="{StaticResource StatCardStyle}">
                         <VerticalStackLayout Spacing="8">
                             <Label FontSize="22" Text="&#x1F3AE;" TextColor="#9787F6" />
-                            <Label FontSize="12" Text="Games Played" TextColor="#6E7C93" />
-                            <Label FontAttributes="Bold" FontSize="22" Text="124" TextColor="#22324A" />
+                            <Label FontSize="12" Text="Sessions" TextColor="#6E7C93" />
+                            <Label x:Name="SessionsValueLabel" FontAttributes="Bold" FontSize="22" Text="0" TextColor="#22324A" />
                         </VerticalStackLayout>
                     </Border>
 
@@ -367,15 +368,15 @@
                         <VerticalStackLayout Spacing="8">
                             <Label FontSize="22" Text="&#x25C9;" TextColor="#7DAEE8" />
                             <Label FontSize="12" Text="Focus" TextColor="#6E7C93" />
-                            <Label FontAttributes="Bold" FontSize="22" Text="82%" TextColor="#22324A" />
+                            <Label x:Name="FocusStatValueLabel" FontAttributes="Bold" FontSize="22" Text="0" TextColor="#22324A" />
                         </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource StatCardStyle}">
                         <VerticalStackLayout Spacing="8">
                             <Label FontSize="22" Text="&#x23F1;" TextColor="#9787F6" />
-                            <Label FontSize="12" Text="Training Time" TextColor="#6E7C93" />
-                            <Label FontAttributes="Bold" FontSize="22" Text="4h 32m" TextColor="#22324A" />
+                            <Label FontSize="12" Text="Active Days" TextColor="#6E7C93" />
+                            <Label x:Name="ActiveDaysValueLabel" FontAttributes="Bold" FontSize="22" Text="0" TextColor="#22324A" />
                         </VerticalStackLayout>
                     </Border>
                 </Grid>

@@ -92,12 +92,12 @@ public static class BrainScoreService
     private static readonly (string Name, int MinScore, string IconSource)[] PeakRanks =
     {
         ("Basecamp", 0, "rank_basecamp.svg"),
-        ("Foothill", 1800, "rank_foothill.svg"),
-        ("Ridge", 3200, "rank_ridge.svg"),
-        ("Ascent", 5200, "rank_ascent.svg"),
-        ("Summit", 7800, "rank_summit.svg"),
-        ("Apex", 11000, "rank_apex.svg"),
-        ("Peak", 15000, "rank_peak.svg")
+        ("Foothill", 550, "rank_foothill.svg"),
+        ("Ridge", 625, "rank_ridge.svg"),
+        ("Ascent", 700, "rank_ascent.svg"),
+        ("Summit", 775, "rank_summit.svg"),
+        ("Apex", 850, "rank_apex.svg"),
+        ("Peak", 925, "rank_peak.svg")
     };
 
     public static bool HasResolvedCurrentUserHistory
@@ -154,13 +154,10 @@ public static class BrainScoreService
 
     public static void PurgeLegacyLocalScoreStorage()
     {
+        // Keep the current per-user v2 history intact. This cleanup is only for
+        // pre-v2 keys and older one-off best score keys from previous versions.
         Preferences.Default.Remove(LegacyHistoryKey);
         Preferences.Default.Remove(LegacyMigrationKey);
-
-        foreach (var usernameKey in LocalAccountStore.GetStoredUsernameKeys())
-        {
-            Preferences.Default.Remove($"{HistoryKeyPrefix}{NormalizeHistoryUserKey(usernameKey)}");
-        }
 
         Preferences.Default.Remove("WordALikeBestScore");
         Preferences.Default.Remove("WordFreshBestScore");
@@ -227,6 +224,17 @@ public static class BrainScoreService
     public static BrainSkillScores GetCurrentScores()
     {
         var history = LoadHistory();
+        if (history.Count == 0)
+        {
+            return new BrainSkillScores(
+                PeakScore: 0,
+                Memory: 0,
+                ProblemSolving: 0,
+                Language: 0,
+                MentalAgility: 0,
+                Focus: 0,
+                Emotion: 0);
+        }
 
         var memoryScore = ToSkillScore(CalculateSkillNormalized(history, BrainSkill.Memory));
         var problemScore = ToSkillScore(CalculateSkillNormalized(history, BrainSkill.ProblemSolving));

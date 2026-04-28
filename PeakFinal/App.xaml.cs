@@ -6,7 +6,7 @@ namespace Peak
         {
             InitializeComponent();
             BrainScoreService.PurgeLegacyLocalScoreStorage();
-            MainPage = CreateInitialPage();
+            SetRootPage(CreateInitialPage());
 
             if (LocalAccountStore.IsSignedIn)
             {
@@ -41,7 +41,7 @@ namespace Peak
                 return;
             }
 
-            Current.MainPage = new AppShell();
+            SetRootPage(new AppShell());
         }
 
         public static void ShowSignedOutExperience()
@@ -51,7 +51,7 @@ namespace Peak
                 return;
             }
 
-            Current.MainPage = CreateSignedOutRoot();
+            SetRootPage(CreateSignedOutRoot());
         }
 
         protected override void OnSleep()
@@ -77,23 +77,59 @@ namespace Peak
                 return new OnlineSyncResult(false, "No signed-in account found for cloud sync.");
             }
 
-            if (isNewAccount)
+            try
             {
-                BrainScoreService.InitializeEmptyCurrentUserHistory();
+                if (isNewAccount)
+                {
+                    BrainScoreService.InitializeEmptyCurrentUserHistory();
+                }
+                else
+                {
+                    var historyResult = await BrainScoreService.RefreshCurrentUserFromDatabaseAsync();
+                    if (!historyResult.IsSuccess && !BrainScoreService.HasResolvedCurrentUserHistory)
+                    {
+                        await AchievementsService.RefreshCurrentUserAsync(syncLocalProgress: false);
+                        return historyResult;
+                    }
+                }
+
+                var scoreSyncResult = await PlayerLeaderboardService.SyncCurrentUserFullWithResultAsync();
+                await AchievementsService.RefreshCurrentUserAsync(syncLocalProgress: BrainScoreService.HasResolvedCurrentUserHistory);
+                return scoreSyncResult;
+            }
+            catch (Exception ex)
+            {
+                return new OnlineSyncResult(false, $"Signed-in sync did not complete. {ex.Message}");
+            }
+        }
+
+        static void SetRootPage(Page page)
+        {
+            if (Current is null)
+            {
+                return;
+            }
+
+            void ApplyRoot()
+            {
+                var window = Current.Windows.FirstOrDefault();
+                if (window is not null)
+                {
+                    window.Page = page;
+                    return;
+                }
+
+                Current.MainPage = page;
+            }
+
+            if (MainThread.IsMainThread)
+            {
+                ApplyRoot();
             }
             else
             {
-                var historyResult = await BrainScoreService.RefreshCurrentUserFromDatabaseAsync();
-                if (!historyResult.IsSuccess && !BrainScoreService.HasResolvedCurrentUserHistory)
-                {
-                    await AchievementsService.RefreshCurrentUserAsync(syncLocalProgress: false);
-                    return historyResult;
-                }
+                MainThread.BeginInvokeOnMainThread(ApplyRoot);
             }
-
-            var scoreSyncResult = await PlayerLeaderboardService.SyncCurrentUserFullWithResultAsync();
-            await AchievementsService.RefreshCurrentUserAsync(syncLocalProgress: BrainScoreService.HasResolvedCurrentUserHistory);
-            return scoreSyncResult;
         }
     }
 }

@@ -269,7 +269,15 @@ public partial class OnboardingPage : ContentPage
 
     async Task ContinueToTodayAsync()
     {
-        App.ShowSignedInExperience();
+        try
+        {
+            App.ShowSignedInExperience();
+        }
+        catch (Exception ex)
+        {
+            ShowFlowStatus($"Your account is ready, but opening the main app failed: {ex.Message}", isError: true);
+        }
+
         await Task.CompletedTask;
     }
 

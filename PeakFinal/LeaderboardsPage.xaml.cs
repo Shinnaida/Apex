@@ -40,11 +40,23 @@ public partial class LeaderboardsPage : ContentPage
             return;
         }
 
-        BuildScopeOptions();
-        ApplyTimeframeButtons();
-        ApplyScopeSelection();
-        _hasLoaded = true;
-        await RenderLeaderboardAsync();
+        try
+        {
+            BuildScopeOptions();
+            ApplyTimeframeButtons();
+            ApplyScopeSelection();
+            _hasLoaded = true;
+            await RenderLeaderboardAsync();
+        }
+        catch
+        {
+            LeaderboardSubtitleLabel.Text = "Rankings are unavailable right now. Please try again in a moment.";
+            BoardCaptionLabel.Text = "Showing no live data";
+            InsightRankLabel.Text = "--";
+            InsightTitleLabel.Text = "Rankings unavailable";
+            InsightDetailLabel.Text = "Your saved data is safe. Try reopening rankings after the app finishes syncing.";
+            _hasLoaded = true;
+        }
     }
 
     async void OnBrainTapped(object sender, EventArgs e)

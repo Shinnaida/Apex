@@ -37,6 +37,8 @@ public partial class MePage : ContentPage
 
         if (_hasLoaded)
         {
+            RefreshProfileMetrics();
+            await RefreshBiometricUiAsync();
             return;
         }
 
@@ -62,8 +64,85 @@ public partial class MePage : ContentPage
         LoadAccessibilityPreferences();
         ApplyAccessibilityPreview();
         LoadSavedAvatar();
+        RefreshProfileMetrics();
         RefreshRankBadge();
         await RefreshBiometricUiAsync();
+    }
+
+    private void RefreshProfileMetrics()
+    {
+        var scores = BrainScoreService.GetCurrentScores();
+        var sessions = BrainScoreService.GetRecordedSessionCount();
+        var activeDays = BrainScoreService.GetActiveDayCount();
+        var streakDays = BrainScoreService.GetCurrentStreakDays();
+
+        if (sessions == 0)
+        {
+            LevelChipLabel.Text = "NEW";
+            StreakChipLabel.Text = "0 DAY STREAK";
+            CurrentStreakValueLabel.Text = "No streak yet";
+            SessionsValueLabel.Text = "0";
+            FocusStatValueLabel.Text = "0";
+            ActiveDaysValueLabel.Text = "0";
+            AccuracyValueLabel.Text = "0/1000";
+            ProgressSectionLabel.Text = "Start your first session";
+            ProgressSummaryBar.Progress = 0;
+            ProgressValueLabel.Text = "No saved stats yet";
+            EnergyStatusLabel.Text = "Ready to begin";
+            return;
+        }
+
+        var tiers = BrainScoreService.GetPeakRankTiers();
+        var currentTier = tiers.Last(t => scores.PeakScore >= t.MinScore);
+        var nextTier = tiers.FirstOrDefault(t => t.MinScore > scores.PeakScore);
+
+        LevelChipLabel.Text = currentTier.Name.ToUpperInvariant();
+        StreakChipLabel.Text = $"{streakDays} DAY STREAK";
+        CurrentStreakValueLabel.Text = $"{streakDays} day{(streakDays == 1 ? string.Empty : "s")}";
+        SessionsValueLabel.Text = sessions.ToString();
+        FocusStatValueLabel.Text = scores.Focus.ToString();
+        ActiveDaysValueLabel.Text = activeDays.ToString();
+        AccuracyValueLabel.Text = $"{scores.PeakScore}/1000";
+
+        if (nextTier is null)
+        {
+            ProgressSectionLabel.Text = "Top Rank";
+            ProgressSummaryBar.Progress = 1;
+            ProgressValueLabel.Text = "Top rank reached";
+        }
+        else
+        {
+            var span = Math.Max(1, nextTier.MinScore - currentTier.MinScore);
+            var progress = Math.Clamp((scores.PeakScore - currentTier.MinScore) / (double)span, 0, 1);
+            ProgressSectionLabel.Text = $"{currentTier.Name} to {nextTier.Name}";
+            ProgressSummaryBar.Progress = progress;
+            ProgressValueLabel.Text = $"{scores.PeakScore} / {nextTier.MinScore} pts";
+        }
+
+        EnergyStatusLabel.Text = sessions == 0
+            ? "Ready to begin"
+            : GetEnergySummary(scores);
+    }
+
+    private static string GetEnergySummary(BrainSkillScores scores)
+    {
+        var strongest = new[]
+        {
+            ("Memory", scores.Memory),
+            ("Problem Solving", scores.ProblemSolving),
+            ("Language", scores.Language),
+            ("Focus", scores.Focus),
+            ("Mental Agility", scores.MentalAgility)
+        }
+        .OrderByDescending(item => item.Item2)
+        .First();
+
+        return strongest.Item2 switch
+        {
+            >= 185 => $"{strongest.Item1} is on fire",
+            >= 165 => $"{strongest.Item1} is looking strong",
+            _ => $"{strongest.Item1} is warming up"
+        };
     }
 
     private void RefreshRankBadge()

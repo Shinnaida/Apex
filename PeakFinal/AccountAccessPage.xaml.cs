@@ -86,7 +86,14 @@ public partial class AccountAccessPage : ContentPage
             failurePrefix: "Signed in locally, but online sync failed.",
             syncResult);
         await Task.Delay(240);
-        App.ShowSignedInExperience();
+        try
+        {
+            App.ShowSignedInExperience();
+        }
+        catch (Exception ex)
+        {
+            ShowFlowStatus($"Signed in, but opening the main app failed: {ex.Message}", isError: true);
+        }
     }
 
     async void OnBiometricSignInClicked(object sender, EventArgs e)
@@ -131,7 +138,14 @@ public partial class AccountAccessPage : ContentPage
             failurePrefix: "Signed in locally, but online sync failed.",
             syncResult);
         await Task.Delay(220);
-        App.ShowSignedInExperience();
+        try
+        {
+            App.ShowSignedInExperience();
+        }
+        catch (Exception ex)
+        {
+            ShowFlowStatus($"Signed in, but opening the main app failed: {ex.Message}", isError: true);
+        }
     }
 
     async void OnCreateAccountClicked(object sender, EventArgs e)
@@ -162,7 +176,14 @@ public partial class AccountAccessPage : ContentPage
             failurePrefix: "Account created locally, but online sync failed.",
             syncResult);
         await Task.Delay(240);
-        App.ShowSignedInExperience();
+        try
+        {
+            App.ShowSignedInExperience();
+        }
+        catch (Exception ex)
+        {
+            ShowFlowStatus($"Account created, but opening the main app failed: {ex.Message}", isError: true);
+        }
     }
 
     async void OnBackToOnboardingClicked(object sender, EventArgs e)

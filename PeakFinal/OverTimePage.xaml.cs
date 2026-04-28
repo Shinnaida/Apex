@@ -53,12 +53,21 @@ public partial class OverTimePage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        CalendarPicker.MaximumDate = DateTime.Today;
-        _isSyncingCalendarDate = true;
-        CalendarPicker.Date = _customStartDate;
-        _isSyncingCalendarDate = false;
-        ApplyFilter(_activeFilter);
-        ApplyAccessibility();
+        try
+        {
+            CalendarPicker.MaximumDate = DateTime.Today;
+            _isSyncingCalendarDate = true;
+            CalendarPicker.Date = _customStartDate;
+            _isSyncingCalendarDate = false;
+            ApplyFilter(_activeFilter);
+            ApplyAccessibility();
+        }
+        catch
+        {
+            OverTimeTitleLabel.Text = "LAST WEEK OF PROGRESS";
+            OverTimeSubtitleLabel.Text = "Your trend will appear after your first saved session.";
+            ApplyAccessibility();
+        }
     }
 
     async void OnBrainTapped(object sender, EventArgs e)

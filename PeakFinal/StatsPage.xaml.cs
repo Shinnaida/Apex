@@ -53,9 +53,22 @@ public partial class StatsPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        ApplyLiveScores();
-        ApplyAccessibility();
-        await AnimateStatBarsAsync();
+        try
+        {
+            ApplyLiveScores();
+            ApplyAccessibility();
+            await AnimateStatBarsAsync();
+        }
+        catch
+        {
+            ApplyAccessibility();
+            SetScores(0, 0, 0, 0, 0, 0);
+            ApplyGoal(0);
+            PeakRankLabel.Text = "Basecamp";
+            PeakRankHintLabel.Text = "Stats will appear after your first saved session.";
+            RenderRankLadder(0);
+            ApplyBarWidthsImmediate();
+        }
     }
 
     protected override void OnDisappearing()
@@ -67,6 +80,25 @@ public partial class StatsPage : ContentPage
     void ApplyLiveScores()
     {
         var scores = BrainScoreService.GetCurrentScores();
+        var recordedSessions = BrainScoreService.GetRecordedSessionCount();
+
+        if (recordedSessions == 0)
+        {
+            SetScores(
+                peakScore: 0,
+                memory: 0,
+                problemSolving: 0,
+                language: 0,
+                mentalAgility: 0,
+                focus: 0);
+            ApplyGoal(0);
+            ApplyComparison(scores);
+            PeakRankLabel.Text = "Basecamp";
+            PeakRankHintLabel.Text = "Stats will appear after your first saved session.";
+            RenderRankLadder(0);
+            return;
+        }
+
         var rank = BrainScoreService.GetPeakRankInfo(scores.PeakScore);
 
         SetScores(

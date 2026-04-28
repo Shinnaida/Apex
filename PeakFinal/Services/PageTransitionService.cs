@@ -29,7 +29,18 @@ public static class PageTransitionService
 
             if (Shell.Current is not null)
             {
-                await Shell.Current.GoToAsync(route, false);
+                try
+                {
+                    await Shell.Current.GoToAsync(route, false);
+                }
+                catch
+                {
+                    if (TryCreateFallbackPage(route, out var fallbackPage))
+                    {
+                        PreparePage(fallbackPage);
+                        await Shell.Current.Navigation.PushAsync(fallbackPage, false);
+                    }
+                }
             }
         }
         finally
@@ -50,7 +61,18 @@ public static class PageTransitionService
 
             if (Shell.Current is not null)
             {
-                await Shell.Current.GoToAsync(route, false, parameters);
+                try
+                {
+                    await Shell.Current.GoToAsync(route, false, parameters);
+                }
+                catch
+                {
+                    if (TryCreateFallbackPage(route, out var fallbackPage))
+                    {
+                        PreparePage(fallbackPage);
+                        await Shell.Current.Navigation.PushAsync(fallbackPage, false);
+                    }
+                }
             }
         }
         finally
@@ -115,7 +137,14 @@ public static class PageTransitionService
             }
 
             PreparePage(page);
-            await navigation.PushAsync(page, false);
+            try
+            {
+                await navigation.PushAsync(page, false);
+            }
+            catch
+            {
+                // Keep the app responsive if a platform navigation edge case occurs.
+            }
         }
         finally
         {
@@ -130,7 +159,14 @@ public static class PageTransitionService
         {
             if (navigation.NavigationStack.Count > 1)
             {
-                await navigation.PopAsync(false);
+                try
+                {
+                    await navigation.PopAsync(false);
+                }
+                catch
+                {
+                    // Ignore platform-specific pop failures so the app does not crash.
+                }
             }
         }
         finally
@@ -227,6 +263,33 @@ public static class PageTransitionService
             "UniqueGamePage" => true,
             _ => false
         };
+    }
+
+    static bool TryCreateFallbackPage(string route, out Page page)
+    {
+        var normalized = route.Trim().TrimStart('/').Split('?', '#')[0];
+        switch (normalized)
+        {
+            case nameof(StatsPage):
+            case "stats":
+                page = new StatsPage();
+                return true;
+            case nameof(OverTimePage):
+                page = new OverTimePage();
+                return true;
+            case nameof(GamesStatsPage):
+                page = new GamesStatsPage();
+                return true;
+            case nameof(LeaderboardsPage):
+                page = new LeaderboardsPage();
+                return true;
+            case nameof(ComparePage):
+                page = new ComparePage();
+                return true;
+            default:
+                page = null!;
+                return false;
+        }
     }
 
     static async Task AnimatePageAsync(Page? page)

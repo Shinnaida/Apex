@@ -31,7 +31,15 @@ public partial class GamesStatsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        RenderPlayedGames();
+        try
+        {
+            RenderPlayedGames();
+        }
+        catch
+        {
+            GamesSectionsHost.Children.Clear();
+            EmptyStateCard.IsVisible = true;
+        }
     }
 
     async void OnBrainTapped(object sender, EventArgs e)
