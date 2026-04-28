@@ -211,7 +211,7 @@
                     </Border.Shadow>
 
                     <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14">
-                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
                             <Frame
                                 x:Name="AvatarFrame"
                                 HeightRequest="88"
@@ -275,44 +275,6 @@
                                     TextColor="#6E7C93" />
                             </VerticalStackLayout>
 
-                            <Border
-                                x:Name="RankBadgeBorder"
-                                Grid.Column="2"
-                                BackgroundColor="#FFFFFF"
-                                Padding="10,8"
-                                Stroke="#D8E8FA"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 18"
-                                VerticalOptions="Start">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnRankBadgeTapped" />
-                                </Border.GestureRecognizers>
-
-                                <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
-                                    <Image
-                                        x:Name="RankBadgeIcon"
-                                        Source="rank_basecamp.svg"
-                                        WidthRequest="16"
-                                        HeightRequest="16"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        x:Name="RankBadgeWordLabel"
-                                        Grid.Column="1"
-                                        FontAttributes="Bold"
-                                        FontSize="10"
-                                        Text="RANK"
-                                        TextColor="#6E7C93"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        x:Name="RankBadgeLabel"
-                                        Grid.Column="2"
-                                        FontAttributes="Bold"
-                                        FontSize="12"
-                                        Text="Basecamp"
-                                        TextColor="#22324A"
-                                        VerticalOptions="Center" />
-                                </Grid>
-                            </Border>
                         </Grid>
 
                         <Grid Grid.Row="1" ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -344,6 +306,45 @@
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>
+
+                        <Border
+                            x:Name="RankBadgeBorder"
+                            Grid.Row="3"
+                            BackgroundColor="#FFFFFF"
+                            Padding="12,10"
+                            Stroke="#D8E8FA"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 18"
+                            HorizontalOptions="Start">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRankBadgeTapped" />
+                            </Border.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
+                                <Image
+                                    x:Name="RankBadgeIcon"
+                                    Source="rank_basecamp.svg"
+                                    WidthRequest="16"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    x:Name="RankBadgeWordLabel"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="10"
+                                    Text="RANK"
+                                    TextColor="#6E7C93"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    x:Name="RankBadgeLabel"
+                                    Grid.Column="2"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="Basecamp"
+                                    TextColor="#22324A"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Border>
 

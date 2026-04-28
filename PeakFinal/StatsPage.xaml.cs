@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
+using Microsoft.Maui.Storage;
 
 namespace Peak;
 
@@ -566,11 +567,31 @@ public partial class StatsPage : ContentPage
                 ? profile.Username.Trim()
                 : "Apex Player";
 
-            await Share.Default.RequestAsync(new ShareTextRequest
+            var screenshot = await Screenshot.Default.CaptureAsync();
+            if (screenshot is null)
             {
-                Title = "Share your Apex Brain summary",
-                Subject = "Apex Brain summary",
-                Text = BuildStatsShareText(playerName, rank.Name, scores)
+                throw new InvalidOperationException("Screenshot capture is not available on this device.");
+            }
+
+            var safePlayerName = string.Concat(playerName.Where(ch => char.IsLetterOrDigit(ch) || ch == '_' || ch == '-'));
+            if (string.IsNullOrWhiteSpace(safePlayerName))
+            {
+                safePlayerName = "apex-player";
+            }
+
+            var fileName = $"apex-stats-{safePlayerName.ToLowerInvariant()}-{DateTime.UtcNow:yyyyMMddHHmmss}.png";
+            var filePath = Path.Combine(FileSystem.CacheDirectory, fileName);
+
+            await using (var sourceStream = await screenshot.OpenReadAsync())
+            await using (var destinationStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                await sourceStream.CopyToAsync(destinationStream);
+            }
+
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = $"Share {playerName}'s Apex Brain snapshot",
+                File = new ShareFile(filePath, "image/png")
             });
         }
         catch (Exception ex)
