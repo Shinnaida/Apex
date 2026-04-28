@@ -38,6 +38,7 @@ public partial class MePage : ContentPage
         if (_hasLoaded)
         {
             RefreshProfileMetrics();
+            RefreshMindProfile();
             await RefreshBiometricUiAsync();
             return;
         }
@@ -65,6 +66,7 @@ public partial class MePage : ContentPage
         ApplyAccessibilityPreview();
         LoadSavedAvatar();
         RefreshProfileMetrics();
+        RefreshMindProfile();
         RefreshRankBadge();
         await RefreshBiometricUiAsync();
     }
@@ -122,6 +124,31 @@ public partial class MePage : ContentPage
         EnergyStatusLabel.Text = sessions == 0
             ? "Ready to begin"
             : GetEnergySummary(scores);
+    }
+
+    private void RefreshMindProfile()
+    {
+        var scores = BrainScoreService.GetCurrentScores();
+        var sessions = BrainScoreService.GetRecordedSessionCount();
+
+        MindProfileSubtitleLabel.Text = sessions == 0
+            ? "Your mental lanes will appear after your first saved session."
+            : "Your strongest mental lanes today.";
+
+        ApplyMindProfileLane(MindProfileMemoryValueLabel, MindProfileMemoryBar, scores.Memory);
+        ApplyMindProfileLane(MindProfileFocusValueLabel, MindProfileFocusBar, scores.Focus);
+        ApplyMindProfileLane(MindProfileLanguageValueLabel, MindProfileLanguageBar, scores.Language);
+        ApplyMindProfileLane(MindProfileAgilityValueLabel, MindProfileAgilityBar, scores.MentalAgility);
+        ApplyMindProfileLane(MindProfileProblemSolvingValueLabel, MindProfileProblemSolvingBar, scores.ProblemSolving);
+    }
+
+    private static void ApplyMindProfileLane(Label valueLabel, ProgressBar progressBar, int score)
+    {
+        var clampedScore = Math.Clamp(score, 0, 200);
+        var percentage = (int)Math.Round((clampedScore / 200d) * 100d);
+
+        valueLabel.Text = $"{percentage}%";
+        progressBar.Progress = percentage / 100d;
     }
 
     private static string GetEnergySummary(BrainSkillScores scores)

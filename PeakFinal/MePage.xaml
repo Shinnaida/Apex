@@ -390,49 +390,49 @@
                             <Label FontSize="18" Text="&#x1F9E0;" TextColor="#7DAEE8" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" Spacing="2">
                                 <Label Style="{StaticResource SectionTitleStyle}" Text="Mind Profile" />
-                                <Label Style="{StaticResource SectionSubtitleStyle}" Text="Your strongest mental lanes today." />
+                                <Label x:Name="MindProfileSubtitleLabel" Style="{StaticResource SectionSubtitleStyle}" Text="Your strongest mental lanes today." />
                             </VerticalStackLayout>
                         </Grid>
 
                         <VerticalStackLayout Spacing="14">
                             <VerticalStackLayout Spacing="6">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Label FontSize="14" Text="Memory" TextColor="#22324A" />
-                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="86%" TextColor="#6B73D9" />
+                                    <Label x:Name="MindProfileMemoryLabel" FontSize="14" Text="Memory" TextColor="#22324A" />
+                                    <Label x:Name="MindProfileMemoryValueLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="0%" TextColor="#6B73D9" />
                                 </Grid>
-                                <ProgressBar Progress="0.86" ProgressColor="#A9D6FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                                <ProgressBar x:Name="MindProfileMemoryBar" Progress="0" ProgressColor="#A9D6FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Spacing="6">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Label FontSize="14" Text="Focus" TextColor="#22324A" />
-                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="82%" TextColor="#7A8FF1" />
+                                    <Label x:Name="MindProfileFocusLabel" FontSize="14" Text="Focus" TextColor="#22324A" />
+                                    <Label x:Name="MindProfileFocusValueLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="0%" TextColor="#7A8FF1" />
                                 </Grid>
-                                <ProgressBar Progress="0.82" ProgressColor="#B8C7FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                                <ProgressBar x:Name="MindProfileFocusBar" Progress="0" ProgressColor="#B8C7FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Spacing="6">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Label FontSize="14" Text="Logic" TextColor="#22324A" />
-                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="78%" TextColor="#7DAEE8" />
+                                    <Label x:Name="MindProfileLanguageLabel" FontSize="14" Text="Language" TextColor="#22324A" />
+                                    <Label x:Name="MindProfileLanguageValueLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="0%" TextColor="#7DAEE8" />
                                 </Grid>
-                                <ProgressBar Progress="0.78" ProgressColor="#9FD8F8" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                                <ProgressBar x:Name="MindProfileLanguageBar" Progress="0" ProgressColor="#9FD8F8" HeightRequest="8" BackgroundColor="#EEF4FB" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Spacing="6">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Label FontSize="14" Text="Speed" TextColor="#22324A" />
-                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="74%" TextColor="#8A96F1" />
+                                    <Label x:Name="MindProfileAgilityLabel" FontSize="14" Text="Mental Agility" TextColor="#22324A" />
+                                    <Label x:Name="MindProfileAgilityValueLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="0%" TextColor="#8A96F1" />
                                 </Grid>
-                                <ProgressBar Progress="0.74" ProgressColor="#CDBDFF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                                <ProgressBar x:Name="MindProfileAgilityBar" Progress="0" ProgressColor="#CDBDFF" HeightRequest="8" BackgroundColor="#EEF4FB" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Spacing="6">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Label FontSize="14" Text="Problem Solving" TextColor="#22324A" />
-                                    <Label Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="85%" TextColor="#6B73D9" />
+                                    <Label x:Name="MindProfileProblemSolvingLabel" FontSize="14" Text="Problem Solving" TextColor="#22324A" />
+                                    <Label x:Name="MindProfileProblemSolvingValueLabel" Grid.Column="1" FontAttributes="Bold" FontSize="13" Text="0%" TextColor="#6B73D9" />
                                 </Grid>
-                                <ProgressBar Progress="0.85" ProgressColor="#B5D3FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
+                                <ProgressBar x:Name="MindProfileProblemSolvingBar" Progress="0" ProgressColor="#B5D3FF" HeightRequest="8" BackgroundColor="#EEF4FB" />
                             </VerticalStackLayout>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
