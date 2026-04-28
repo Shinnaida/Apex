@@ -366,25 +366,37 @@ public partial class LeaderboardsPage : ContentPage
             InsightTitleLabel.Text = "Loading rankings...";
             InsightDetailLabel.Text = "We are refreshing the latest player standings.";
 
-            await App.RefreshSignedInCloudStateAsync();
-            var result = await PlayerLeaderboardService.GetLeaderboardAsync(25, _currentTimeframe, _selectedGameSourceId);
-            var orderedEntries = result.Entries
-                .OrderBy(entry => entry.Rank)
-                .ToList();
-
-            _rankChangeLabels = ApplyRankChanges(orderedEntries);
-
-            LeaderboardSubtitleLabel.Text = result.Message;
-            BoardCaptionLabel.Text = BuildBoardCaption(orderedEntries, _currentTimeframe, _selectedGameSourceId);
-
-            RenderInsight(orderedEntries);
-            await RenderPodiumAsync(orderedEntries);
-            RenderRankedList(orderedEntries);
-
-            if (Content is VisualElement pageRoot)
+            try
             {
-                pageRoot.Opacity = 0.98;
-                await pageRoot.FadeTo(1, 120, Easing.CubicOut);
+                await App.RefreshSignedInCloudStateAsync();
+                var result = await PlayerLeaderboardService.GetLeaderboardAsync(25, _currentTimeframe, _selectedGameSourceId);
+                var orderedEntries = result.Entries
+                    .Where(entry => !string.IsNullOrWhiteSpace(entry.PlayerId))
+                    .GroupBy(entry => entry.PlayerId, StringComparer.OrdinalIgnoreCase)
+                    .Select(group => group
+                        .OrderBy(entry => entry.Rank)
+                        .First())
+                    .OrderBy(entry => entry.Rank)
+                    .ToList();
+
+                _rankChangeLabels = ApplyRankChanges(orderedEntries);
+
+                LeaderboardSubtitleLabel.Text = result.Message;
+                BoardCaptionLabel.Text = BuildBoardCaption(orderedEntries, _currentTimeframe, _selectedGameSourceId);
+
+                RenderInsight(orderedEntries);
+                await RenderPodiumAsync(orderedEntries);
+                RenderRankedList(orderedEntries);
+
+                if (Content is VisualElement pageRoot)
+                {
+                    pageRoot.Opacity = 0.98;
+                    await pageRoot.FadeTo(1, 120, Easing.CubicOut);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowLeaderboardUnavailable($"Rankings are unavailable right now. {ex.Message}");
             }
         }
         finally
@@ -422,9 +434,44 @@ public partial class LeaderboardsPage : ContentPage
             }
         }
 
-        var current = entries.ToDictionary(entry => entry.PlayerId, entry => entry.Rank, StringComparer.OrdinalIgnoreCase);
+        var current = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var entry in entries)
+        {
+            if (string.IsNullOrWhiteSpace(entry.PlayerId) || current.ContainsKey(entry.PlayerId))
+            {
+                continue;
+            }
+
+            current[entry.PlayerId] = entry.Rank;
+        }
+
         SaveRankSnapshot(snapshotKey, current);
         return labels;
+    }
+
+    private void ShowLeaderboardUnavailable(string message)
+    {
+        _rankChangeLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        PodiumHost.Children.Clear();
+        LeaderboardHost.Children.Clear();
+        CelebrationLayer.Children.Clear();
+        CelebrationLayer.IsVisible = false;
+
+        LeaderboardSubtitleLabel.Text = message;
+        BoardCaptionLabel.Text = "Showing no live data";
+        InsightCard.BackgroundColor = Color.FromArgb("#A19BCB");
+        InsightRankLabel.Text = "--";
+        InsightTitleLabel.Text = "Rankings unavailable";
+        InsightDetailLabel.Text = "Your saved data is safe. Try reopening rankings after the app finishes syncing.";
+
+        LeaderboardHost.Children.Add(new Label
+        {
+            Text = "No leaderboard data is available right now.",
+            FontSize = 13,
+            TextColor = Color.FromArgb("#8F88B2"),
+            HorizontalTextAlignment = TextAlignment.Center,
+            Margin = new Thickness(0, 8, 0, 4)
+        });
     }
 
     private string BuildRankSnapshotKey()
@@ -551,7 +598,14 @@ public partial class LeaderboardsPage : ContentPage
         var champion = podiumParts.FirstOrDefault(parts => parts.DisplayRank == 1);
         if (champion is not null && first is not null)
         {
-            await PlayTopEffectsAsync(champion);
+            try
+            {
+                await PlayTopEffectsAsync(champion);
+            }
+            catch
+            {
+                // Decorative effects should never crash rankings on device.
+            }
         }
     }
 
@@ -897,27 +951,35 @@ public partial class LeaderboardsPage : ContentPage
 
     private async Task ShowProfileAsync(PlayerLeaderboardEntry entry)
     {
-        ApplyProfileDetails(new PlayerProfileDetails(
-            Name: entry.Name,
-            AvatarText: entry.AvatarText,
-            AvatarImageSource: entry.AvatarImageSource,
-            CurrentRank: entry.Rank,
-            RankLabel: _selectedGameSourceId is null
-                ? $"Overall rank #{entry.Rank}"
-                : $"{PlayerLeaderboardService.GetGameDisplayName(_selectedGameSourceId)} rank #{entry.Rank}",
-            BestSkillName: "Loading...",
-            GamesPlayed: 0,
-            Score: entry.PeakScore,
-            ScoreLabel: _selectedGameSourceId is null
-                ? "Peak Brain Score"
-                : $"{PlayerLeaderboardService.GetGameDisplayName(_selectedGameSourceId)} best",
-            AchievementSummaryText: "Loading achievements...",
-            Achievements: Array.Empty<AchievementItem>()));
+        try
+        {
+            ApplyProfileDetails(new PlayerProfileDetails(
+                Name: entry.Name,
+                AvatarText: entry.AvatarText,
+                AvatarImageSource: entry.AvatarImageSource,
+                CurrentRank: entry.Rank,
+                RankLabel: _selectedGameSourceId is null
+                    ? $"Overall rank #{entry.Rank}"
+                    : $"{PlayerLeaderboardService.GetGameDisplayName(_selectedGameSourceId)} rank #{entry.Rank}",
+                BestSkillName: "Loading...",
+                GamesPlayed: 0,
+                Score: entry.PeakScore,
+                ScoreLabel: _selectedGameSourceId is null
+                    ? "Peak Brain Score"
+                    : $"{PlayerLeaderboardService.GetGameDisplayName(_selectedGameSourceId)} best",
+                AchievementSummaryText: "Loading achievements...",
+                Achievements: Array.Empty<AchievementItem>()));
 
-        await ShowProfileOverlayAsync();
+            await ShowProfileOverlayAsync();
 
-        var details = await PlayerLeaderboardService.GetPlayerProfileAsync(entry, _currentTimeframe, _selectedGameSourceId);
-        ApplyProfileDetails(details);
+            var details = await PlayerLeaderboardService.GetPlayerProfileAsync(entry, _currentTimeframe, _selectedGameSourceId);
+            ApplyProfileDetails(details);
+        }
+        catch (Exception ex)
+        {
+            await HideProfileAsync();
+            await DisplayAlert("Rankings unavailable", $"We couldn't open that player profile right now.\n\n{ex.Message}", "OK");
+        }
     }
     private void ApplyProfileDetails(PlayerProfileDetails details)
     {
