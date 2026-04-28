@@ -73,8 +73,12 @@ public partial class AccountAccessPage : ContentPage
 
         if (!LocalAccountStore.TrySignIn(username, password, out var error))
         {
-            ShowFlowStatus(error, isError: true);
-            return;
+            var restored = await TryRestoreAccountFromCloudAsync(username, password, error);
+            if (!restored)
+            {
+                ShowFlowStatus(error, isError: true);
+                return;
+            }
         }
 
         var syncResult = await App.RefreshSignedInCloudStateAsync();
@@ -158,6 +162,13 @@ public partial class AccountAccessPage : ContentPage
         if (!LocalAccountStore.TryValidateRegistration(username, ageText, password, confirmPassword, out var age, out var error))
         {
             ShowFlowStatus(error, isError: true);
+            return;
+        }
+
+        var remoteAccount = await OnlineAccountRestoreService.LookupAccountAsync(username);
+        if (remoteAccount.AccountExists)
+        {
+            ShowFlowStatus("That username already exists online. Use Log In to restore it on this device.", isError: true);
             return;
         }
 
@@ -366,6 +377,32 @@ public partial class AccountAccessPage : ContentPage
         RecentAccountAvatarImage.IsVisible = false;
         RecentAccountAvatarEmojiLabel.Text = LocalAccountStore.DefaultAvatarEmoji;
         RecentAccountAvatarEmojiLabel.IsVisible = true;
+    }
+
+    async Task<bool> TryRestoreAccountFromCloudAsync(string username, string password, string localError)
+    {
+        if (!string.Equals(localError, "Username not found.", StringComparison.Ordinal)
+            || string.IsNullOrWhiteSpace(username)
+            || string.IsNullOrWhiteSpace(password))
+        {
+            return false;
+        }
+
+        ShowFlowStatus("Checking for your saved online account...", isError: false);
+        var lookup = await OnlineAccountRestoreService.LookupAccountAsync(username);
+        if (!lookup.AccountExists)
+        {
+            return false;
+        }
+
+        LocalAccountStore.SaveRestoredAccount(
+            string.IsNullOrWhiteSpace(lookup.DisplayName) ? username : lookup.DisplayName,
+            age: 0,
+            password: password);
+
+        LoginUsernameEntry.Text = string.IsNullOrWhiteSpace(lookup.DisplayName) ? username : lookup.DisplayName;
+        ShowFlowStatus("Account restored on this device. Signing you in...", isError: false);
+        return true;
     }
 }
 

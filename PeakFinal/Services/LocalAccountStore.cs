@@ -97,6 +97,16 @@ public static class LocalAccountStore
 
     public static void SaveAccount(string username, int age, string password)
     {
+        SaveAccountCore(username, age, password, initializeEmptyHistory: true);
+    }
+
+    public static void SaveRestoredAccount(string username, int age, string password)
+    {
+        SaveAccountCore(username, age, password, initializeEmptyHistory: false);
+    }
+
+    private static void SaveAccountCore(string username, int age, string password, bool initializeEmptyHistory)
+    {
         EnsureMigratedLegacyAccount();
 
         var displayUsername = username.Trim();
@@ -115,7 +125,10 @@ public static class LocalAccountStore
         Preferences.Set(CurrentUserKey, usernameKey);
         Preferences.Set(IsSignedInKey, true);
         Preferences.Set(HasAccountKey, true);
-        BrainScoreService.InitializeEmptyCurrentUserHistory();
+        if (initializeEmptyHistory)
+        {
+            BrainScoreService.InitializeEmptyCurrentUserHistory();
+        }
     }
 
     public static bool TryGetProfile(out LocalAccountProfile profile)
