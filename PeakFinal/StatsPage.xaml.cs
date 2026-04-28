@@ -63,7 +63,7 @@ public partial class StatsPage : ContentPage
         {
             ApplyAccessibility();
             SetScores(0, 0, 0, 0, 0, 0);
-            ApplyGoal(0);
+            ApplyGoal(0, hasProgress: false);
             PeakRankLabel.Text = "Basecamp";
             PeakRankHintLabel.Text = "Stats will appear after your first saved session.";
             RenderRankLadder(0);
@@ -91,10 +91,11 @@ public partial class StatsPage : ContentPage
                 language: 0,
                 mentalAgility: 0,
                 focus: 0);
-            ApplyGoal(0);
+            ApplyGoal(0, hasProgress: false);
             ApplyComparison(scores);
             PeakRankLabel.Text = "Basecamp";
             PeakRankHintLabel.Text = "Stats will appear after your first saved session.";
+            RankProgressLabel.Text = "Complete your first saved session to start the rank ladder.";
             RenderRankLadder(0);
             return;
         }
@@ -109,7 +110,7 @@ public partial class StatsPage : ContentPage
             mentalAgility: scores.MentalAgility,
             focus: scores.Focus);
 
-        ApplyGoal(scores.PeakScore);
+        ApplyGoal(scores.PeakScore, hasProgress: true);
         ApplyComparison(scores);
 
         PeakRankLabel.Text = rank.Name;
@@ -136,19 +137,28 @@ public partial class StatsPage : ContentPage
         AgilityValue.Text = mentalAgility.ToString();
         FocusValue.Text = focus.ToString();
 
-        _peakFillTargetWidth = MapToWidth(peakScore, min: 55, max: 260);
-        _memoryFillTargetWidth = MapToWidth(memory, min: 70, max: 260);
-        _problemFillTargetWidth = MapToWidth(problemSolving, min: 70, max: 260);
-        _languageFillTargetWidth = MapToWidth(language, min: 70, max: 260);
-        _agilityFillTargetWidth = MapToWidth(mentalAgility, min: 70, max: 260);
-        _focusFillTargetWidth = MapToWidth(focus, min: 70, max: 260);
+        _peakFillTargetWidth = MapPeakToWidth(peakScore);
+        _memoryFillTargetWidth = MapSkillToWidth(memory);
+        _problemFillTargetWidth = MapSkillToWidth(problemSolving);
+        _languageFillTargetWidth = MapSkillToWidth(language);
+        _agilityFillTargetWidth = MapSkillToWidth(mentalAgility);
+        _focusFillTargetWidth = MapSkillToWidth(focus);
     }
 
-    void ApplyGoal(int peakScore)
+    void ApplyGoal(int peakScore, bool hasProgress)
     {
+        if (!hasProgress || peakScore <= 0)
+        {
+            PeakGoalLabel.Text = "0";
+            GoalMarker.IsVisible = false;
+            GoalMarker.TranslationX = 0;
+            return;
+        }
+
         var goal = Math.Min(1000, Math.Max(peakScore + PeakGoalHorizon, 180));
         PeakGoalLabel.Text = goal.ToString();
-        GoalMarker.TranslationX = MapToWidth(goal, min: 18, max: 240);
+        GoalMarker.IsVisible = true;
+        GoalMarker.TranslationX = MapPeakToWidth(goal, max: 240);
     }
 
     void ApplyComparison(BrainSkillScores scores)
@@ -166,17 +176,17 @@ public partial class StatsPage : ContentPage
 
         CompareTargetLabel.Text = benchmark.Label.ToUpperInvariant();
 
-        _memoryBenchmarkTargetWidth = MapToWidth(benchmark.Memory, min: 50, max: 260);
-        _problemBenchmarkTargetWidth = MapToWidth(benchmark.ProblemSolving, min: 50, max: 260);
-        _languageBenchmarkTargetWidth = MapToWidth(benchmark.Language, min: 50, max: 260);
-        _agilityBenchmarkTargetWidth = MapToWidth(benchmark.MentalAgility, min: 50, max: 260);
-        _focusBenchmarkTargetWidth = MapToWidth(benchmark.Focus, min: 50, max: 260);
+        _memoryBenchmarkTargetWidth = MapSkillToWidth(benchmark.Memory);
+        _problemBenchmarkTargetWidth = MapSkillToWidth(benchmark.ProblemSolving);
+        _languageBenchmarkTargetWidth = MapSkillToWidth(benchmark.Language);
+        _agilityBenchmarkTargetWidth = MapSkillToWidth(benchmark.MentalAgility);
+        _focusBenchmarkTargetWidth = MapSkillToWidth(benchmark.Focus);
 
-        _memoryFillTargetWidth = MapToWidth(scores.Memory, min: 50, max: 260);
-        _problemFillTargetWidth = MapToWidth(scores.ProblemSolving, min: 50, max: 260);
-        _languageFillTargetWidth = MapToWidth(scores.Language, min: 50, max: 260);
-        _agilityFillTargetWidth = MapToWidth(scores.MentalAgility, min: 50, max: 260);
-        _focusFillTargetWidth = MapToWidth(scores.Focus, min: 50, max: 260);
+        _memoryFillTargetWidth = MapSkillToWidth(scores.Memory);
+        _problemFillTargetWidth = MapSkillToWidth(scores.ProblemSolving);
+        _languageFillTargetWidth = MapSkillToWidth(scores.Language);
+        _agilityFillTargetWidth = MapSkillToWidth(scores.MentalAgility);
+        _focusFillTargetWidth = MapSkillToWidth(scores.Focus);
     }
 
     void SetComparisonVisibility(bool isVisible)
@@ -189,11 +199,25 @@ public partial class StatsPage : ContentPage
         FocusBenchmarkRow.IsVisible = isVisible;
     }
 
-    double MapToWidth(int value, double min, double max)
+    static double MapToWidth(int value, int maxScore, double maxWidth)
     {
-        var clamped = Math.Clamp(value, 0, 300);
-        var t = clamped / 300.0;
-        return min + (max - min) * t;
+        if (value <= 0 || maxScore <= 0)
+        {
+            return 0;
+        }
+
+        var clamped = Math.Clamp(value, 0, maxScore);
+        return maxWidth * (clamped / (double)maxScore);
+    }
+
+    static double MapPeakToWidth(int value, double max = 260)
+    {
+        return MapToWidth(value, maxScore: 1000, maxWidth: max);
+    }
+
+    static double MapSkillToWidth(int value, double max = 260)
+    {
+        return MapToWidth(value, maxScore: 200, maxWidth: max);
     }
 
     void ApplyBarWidthsImmediate()
@@ -217,18 +241,18 @@ public partial class StatsPage : ContentPage
         const double minPeakWidth = 10;
         const double minBenchmarkWidth = 4;
 
-        ResetBarForAnimation(PeakFill, minPeakWidth);
-        ResetBarForAnimation(MemoryFill, minPrimaryWidth);
-        ResetBarForAnimation(ProblemFill, minPrimaryWidth);
-        ResetBarForAnimation(LanguageFill, minPrimaryWidth);
-        ResetBarForAnimation(AgilityFill, minPrimaryWidth);
-        ResetBarForAnimation(FocusFill, minPrimaryWidth);
+        ResetBarForAnimation(PeakFill, _peakFillTargetWidth > 0 ? minPeakWidth : 0);
+        ResetBarForAnimation(MemoryFill, _memoryFillTargetWidth > 0 ? minPrimaryWidth : 0);
+        ResetBarForAnimation(ProblemFill, _problemFillTargetWidth > 0 ? minPrimaryWidth : 0);
+        ResetBarForAnimation(LanguageFill, _languageFillTargetWidth > 0 ? minPrimaryWidth : 0);
+        ResetBarForAnimation(AgilityFill, _agilityFillTargetWidth > 0 ? minPrimaryWidth : 0);
+        ResetBarForAnimation(FocusFill, _focusFillTargetWidth > 0 ? minPrimaryWidth : 0);
 
-        if (MemoryBenchmarkRow.IsVisible) ResetBarForAnimation(MemoryBenchmarkFill, minBenchmarkWidth);
-        if (ProblemBenchmarkRow.IsVisible) ResetBarForAnimation(ProblemBenchmarkFill, minBenchmarkWidth);
-        if (LanguageBenchmarkRow.IsVisible) ResetBarForAnimation(LanguageBenchmarkFill, minBenchmarkWidth);
-        if (AgilityBenchmarkRow.IsVisible) ResetBarForAnimation(AgilityBenchmarkFill, minBenchmarkWidth);
-        if (FocusBenchmarkRow.IsVisible) ResetBarForAnimation(FocusBenchmarkFill, minBenchmarkWidth);
+        if (MemoryBenchmarkRow.IsVisible) ResetBarForAnimation(MemoryBenchmarkFill, _memoryBenchmarkTargetWidth > 0 ? minBenchmarkWidth : 0);
+        if (ProblemBenchmarkRow.IsVisible) ResetBarForAnimation(ProblemBenchmarkFill, _problemBenchmarkTargetWidth > 0 ? minBenchmarkWidth : 0);
+        if (LanguageBenchmarkRow.IsVisible) ResetBarForAnimation(LanguageBenchmarkFill, _languageBenchmarkTargetWidth > 0 ? minBenchmarkWidth : 0);
+        if (AgilityBenchmarkRow.IsVisible) ResetBarForAnimation(AgilityBenchmarkFill, _agilityBenchmarkTargetWidth > 0 ? minBenchmarkWidth : 0);
+        if (FocusBenchmarkRow.IsVisible) ResetBarForAnimation(FocusBenchmarkFill, _focusBenchmarkTargetWidth > 0 ? minBenchmarkWidth : 0);
 
         await Task.Delay(35);
 
@@ -282,6 +306,7 @@ public partial class StatsPage : ContentPage
     void RenderRankLadder(int peakScore)
     {
         RankLadderContainer.Children.Clear();
+        var hasRecordedSessions = BrainScoreService.GetRecordedSessionCount() > 0;
 
         var options = AccessibilityService.GetOptions();
         var currentRowColor = options.HighContrastEnabled
@@ -309,9 +334,11 @@ public partial class StatsPage : ContentPage
         var tiers = BrainScoreService.GetPeakRankTiers();
         var nextTier = tiers.FirstOrDefault(t => peakScore < t.MinScore);
 
-        RankProgressLabel.Text = nextTier is null
-            ? "You reached the highest rank. Keep it up."
-            : $"{Math.Max(0, nextTier.MinScore - peakScore)} points to unlock {nextTier.Name}.";
+        RankProgressLabel.Text = !hasRecordedSessions
+            ? "Complete your first saved session to start the rank ladder."
+            : nextTier is null
+                ? "You reached the highest rank. Keep it up."
+                : $"{Math.Max(0, nextTier.MinScore - peakScore)} points to unlock {nextTier.Name}.";
 
         foreach (var tier in tiers)
         {
